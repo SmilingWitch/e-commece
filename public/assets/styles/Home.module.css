@@ -1,0 +1,115 @@
+.cont{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+.slider{
+    position: relative;
+    width: 100%;
+    height: 100vh ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.sliderBx{
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+.images{
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    
+}
+.images img{
+    position: relative;
+    width: 100%;
+    
+}
+.card{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+.header{
+    position: relative;
+    height: 40px;
+    width: 250px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+.line{
+    position: relative;
+    height: 100%;
+    width: 5px;
+    background: var(--hlColor);
+    border-radius: 50px;
+    margin-right: 10px;
+}
+.categoriesBx{
+    position: relative;
+    padding: 10px;
+    height: 50px;
+    margin: 5px;
+    width: 100%;
+}
+.categories{
+    position: relative;
+    width: 150px;
+    height: 60px;
+    padding: 5px;
+    border: 1px solid var(--deseableColor);
+    border-radius: 20px;
+    color: black;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+}
+.categories:hover{
+    border: 1px solid var(--hlColor);   
+}
+.img{
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: red;
+    margin-left: 10px;
+}
+.name{
+    padding-left: 5px;
+}
+.cardBx{
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    margin-top: 50px;
+    padding: 20px;
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+}
+
+/*---------------ANUNCIOS----------------*/
+.anuncioImg{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.anuncioImg img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+@media(max-width: 478px){
+    .cardBx{
+        grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    }
+}

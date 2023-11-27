@@ -1,0 +1,83 @@
+.cont{
+   position: absolute;
+   z-index: 10000000;
+   height: 100px;
+   width: 100%;
+   -webkit-box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
+    -moz-box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
+    box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
+
+}
+.superior{
+    position: relative;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input{
+    position: relative;
+    width: 400px;
+    border: 2px solid var(--hlColor);
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    overflow: hidden;
+}
+.input input{
+    position: relative;
+    width: 82%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: black;
+}
+.input input:active, .input input:focus{
+    outline: none;
+    border: none;
+}
+.icon{
+    width: 60px;
+    font-size: 1.5em;
+    background: var(--hlColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconBx{
+    position: relative;
+    font-size: 1.5em;
+    padding: 10px;
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.iconBx .contIcon span,
+.iconBx .contIcon1 span{
+    cursor: pointer;
+    color: var(--hlColor);
+}
+.iconBx .contIcon div,
+.iconBx .contIcon1 div{
+    position: absolute;
+    background: rgba(0, 0, 0,0.5);
+    font-size: 11px;
+    margin-top: 10px;
+    min-width: 10px;
+    padding: 2px;
+    border-radius: 2px;
+    margin-left: -10px;
+}
+.cont1, .cont2{
+    visibility: hidden;
+}
+.contIcon1:hover .cont1,
+.contIcon1:hover .cont2{
+    visibility: visible;    
+}
+
+
