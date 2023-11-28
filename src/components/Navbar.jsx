@@ -5,9 +5,22 @@ import { MdSearch } from "react-icons/md";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaRegUserCircle } from "react-icons/fa";
 import { SlWallet } from "react-icons/sl";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { useState, useEffect } from "react";
 
 
 export default function Navbar(){
+
+    const [visible,Setvisible] = useState(false)
+
+    const handleClick = () => {
+        Setvisible(!visible)
+        console.log(visible)
+    }
+    useEffect(() => {
+        console.log(visible);
+       }, [visible]);
+
     return(
         <div className={style.cont}>
             <section className={style.superior}>
@@ -31,7 +44,25 @@ export default function Navbar(){
                 </div>
 
             </section>
-            <section>
+            <section className={style.section2}>
+                <div className={style.productsBx}>
+                    <div className={style.btnProducts} onClick={() => Setvisible(!visible)}>
+                        <span>Productos</span>
+                        <span><MdKeyboardArrowDown/></span>
+                    </div>
+                    <div className={ visible === true ? `${style.productList}` : `${style.invisible}`}  >
+                        <ul>
+                            <li>Laptops</li>
+                            <li>Telefonos</li>
+                            <li>Ropa</li>
+                            <li>Camara</li>
+                            <li>Mochilas</li>
+                            <li>Mandos</li>
+                        </ul>
+
+                    </div>
+
+                </div>
 
             </section>
             

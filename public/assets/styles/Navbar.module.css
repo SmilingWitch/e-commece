@@ -1,8 +1,10 @@
 .cont{
    position: absolute;
    z-index: 10000000;
-   height: 100px;
+   position: fixed;
+   height: 120px;
    width: 100%;
+   background: white;
    -webkit-box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
     -moz-box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
     box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
@@ -79,5 +81,62 @@
 .contIcon1:hover .cont2{
     visibility: visible;    
 }
+.section2{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btnProducts{
+    position: relative;
+    padding: 5px;
+    background: var(--hlColor);
+    width: 120px;
+    margin-left: 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnProducts:hover{
+    background: rgb(246, 99, 45);
+}
+.btnProducts span{
+    color: white;
+}
+.productList{
+    position: absolute;
+    visibility: visible;
+    background: white;
+    color: black;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 120px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-height: 100px;
+    -webkit-box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
+    -moz-box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
+    box-shadow: 0px 5px 6px 0px rgba(164,163,166,1);
+}
+.invisible{
+    position: absolute;
+    visibility: hidden;
+    
+}
+.productList ul{
+    list-style: none;
+}
+.productList ul li{
+    padding: 10px; 
+    transition: 0.3s;  
+}
+.productList ul li:hover{
+    background: rgba(255, 68, 0,0.2);
 
-
+}
