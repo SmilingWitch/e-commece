@@ -1,0 +1,141 @@
+.bx{
+    position: relative;
+    background: rgb(248, 243, 243);
+    width: 100%;
+    min-height: 100vh;
+    color: black;
+
+    
+}
+.wave{
+    position: absolute;
+    width: 100vw;
+    height: 200px;
+    z-index: 10;
+
+}
+.wave img{
+    position: relative;
+    width: 100%;
+
+}
+.formBx{
+    position: relative;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    background: rgba(255, 255, 255,0.5);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.form *{
+    position: relative;
+    padding: 5px;
+    margin: 10px;
+}
+.input{
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--hlColor);
+    border-radius: 20px;
+    padding: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    overflow: hidden;
+}
+.input input{
+    position: relative;
+    width: 82%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: black;
+}
+
+.input span{
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input input:active, 
+.input input:focus{
+    outline: none;
+    border: none;
+}
+.logo{
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: rgb(47, 46, 46);
+    font-family: "PoppinsBolder";
+}
+.label{
+    font-family: "PoppinsBold" ;
+    color: var(--hlColor);
+    text-transform: uppercase;
+}
+.select{
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--hlColor);
+    border-radius: 20px;
+    padding: 10px;
+    height: 50px;
+    background: transparent;
+    color: black;
+}
+.submit{
+    border: none;
+    padding: 15px;
+    background: var(--hlColor);
+    width: 100%;
+    margin-left: 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: "PoppinsBold";
+}
+.submit:hover{
+    background: rgb(246, 99, 45);
+}
+.resend{
+    position: relative;
+    width: 100%;
+    text-align: end;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: var(--hlColor);
+    font-family: "PoppinsBold" ;
+}
+.redirect{
+    position: relative;
+    font-size: 0.8em;
+    font-family: "PoppinsBold";
+}
+.redirect span{
+    text-transform: uppercase;
+    color: var(--hlColor);
+    font-family: "PoppinsBold";
+}
