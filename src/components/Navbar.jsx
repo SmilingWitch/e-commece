@@ -7,10 +7,13 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { SlWallet } from "react-icons/sl";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation'
+import Link from "next/link"
 
 
 export default function Navbar(){
 
+    const pathname = usePathname()
     const [visible,Setvisible] = useState(false)
 
     const handleClick = () => {
@@ -31,14 +34,14 @@ export default function Navbar(){
                 </div>
                 <div className={style.iconBx}>
                     <div className={style.contIcon1}>
-                        <span className={style.icon1}><SlWallet/></span>
+                        <span className={style.icon1}><Link href = "/wallet"><SlWallet/></Link></span>
                         <div className={style.cont1}>Billetera</div>
                     </div>
                     <div className={style.contIcon}>
                         <span><LuShoppingCart/></span>
                     </div>
                     <div className={style.contIcon1}>
-                        <span className={style.icon2}><FaRegUserCircle/></span>
+                        <span className={style.icon2}><Link href = "/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
                     </div>
                 </div>
@@ -63,7 +66,14 @@ export default function Navbar(){
                     </div>
 
                 </div>
-
+                <div className={style.routes}>
+                    <ul>
+                        <li><Link href = "/wallet" className={`link ${pathname === '/wallet' ? `${style.active} `: ''}`}>Billetera Zona0</Link></li>
+                        <li><Link href = "/">Ofertas</Link></li>
+                        <li><Link href = "/">Catalogo</Link></li>
+                        <li><Link href = "/">Preguntas frecuentes</Link></li>
+                    </ul>
+                </div>
             </section>
             
         </div>
