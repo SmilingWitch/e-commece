@@ -1,0 +1,33 @@
+.cont{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: whitesmoke;
+}
+.logo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo img{
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.logo span{
+    position: relative;
+    text-transform: uppercase;
+    font-size: 2em;
+    font-family: "PoppinsBolder";
+    margin-left: -20px
+}
+.spinner{
+    position: relative;
+    padding-left: 40px;
+
+}
