@@ -3,6 +3,7 @@
     width: 100%;
     min-height: 100vh;
     padding-top: 30px;
+    padding: 20px;
 }
 .slider{
     position: relative;
