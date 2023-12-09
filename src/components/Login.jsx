@@ -16,7 +16,7 @@ export default function Login(){
     const [formValue,setFormValue]=useState({
         username:'',
         password:'',
-        email:''
+        email: ''
       });
 
     const [redirect,setRedirect] = useState(false)
@@ -33,10 +33,12 @@ export default function Login(){
         console.log("AUTENTICACION")
       try{
         console.log("AUTENTICACION1")
+        console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/accounts/login/',formValue)
-        console.log("response",res)
+        console.log("response",res.data)
         localStorage.setItem('access',res.data.data.access)
         localStorage.setItem('refresh',res.data.data.refresh)
+        setError('')
         setRedirect(true)
         console.log(redirect)
       }catch(error){
@@ -44,6 +46,7 @@ export default function Login(){
         setError('Unable to log in with provided credentials.')
       }
     }
+
 
     if (redirect === true) {
         router.push('/home');
@@ -59,33 +62,28 @@ export default function Login(){
                 
                 <form className={style.form}>
 
-                    <div className={style.logo}>
-                        Zona 0
-                    </div>
-                    <div className={style.input}>
-                        <input 
-                        type="text" 
-                        placeholder="Username" 
-                        required
-                        name = "username"
-                        value={formValue.username}
-                        onChange={handleChange}/>
-                        <span><FiUser/></span>
-                    </div>
+                <div className={style.logo}>
+                    <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+                    <span>rca Store</span>
+                </div>
+                    {error === '' ? "" : <div className={style.error}>{error}</div>}
+                    
+                    <div className={style.label}>Email</div>
                     <div className={style.input}>
                         <input 
                         type="email" 
                         placeholder="Email"
-                        required
                         name = "email"
                         value={formValue.email}
                         onChange={handleChange} />
                         <span><MdOutlineMail/></span>
-                    </div>
+                      </div>
+
+                    <div className={style.label}>Contrasena</div>
                     <div className={style.input}>
                         <input 
                         type="password" 
-                        placeholder="Password"
+                        placeholder="Contrasena"
                         name = "password"
                         value={formValue.password}
                         onChange={handleChange} />

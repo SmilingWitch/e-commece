@@ -27,7 +27,12 @@ export default function Navbar(){
     return(
         <div className={style.cont}>
             <section className={style.superior}>
-                <div><h1>LOGO</h1></div>
+            <Link href = "/home">
+                <div className={style.logo}>
+                    <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+                    <span>rca Store</span>
+                </div>
+            </Link>
                 <div className={style.input}> 
                     <input type="text" name="" id="" placeholder="Buscar" />
                     <div className={style.icon}><MdSearch/></div>
@@ -68,7 +73,7 @@ export default function Navbar(){
                 </div>
                 <div className={style.routes}>
                     <ul>
-                        <li><Link href = "/wallet" className={`link ${pathname === '/wallet' ? `${style.active} `: ''}`}>Billetera Zona0</Link></li>
+                        <li><Link href = "/wallet" className={`link ${pathname === '/wallet' ? `${style.active} `: ''}`}>Billetera OrcaMarket</Link></li>
                         <li><Link href = "/">Ofertas</Link></li>
                         <li><Link href = "/">Catalogo</Link></li>
                         <li><Link href = "/">Preguntas frecuentes</Link></li>
