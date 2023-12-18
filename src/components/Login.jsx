@@ -31,6 +31,7 @@ export default function Login(){
 
     const handleSubmit = async (e) => {
         console.log("AUTENTICACION")
+        event.preventDefault();
       try{
         console.log("AUTENTICACION1")
         console.log(formValue)
@@ -99,7 +100,7 @@ export default function Login(){
                     </div>
                     <div className={style.redirect}>
                         No tienes cuenta? 
-                        <span><Link href = "/registro">Registrarse</Link></span>
+                        <span><Link href = "/accounts/registro">Registrarse</Link></span>
                     </div>
                 </form>
                  
