@@ -11,11 +11,11 @@ export default function Client_Company(){
             <div>Como te quieres registrar?</div>
             <div className={style.btnBx}>
                 <div  className={style.Btn}>
-                    <span className={style.icon}><Link href = "registro/clientForm"><FiUser/></Link></span>
+                    <span className={style.icon}><Link href = "/accounts/registro/clientForm"><FiUser/></Link></span>
                     <span className={style.text}>Cliente</span>
                 </div>
                 <div className={style.Btn}>
-                    <span className={style.icon}><Link href = "registro/companyForm"><LiaIndustrySolid/></Link></span>
+                    <span className={style.icon}><Link href = "/accounts/registro/companyForm"><LiaIndustrySolid/></Link></span>
                     <span className={style.text}>Compania</span>
 
                 </div>
