@@ -1,0 +1,73 @@
+@font-face {
+    font-family: "PoppinsBolder";
+    src: url("../../../public/assets/fonts/Poppins-Bold.ttf");
+  }
+
+.btn{
+    position: fixed;
+    z-index: 100000000000000000;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--hlColor);
+    color: white; 
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+.btn:nth-child(2) {
+    bottom: 70px;
+
+   }
+.btn:hover{
+    background: rgb(246, 99, 45);
+}
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: white;
+    /*background-color: rgba(223, 215, 215, 0.5);
+    backdrop-filter: blur(10px);*/
+    overflow-x: hidden;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+   
+   .menuCont{
+        height: 50%;
+        width: 80%;
+   }
+   .menuCont ul{
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        list-style: none;
+        text-transform: uppercase;
+        font-family: "PoppinsBolder";
+        color: black;
+   }
+   .menuCont ul li{
+   
+    font-size: 1.2em;
+    cursor: pointer;
+   }
+   .link{
+    font-family: "PoppinsBolder";
+   }
