@@ -1,0 +1,96 @@
+.btnBx{
+    position: relative;
+    width: 100%;
+    
+}
+.btn{
+    position: relative;
+    background: violet;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid black;
+
+}
+.imageBx{
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+.sliderBx{
+    position: relative;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 80px; /* Ajusta la altura del slider */
+    position: relative;
+    
+   }
+   
+   .slide {
+    position: relative;
+    width: 50px; /* Ajusta el ancho de las imágenes */
+    height: 80px; /* Ajusta la altura de las imágenes */
+    margin-right:30px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   .slideCont{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid whitesmoke;
+    transition: 0.3s;
+   }
+   .slideCont:hover{
+    border: 2px solid var(--hlColor);
+   }
+
+   @media(max-width: 658px){
+    .slideCont{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .imageBx{
+        display: none;
+    }
+   }
+   @media(max-width:500px){
+       
+    .slideCont{
+        padding: 3px;
+        height: 35px;
+    }
+    .slide{
+        padding: 5px;
+    }
+   }
+
+   @media(max-width: 384px){
+    .slideCont span{
+        font-size: 0.8em;
+    }
+   }
+   
+   @keyframes slide {
+    0% { left: 0; }
+    25% { left: -200px; } /* Ajusta la posición de las imágenes */
+    50% { left: -400px; } /* Ajusta la posición de las imágenes */
+    75% { left: -600px; } /* Ajusta la posición de las imágenes */
+    100% { left: -800px; } /* Ajusta la posición de las imágenes */
+   }
+   
+   
