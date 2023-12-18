@@ -229,7 +229,37 @@
     font-size: 0.8em;
     padding-top: 10px;
 }
-
+.correct{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 20px;
+    
+}
+.correct span{
+    position: relative;
+    font-size: 0.8em;
+    color: var(--hlColor);
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+}
+.log{
+    display: flex;
+    align-items: center;
+}
+.correct div{
+    position: relative;
+    color: var(--hlColor);
+    font-size: 2em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    font-size: 2.5em;
+}
 
 /*-----------------REGISTER----------------*/
 .form1{
@@ -264,4 +294,23 @@
 }
 .form1 .input input{
     width: 100%;
+}
+.errorHeader{
+    color: red !important;
+    background: transparent;
+}
+
+
+
+/*-------------------VERIFY EMAIL---------------*/
+.header_verify{
+    position: relative;
+    text-align: center;
+}
+.header_verify span{
+    font-size: 2.5em;
+    font-family: "PoppinsBolder";
+}
+.header_verify .emailBold{
+    font-family: "PoppinsBolder";
 }
