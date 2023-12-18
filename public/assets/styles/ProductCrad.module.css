@@ -81,8 +81,7 @@
     position: relative;   
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding-left: 10px;
+    justify-content: center;
 }
 .actions{
     position: relative;
@@ -126,12 +125,12 @@
     padding: 10px;
     background: var(--hlColor);
     color: white;
-    height: 35spx;
+    height: 35px;
     border-radius: 10px;
     margin: 0 auto;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 0.8em;
+    width: 100%;
 }
 .btnBx:hover{
     background: rgb(246, 99, 45);
@@ -150,7 +149,17 @@
 }
 
 @media(max-width: 478px){
-    .card{
-        height: 200px;
+
+    .imgBx{
+
+        height: 100px;
+    }
+
+
+    .btnBx{
+        padding: 5px;
+        font-size: 0.8em;
+        height: 30px;
+        
     }
 }
