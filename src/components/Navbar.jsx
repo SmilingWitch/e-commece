@@ -36,7 +36,7 @@ export default function Navbar(){
                 <div className={style.input}> 
                     <input type="text" name="" id="" placeholder="Buscar" />
                     <div className={style.icon}><MdSearch/></div>
-                </div>
+                </div>q
                 <div className={style.iconBx}>
                     <div className={style.contIcon1}>
                         <span className={style.icon1}><Link href = "/wallet"><SlWallet/></Link></span>
@@ -46,7 +46,7 @@ export default function Navbar(){
                         <span><LuShoppingCart/></span>
                     </div>
                     <div className={style.contIcon1}>
-                        <span className={style.icon2}><Link href = "/login"><FaRegUserCircle/></Link></span>
+                        <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ export default function Navbar(){
                     <ul>
                         <li><Link href = "/wallet" className={`link ${pathname === '/wallet' ? `${style.active} `: ''}`}>Billetera OrcaMarket</Link></li>
                         <li><Link href = "/">Ofertas</Link></li>
-                        <li><Link href = "/">Catalogo</Link></li>
+                        <li><Link href = "/catalogo" className={`link ${pathname === '/catalogo' ? `${style.active} `: ''}`}>Catalogo</Link></li>
                         <li><Link href = "/">Preguntas frecuentes</Link></li>
                     </ul>
                 </div>
