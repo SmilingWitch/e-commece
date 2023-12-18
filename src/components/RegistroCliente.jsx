@@ -23,6 +23,7 @@ export default function Registro(){
 
     const [redirect,setRedirect] = useState(false)
     const [error,setError] = useState('')
+    const [correct,setCorrect] = useState(false)
 
     const data = {
         username: formValue.username,
@@ -44,6 +45,7 @@ export default function Registro(){
 
       const handleSubmit = async (e) => {
         console.log("AUTENTICACION")
+        e.preventDefault();
       try{
         console.log("AUTENTICACION1")
         console.log(formValue)
@@ -53,10 +55,12 @@ export default function Registro(){
         localStorage.setItem('refresh',res.data.data.refresh)
         setError('')
         setRedirect(true)
+        setCorrect(true)
         console.log(redirect)
       }catch(error){
         console.log(error.response)
-        setError('Unable to log in with provided credentials.')
+        setError(error.response.data)
+        console.log(error.response.data)
       }
     }
 
@@ -65,111 +69,145 @@ export default function Registro(){
         router.push('/home');
       }
 
-
-
-
     return(
         <div className={style.bx}>
         <div className={style.formBx}>
+            {correct === true ? 
             
             <form className={style.form1}>
-                <div className={style.logo}>
-                    <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
-                    <span>rca Store</span>
+            <div className={style.logo}>
+                <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+                <span>rca Store</span>
+            </div>
+            <div className={style.header_verify}>
+                <span>Revisa tu email</span>
+                <div>
+                    Hemos mandado un email a la cuenta
+                    <div className={style.emailBold}>{formValue.email}</div>
                 </div>
-                <div className={style.label}>Nombre</div>
-                <div className={style.input}>
-                    <input 
-                    type="text" 
-                    name="name" 
-                    id="" 
-                    required
-                    value={formValue.name}
-                    onChange={handleChange}
-                    placeholder="Nombre" />
-                </div>
+            </div>
+                        
+            <input type="submit" value="Reenviar correo" className={style.submit} onClick={(e) => handleSubmit(e)} />
+            <div className={style.correct}>
+                <span>
+                    <Link href = "/accounts/login" className={style.log}>
+                        <div><IoMdArrowBack/> </div>
+                        Volver al login      
+                    </Link>   
+                </span>
+            </div>
+                        
+            </form> :
 
-                <div className={style.label}>Apellidos</div>
-                <div className={style.input}>
-                    <input 
-                    type="text" 
-                    name="last_name" 
-                    id="" 
-                    required
-                    value={formValue.last_name}
-                    onChange={handleChange}
-                    placeholder="Apellidos" />
-                </div>
-
-                <div className={style.label}>Nombre de ususario</div>
-                <div className={style.input}>
-                    <input 
-                    type="email" 
-                    name="username" 
-                    id="" 
-                    required
-                    value={formValue.username}
-                    onChange={handleChange}
-                    placeholder="Nombre de usuario" />
-                </div>
-
-                <div className={style.label}>Numero de carnet</div>
-                <div className={style.input}>
-                    <input 
-                    type="text" 
-                    name="ci" 
-                    id="" 
-                    required
-                    value={formValue.ci}
-                    onChange={handleChange}
-                    placeholder="Numero de carnet" />
-                </div>
-
-                <div className={style.label}>Telefono</div>
-                <div className={style.input}>
-                    <input 
-                    type="tel" 
-                    name="movil" 
-                    id="" 
-                    required
-                    value={formValue.movil}
-                    onChange={handleChange}
-                    placeholder="Telefono" />
-                </div>
-
-                <div className={style.label}>Email</div>
-                <div className={style.input}>
-                    <input 
-                    type="email" 
-                    name="email" 
-                    id="" 
-                    required
-                    value={formValue.email}
-                    onChange={handleChange}
-                    placeholder="Email" />
-                </div>
-
-                <div className={style.label}>Contrasena</div>
-                <div className={style.input}>
-                    <input 
-                    type="password" 
-                    name="password" 
-                    id="" 
-                    required
-                    value={formValue.password}
-                    onChange={handleChange}
-                    placeholder="Password" />
-                </div>
-                
-                <input type="submit" value="Registrar" className={style.submit} onClick={(e) => handleSubmit(e)}/>
-                <div className={style.redirect}>
-                    Ya tienes cuenta? 
-                    <span><Link href = "/login">Autenticarse</Link></span>
-                </div>
+            <form className={style.form1}>
+            <div className={style.logo}>
+                <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+                <span>rca Store</span>
+            </div>
+            <div className= {error.name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre</div>
+            <div className={style.input}>
+                <input 
+                type="text" 
+                name="name" 
+                id="" 
+                required
+                value={formValue.name}
+                onChange={handleChange}
+                placeholder="Nombre" />
+            </div>
+            {error.name === undefined ? "" : <div className={style.error}>{error.name}</div>}
+                        
+            <div className= {error.last_name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Apellidos</div>
+            <div className={style.input}>
+                <input 
+                type="text" 
+                name="last_name" 
+                id="" 
+                required
+                value={formValue.last_name}
+                onChange={handleChange}
+                placeholder="Apellidos" />
+            </div>
+            {error.last_name === undefined ? "" : <div className={style.error}>{error.last_name}</div>}
+                        
+            <div className= {error.username ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre de ususario</div>
+            <div className={style.input}>
+                <input 
+                type="text" 
+                name="username" 
+                id="" 
+                required
+                value={formValue.username}
+                onChange={handleChange}
+                placeholder="Nombre de usuario" />
+            </div>
+            {error.username === undefined ? "" : <div className={style.error}>{error.username}</div>}
+                        
+            <div className= {error.ci ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Numero de carnet</div>
+            <div className={style.input}>
+                <input 
+                type="text" 
+                name="ci" 
+                id="" 
+                required
+                value={formValue.ci}
+                onChange={handleChange}
+                placeholder="Numero de carnet" />
+            </div>
+            {error.ci === undefined ? "" : <div className={style.error}>{error.ci}</div>}
+                        
+            <div className= {error.movil ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Telefono</div>
+            <div className={style.input}>
+                <input 
+                type="tel" 
+                name="movil" 
+                id="" 
+                required
+                value={formValue.movil}
+                onChange={handleChange}
+                placeholder="Telefono" />
+            </div>
+            {error.movil === undefined ? "" : <div className={style.error}>{error.movil}</div>}
+                        
+            <div className= {error.email ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Email</div>
+            <div className={style.input}>
+                <input 
+                type="email" 
+                name="email" 
+                id="" 
+                required
+                value={formValue.email}
+                onChange={handleChange}
+                placeholder="Email" />
+            </div>
+            {error.email === undefined ? "" : <div className={style.error}>{error.email}</div>}
+                        
+            <div className= {error.password ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Contrasena</div>
+            <div className={style.input}>
+                <input 
+                type="password" 
+                name="password" 
+                id="" 
+                required
+                value={formValue.password}
+                onChange={handleChange}
+                placeholder="Password" />
+            </div>
+            {error.password === undefined ? "" : <div className={style.error}>{error.password}</div>}
+                        
+            <input type="submit" value="Registrarse" className={style.submit} onClick={(e) => handleSubmit(e)}/>
+            <div className={style.redirect}>
+                Ya tienes cuenta? 
+                <span><Link href = "/accounts/login">Autenticarse</Link></span>
+            </div>
             </form>
-             
-        </div>
-        
+            
+                        
+                    }
+                        
+                         
+                    </div>
+                    
     </div>
     )
     
