@@ -6,6 +6,7 @@ import style from "../../public/assets/styles/Home.module.css"
 import ProductCard from "./productCard";
 import Anuncios from "./Anuncio";
 import Contact from "./Contact";
+import Categories from "./Categories";
 
 
 export default function Home() {
@@ -95,8 +96,13 @@ export default function Home() {
                         </div>
                     </Slider>
                 </div>
-                
             </div>
+
+            {/*Categories*/}
+            <Categories/>
+
+            {/* End Categories*/}
+
             <div className={style.header}>
                 <div className={style.line}></div>
                 <h3>Nuestras sugerencias</h3> 
