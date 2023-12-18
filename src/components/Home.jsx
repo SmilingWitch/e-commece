@@ -7,6 +7,7 @@ import ProductCard from "./productCard";
 import Anuncios from "./Anuncio";
 import Contact from "./Contact";
 import Categories from "./Categories";
+import Image from "next/image"
 
 
 export default function Home() {
@@ -83,16 +84,32 @@ export default function Home() {
                 <div className={style.sliderBx}>
                     <Slider {...settings}>
                         <div className = {style.images}>
-                            <img  src="/assets/images/annie-spratt-hS46bsAASwQ-unsplash.jpg" alt="" />
+                            <Image  
+                            layout="fill"
+                            objectFit="cover" // Ajusta la imagen para cubrir todo el contenedor
+                            objectPosition="center"
+                            src="/assets/images/annie-spratt-hS46bsAASwQ-unsplash.jpg" alt="" />
                         </div>
                         <div className = {style.images}>
-                            <img  src="/assets/images/gilles-lambert-mSK5nNsAsLY-unsplash.jpg" alt="" />
+                            <Image 
+                            layout="fill"
+                            objectFit="cover" // Ajusta la imagen para cubrir todo el contenedor
+                            objectPosition="center"
+                             src="/assets/images/gilles-lambert-mSK5nNsAsLY-unsplash.jpg" alt="" />
                         </div>
                         <div className = {style.images}>
-                            <img  src="/assets/images/annie-spratt-hS46bsAASwQ-unsplash.jpg" alt="" />
+                            <Image 
+                            layout="fill"
+                            objectFit="cover" // Ajusta la imagen para cubrir todo el contenedor
+                            objectPosition="center"
+                            src="/assets/images/annie-spratt-hS46bsAASwQ-unsplash.jpg" alt="" />
                         </div>
                         <div className = {style.images}>
-                            <img  src="/assets/images/wallpaperflare.com_wallpaper.jpg" alt="" />
+                            <Image 
+                            layout="fill"
+                            objectFit="cover" // Ajusta la imagen para cubrir todo el contenedor
+                            objectPosition="center" 
+                            src="/assets/images/wallpaperflare.com_wallpaper.jpg" alt="" />
                         </div>
                     </Slider>
                 </div>

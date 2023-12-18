@@ -5,7 +5,7 @@ import Link from "next/link"
 import {useState, useEffect} from "react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
-import { IoMdArrowBack } from "react-icons/io";
+import { MdKeyboardArrowUp } from "react-icons/md";
 
 
 
@@ -74,7 +74,7 @@ export default function RegistroCompany(){
                 <div className={style.correct}>
                     <span>
                         <Link href = "/accounts/login" className={style.log}>
-                            <div><IoMdArrowBack/> </div>
+                            <div><MdKeyboardArrowUp/> </div>
                             Volver al login      
                         </Link>   
                     </span>

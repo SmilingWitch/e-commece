@@ -4,6 +4,7 @@ import style from "../../public/assets/styles/ProductCrad.module.css"
 import { LuShoppingCart } from "react-icons/lu";
 import {HiOutlinePlusSm, HiOutlineMinusSm} from "react-icons/hi"
 import { useState } from "react";
+import Image from "next/image"
 
 
 export default function ProductCard({url}) {
@@ -30,7 +31,12 @@ export default function ProductCard({url}) {
         <div className={style.card}>
           <div className={style.top}>
             <div className={style.imgBx}>
-                  <img  src={url} alt="" />
+                  <Image  src={url} 
+                  alt=""
+                  layout="fill"
+                  objectFit="cover" // Ajusta la imagen para cubrir todo el contenedor
+                  objectPosition="center"
+                  />
                   <span className={style.descont}>-10.00%</span>
               </div>
               <div className={style.detail}>

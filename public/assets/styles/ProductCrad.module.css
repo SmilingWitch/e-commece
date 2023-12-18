@@ -44,7 +44,7 @@
     border-radius: 20px;
     font-size: 0.8em;
     color: white;
-    bottom: 10px;
+    bottom: -80px;
     left: 30%;
     
 }
@@ -153,6 +153,19 @@
     .imgBx{
 
         height: 100px;
+    }
+    .descont{
+        position: relative;
+        background: var(--hlColor);
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 20px;
+        font-size: 0.8em;
+        color: white;
+        bottom: -50px;
+        left: 30%;
+        
     }
 
 
