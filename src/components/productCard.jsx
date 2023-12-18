@@ -46,7 +46,7 @@ export default function ProductCard({url}) {
             
 
           <div className={style.buySection}>
-              <div className={style.actions}>
+              {/*<div className={style.actions}>
                   <button className={style.btn} onClick={handleDecrement}><HiOutlineMinusSm/></button>
                     <div className={style.inputCont}>
                       <div className={style.input}>
@@ -69,7 +69,7 @@ export default function ProductCard({url}) {
                       </div>
                     </div>
                   <button className={style.btn} onClick={handleIncrement}><HiOutlinePlusSm/></button>
-               </div>
+               </div>*/}
               <div className={style.btnBx}>
                   <div className={style.icon}><LuShoppingCart /></div>
                   <div className={style.cart}>Lo quiero</div>
