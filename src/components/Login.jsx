@@ -31,7 +31,7 @@ export default function Login(){
 
     const handleSubmit = async (e) => {
         console.log("AUTENTICACION")
-        event.preventDefault();
+        e.preventDefault();
       try{
         console.log("AUTENTICACION1")
         console.log(formValue)
@@ -56,9 +56,6 @@ export default function Login(){
     
     return (
         <div className={style.bx}>
-            <div className={style.wave}>
-                <img src="/assets/images/wave.svg" alt="" />
-            </div>
             <div className={style.formBx}>
                 
                 <form className={style.form}>
@@ -96,7 +93,7 @@ export default function Login(){
                     onClick={(e) => handleSubmit(e)}
                     className={style.submit} />
                     <div className={style.resend}>
-                        <Link href="/">Has olvidado tu contrasena?</Link>
+                        <Link href="/accounts/password-reset">Has olvidado tu contrasena?</Link>
                     </div>
                     <div className={style.redirect}>
                         No tienes cuenta? 
