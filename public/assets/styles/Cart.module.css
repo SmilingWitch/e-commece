@@ -52,7 +52,7 @@
    }
    .header1 button{
     position: relative;
-    top: 50px;
+    top: 30px;
     padding: 10px;
     border: none;
     min-width: 20px;
@@ -74,16 +74,44 @@
    .header1 button span{
     color: whitesmoke;
    }
-
+   
    .cartCardBx{
-    height: 60%;
+    height: 65%;
     overflow-y: scroll;
-    background: violet;
    }
+
    .bottom{
-    height: 20%;
-    background: orange;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
    }
+   .bx{
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+   }
+
+   .btn{
+    position: relative;
+    padding: 10px;
+    border: none;
+    width: 90%;
+    background: var(--hlColor);
+    border-radius: 20px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: 0.3s;
+   }
+   .btn span{
+    color: whitesmoke;
+   }
+   .btn:hover{
+    background: rgb(246, 99, 45);
+}
+.btn span:nth-child(1){
+    padding-right: 10px;
+}
 
    @media(max-width:734px){
     .cont {
