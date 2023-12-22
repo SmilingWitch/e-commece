@@ -53,12 +53,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 .form{
     position: relative;
     background: rgba(255, 255, 255,0.5);
     backdrop-filter: blur(10px);
     padding: 20px;
+
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -78,6 +81,7 @@
     border: 1px solid var(--hlColor);
     border-radius: 20px;
     padding: 10px;
+    
     height: 50px;
     display: flex;
     align-items: center;
@@ -267,7 +271,7 @@
     background: rgba(255, 255, 255,0.5);
     backdrop-filter: blur(10px);
     padding: 20px;
-    width: 400px;
+    width: 500px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -308,9 +312,33 @@
     text-align: center;
 }
 .header_verify span{
-    font-size: 2.5em;
+    font-size: 1.5em;
     font-family: "PoppinsBolder";
 }
 .header_verify .emailBold{
     font-family: "PoppinsBolder";
+}
+
+
+
+/*-------------------RESET PASSWORD---------------*/
+.header_reset{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.header_reset span:nth-child(1){
+    font-size: 1.5em;
+    font-family: "PoppinsBolder";
+}
+.header_reset span:nth-child(2){
+    font-size: 0.8em;
+    bottom: 20px;
+    text-align: center;
+}
+.header_reset span:nth-child(2) div{
+    font-family: "PoppinsBolder";
+    bottom: 20px;
 }
