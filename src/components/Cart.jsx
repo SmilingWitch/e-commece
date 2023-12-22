@@ -31,13 +31,21 @@ export default function Cart({SetCart}){
                             <CartCard/>
                             <CartCard/>
                             <CartCard/>
-
+                            <CartCard/>
+                            <CartCard/>
+                            <CartCard/>
+                            <CartCard/>
+                            <CartCard/>
+                            <CartCard/>
 
                         </div>
                     </div>
 
                     <div className={style.bottom}>
-
+                        <button className={style.btn}>
+                            <span>Pagar</span>
+                            <span>$500.00</span>
+                        </button>                              
                     </div>
                     
 
