@@ -5,7 +5,7 @@
 
 .btn{
     position: fixed;
-    z-index: 100000000000000000;
+    z-index: 10;
     bottom: 20px;
     right: 20px;
     width: 40px;
@@ -50,6 +50,7 @@
    .menuCont{
         height: 50%;
         width: 80%;
+
    }
    .menuCont ul{
         position: relative;
