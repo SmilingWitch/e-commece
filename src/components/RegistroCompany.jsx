@@ -47,8 +47,18 @@ export default function RegistroCompany(){
         setCorrect(true)
         console.log(correct)
       }catch(error){
-        console.log(error.response)
-        setError(error.response.data)
+        if (error.response) {
+            // El servidor respondió con un estado fuera del rango de 2xx
+            setError(error.response.data);
+            console.log(error)
+          } else if (error.request) {
+            alert("Something went wrong. Try in a few minutes!!")
+          } else {
+            alert("Something went wrong. Try in a few minutes!!")
+          }
+          if (error.response.status === 500) {
+            alert("Something went wrong. Try in a few minutes!!")
+          }
       }
     }
 
