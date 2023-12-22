@@ -13,7 +13,7 @@ export default function Categories(){
     const settings = {
         dots: false,
         arrows: false,
-        slidesToShow: 10,
+        slidesToShow: 7,
         slidesToScroll: 1,
         autoplay: true,
         speed: 500,
@@ -23,7 +23,7 @@ export default function Categories(){
           {
             breakpoint: 1600,
             settings: {
-              slidesToShow: 9,
+              slidesToShow: 7,
             },
           },
           {
