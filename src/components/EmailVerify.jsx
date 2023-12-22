@@ -34,12 +34,16 @@ export default function EmailVerify(){
  return (
  <div className={style.formBx}>
     <form className={style.form1}>
-                <div className={style.logo}>
+    <div className={style.logo}>
+                    <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+                    <span>rca Store</span>
+                </div>
+                <div className={style.header_reset}>
                     <span>Verifica tu correo</span>
                 </div>
-                <input type="submit" value="Verificar" className={style.submit} onClick={(e) => handleSubmit(e)} />
+                <input type="submit" value="Reenviar correo" className={style.submit} onClick={(e) => handleSubmit(e)} />
                 <div className={style.correct}>
-                    <span><Link href = "/login">Volver al login</Link></span>
+                    <span><Link href = "/accounts/login">Volver al login</Link></span>
                 </div>
 
             </form>
