@@ -36,6 +36,13 @@
     align-items: center;
     justify-content: space-between;
 }
+.inputBx{
+    position: relative;
+    width: 90%;
+    display:flex ;
+    align-items: center;
+    justify-content: center;
+}
 .input{
     position: relative;
     width: 400px;
