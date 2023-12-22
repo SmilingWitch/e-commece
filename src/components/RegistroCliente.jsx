@@ -45,30 +45,30 @@ export default function Registro(){
       }
 
       const handleSubmit = async (e) => {
-        console.log("AUTENTICACION")
         e.preventDefault();
       try{
-        console.log("AUTENTICACION1")
         console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/register/client/', data)
         console.log("response",res.data)
-        localStorage.setItem('access',res.data.data.access)
-        localStorage.setItem('refresh',res.data.data.refresh)
         setError('')
-        setRedirect(true)
+        router.push("/accounts/login")
         setCorrect(true)
-        console.log(redirect)
       }catch(error){
-        console.log(error.response)
-        setError(error.response.data)
-        console.log(error.response.data)
+        if (error.response) {
+            // El servidor respondió con un estado fuera del rango de 2xx
+            setError(error.response.data);
+            console.log(error)
+          } else if (error.request) {
+            alert("Something went wrong. Try in a few minutes!!")
+          } else {
+            alert("Something went wrong. Try in a few minutes!!")
+          }
+          if (error.response.status === 500) {
+            alert("Something went wrong. Try in a few minutes!!")
+          }
       }
     }
 
-
-    if (redirect === true) {
-        router.push('/home');
-      }
 
     return(
         <div className={style.bx}>
