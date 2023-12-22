@@ -8,18 +8,29 @@ import { SlWallet } from "react-icons/sl";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+
 import Link from "next/link"
+import Cart from "./Cart";
 
 
-export default function Navbar(){
+export default function Navbar({SetCart, cart}){
 
     const pathname = usePathname()
     const [visible,Setvisible] = useState(false)
+    
+    console.log(cart)
 
-    const handleClick = () => {
-        Setvisible(!visible)
-        console.log(visible)
-    }
+    const router = useRouter();
+    
+    function handleKeyDown(event) {
+        if (event.key === 'Enter') {
+          if (router.pathname !== '/catalogo') {
+            router.push('/catalogo');
+          }
+        }
+       }
+       
     useEffect(() => {
         console.log(visible);
        }, [visible]);
@@ -33,17 +44,25 @@ export default function Navbar(){
                     <span>rca Store</span>
                 </div>
             </Link>
+            <div className={style.inputBx}>
                 <div className={style.input}> 
-                    <input type="text" name="" id="" placeholder="Buscar" />
-                    <div className={style.icon}><MdSearch/></div>
-                </div>q
+                    <input type="text" 
+                    name="" 
+                    id="" 
+                    placeholder="Buscar"
+                    onKeyDown={handleKeyDown} />
+                    <div className={style.icon}><Link href = "/catalogo"><MdSearch/></Link></div>
+                </div>
+
+            </div>
+                
                 <div className={style.iconBx}>
                     <div className={style.contIcon1}>
-                        <span className={style.icon1}><Link href = "/wallet"><SlWallet/></Link></span>
+                        <span className={style.icon1}><Link href = "/dasboard/wallet"><SlWallet/></Link></span>
                         <div className={style.cont1}>Billetera</div>
                     </div>
                     <div className={style.contIcon}>
-                        <span><LuShoppingCart/></span>
+                        <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
                     </div>
                     <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
@@ -73,13 +92,17 @@ export default function Navbar(){
                 </div>
                 <div className={style.routes}>
                     <ul>
-                        <li><Link href = "/wallet" className={`link ${pathname === '/wallet' ? `${style.active} `: ''}`}>Billetera OrcaMarket</Link></li>
-                        <li><Link href = "/">Ofertas</Link></li>
+                        <li><Link href = "/dasboard/wallet" className={`link ${pathname === '/dasboard/wallet' ? `${style.active} `: ''}`}>Billetera OrcaMarket</Link></li>
+                        <li><Link href = "/home">Ofertas</Link></li>
                         <li><Link href = "/catalogo" className={`link ${pathname === '/catalogo' ? `${style.active} `: ''}`}>Catalogo</Link></li>
-                        <li><Link href = "/">Preguntas frecuentes</Link></li>
+                        <li><Link href = "/home">Preguntas frecuentes</Link></li>
                     </ul>
                 </div>
             </section>
+
+            {cart && (
+              <Cart SetCart = {SetCart} />
+            )}
             
         </div>
         ) 
