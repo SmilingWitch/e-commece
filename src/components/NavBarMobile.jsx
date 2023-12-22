@@ -6,8 +6,9 @@ import { LuShoppingCart } from "react-icons/lu";
 import { FaRegUserCircle } from "react-icons/fa";
 import { SlWallet } from "react-icons/sl";
 import Link from "next/link"
+import Cart from "./Cart";
 
-export default function NavBarMobile(){
+export default function NavBarMobile({SetCart, cart}){
     return(
         <div className={style.contMobile}>
             <section className={style.superiorMobile}>
@@ -19,14 +20,14 @@ export default function NavBarMobile(){
             </Link>
                 <div className={style.iconBx}>
                     <div className={style.contIcon1}>
-                        <span className={style.icon1}><Link href = "/wallet"><SlWallet/></Link></span>
+                        <span className={style.icon1}><Link href = "/dasboard/wallet"><SlWallet/></Link></span>
                         <div className={style.cont1}>Billetera</div>
                     </div>
                     <div className={style.contIcon}>
-                        <span><LuShoppingCart/></span>
+                        <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
                     </div>
                     <div className={style.contIcon}>
-                        <span><MdSearch/></span>
+                        <span><Link href = "/catalogo"><MdSearch/></Link></span>
                     </div>
                     <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
@@ -35,6 +36,9 @@ export default function NavBarMobile(){
                 </div>
 
             </section>
+            {cart && (
+              <Cart SetCart = {SetCart} />
+            )}
         </div>
     )
 }
