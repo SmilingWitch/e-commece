@@ -36,19 +36,18 @@ export default function MenuFloatinButton(){
           </button>
         )}
         {isMobile ? <button className={style.btn} onClick={() => setIsOpen(!isOpen)}>
-          <MdOutlineMenu /> 
+          <MdOutlineMenu/> 
         </button>: ""}
         {isOpen && isMobile && (
           <div className={style.menu}>
             <div className={style.menuCont}>
               <ul>
                <li><Link Link href = "/wallet" className={style.link}>Billetera OrcaStore</Link></li>
-               <li><Link Link href = "/" className={style.link}>Ofertas</Link></li>
+               <li><Link Link href = "/home" className={style.link}>Ofertas</Link></li>
                <li><Link Link href = "/catalogo" className={style.link}>Catalogo</Link></li>
-               <li><Link href = "/" className={style.link}>Preguntas frecuentes</Link></li>
+               <li><Link href = "/home" className={style.link}>Preguntas frecuentes</Link></li>
               </ul>
             </div>
-          {/* Aquí puedes agregar más elementos al menú */}
         </div>
         )}
     </div>
