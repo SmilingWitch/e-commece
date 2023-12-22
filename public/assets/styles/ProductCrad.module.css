@@ -24,6 +24,7 @@
 .imgBx{
     position: relative;
     height: 150px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
