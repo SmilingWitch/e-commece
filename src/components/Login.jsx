@@ -8,10 +8,14 @@ import Link from "next/link"
 import {useState, useEffect} from "react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
+import{ useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+
 
 
 export default function Login(){
     const router = useRouter()
+    const { signIn } = useContext(AuthContext);
 
     const [formValue,setFormValue]=useState({
         username:'',
@@ -29,7 +33,7 @@ export default function Login(){
       })
     }
 
-    const handleSubmit = async (e) => {
+    /*const handleSubmit = async (e) => {
         console.log("AUTENTICACION")
         e.preventDefault();
       try{
@@ -37,20 +41,34 @@ export default function Login(){
         console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/accounts/login/',formValue)
         console.log("response",res.data)
-        localStorage.setItem('access',res.data.data.access)
-        localStorage.setItem('refresh',res.data.data.refresh)
+        localStorage.setItem('access',res.data.access)
+        localStorage.setItem('refresh',res.datarefresh)
         setError('')
+        console.log(error)
         setRedirect(true)
         console.log(redirect)
       }catch(error){
         console.log(error.response)
         setError('Unable to log in with provided credentials.')
       }
-    }
+    }*/
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try{
+        const res = await signIn(formValue);
+        setError('');
+        console.log(res)
+        setRedirect(true)
+      }catch(error){
+        setError('Unable to log in with provided credentials.')
+        console.log(error)
+      }
+     }
+    
 
 
     if (redirect === true) {
-        router.push('/home');
+        router.push('/catalogo');
       }
     
     
