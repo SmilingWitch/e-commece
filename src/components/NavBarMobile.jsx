@@ -8,7 +8,7 @@ import { SlWallet } from "react-icons/sl";
 import Link from "next/link"
 import Cart from "./Cart";
 
-export default function NavBarMobile({SetCart, cart}){
+export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
     return(
         <div className={style.contMobile}>
             <section className={style.superiorMobile}>
