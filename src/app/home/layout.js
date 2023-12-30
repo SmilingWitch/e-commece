@@ -10,11 +10,12 @@ import {useState} from "react"
 export default function RootLayout({ children }) {
  const isMobile = useMediaQuery('(max-width: 768px)');
  const [cart, SetCart] = useState(false)
+ const [myAccount, SetMyAccount] = useState(false)
 
  return (
    <>
-     {isMobile ? <NavBarMobile SetCart = {SetCart} cart = {cart}/> :
-                 <Navbar SetCart = {SetCart} cart = {cart}/>}
+     {isMobile ? <NavBarMobile SetCart = {SetCart} cart = {cart} SetMyAccount = {SetMyAccount} myAccount = {myAccount}/> :
+                 <Navbar SetCart = {SetCart} cart = {cart} SetMyAccount = {SetMyAccount} myAccount = {myAccount}/>}
      <MenuFloatinButton/>
      <main >{children}</main>
  

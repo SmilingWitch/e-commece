@@ -2,7 +2,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
-
+import { AuthProvider } from '../contexts/AuthProvider';
 
 
 export default function RootLayout({
@@ -10,7 +10,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <AuthProvider>
+        <body>{children}</body>
+      </AuthProvider>
+      
     </html>
   )
 }
