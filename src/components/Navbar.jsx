@@ -9,17 +9,22 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation';
-
+import React, { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import Link from "next/link"
+import Image from "next/image"
 import Cart from "./Cart";
+import MyAccount from "./MyAccount";
 
 
-export default function Navbar({SetCart, cart}){
+
+export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
 
     const pathname = usePathname()
     const [visible,Setvisible] = useState(false)
     
-    console.log(cart)
+    const { user } = useContext(AuthContext);
+    console.log("USER",user)
 
     const router = useRouter();
     
@@ -34,6 +39,8 @@ export default function Navbar({SetCart, cart}){
     useEffect(() => {
         console.log(visible);
        }, [visible]);
+
+
 
     return(
         <div className={style.cont}>
@@ -64,10 +71,24 @@ export default function Navbar({SetCart, cart}){
                     <div className={style.contIcon}>
                         <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
                     </div>
-                    <div className={style.contIcon1}>
+                    {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
+                    </div>:
+                    <div className={style.contLogg}>
+                        <span className={style.iconLogg}>
+                        <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
+                            <div className={style.name}>Daniela</div> 
+                            <div className={style.circle}>
+                            <Image
+                                width={40}
+                                height={40} 
+                                src="/assets/images/imagenPorDefecto.png"  />
+                            </div>   
+                        </div></span>
                     </div>
+                     }
+                    
                 </div>
 
             </section>
@@ -103,6 +124,11 @@ export default function Navbar({SetCart, cart}){
             {cart && (
               <Cart SetCart = {SetCart} />
             )}
+            {myAccount && (
+                <MyAccount SetMyAccount = {SetMyAccount} />
+            )
+            }
+
             
         </div>
         ) 
