@@ -1,0 +1,64 @@
+.cont{
+    position: fixed;
+    background-color: rgba(135, 134, 134, 0.5);
+    z-index: 100000000000000000000000000000000000000000000000000000000000000000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bx{
+    position: relative;
+    width: 400px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    color: black;
+}
+.header{
+    font-family: "PoppinsBolder";
+    font-size: 1.2em;
+}
+.content{
+    padding-bottom: 20px;
+}
+.btnBx{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.btnBx button{
+    border: none;
+    padding: 15px;
+    background: var(--hlColor);
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnBx button:hover{
+    background: rgb(246, 99, 45);
+}
+.btnBx button:nth-child(1){
+    margin-right: 20px;
+}
+@media(max-width: 408px){
+    .bx{
+        width: 300px;
+    }
+    .header{
+        font-size: 1em;
+    }
+    .content{
+       font-size: 0.8em;
+    }
+}
+
