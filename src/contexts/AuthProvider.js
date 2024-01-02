@@ -8,8 +8,9 @@ import { useRouter } from 'next/navigation'
 
 
 export function AuthProvider({ children }) {
- const [user, setUser] = useState(null);
- const [credential, setCredential] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('credential')) || null);
+  const [credential, setCredential] = useState(JSON.parse(localStorage.getItem('credential')) || null);
+  
  
  const router = useRouter()
 
@@ -20,13 +21,18 @@ export function AuthProvider({ children }) {
  try {
    const response = await axios.post('https://zona0.onrender.com/accounts/login/',  formValue );
    console.log("Autenticacion1")
-   localStorage.setItem('access', response.data.access);
+  /* localStorage.setItem('access', response.data.access);
    localStorage.setItem('refresh', response.data.refresh);
    localStorage.setItem('credential', response.data.user);
    console.log("MMMM",response.data.user)
    setUser( localStorage.getItem('access'));
    setCredential(response.data.user)
-   console.log("CREDenciales",credential)
+   console.log("CREDenciales",credential)*/
+    localStorage.setItem('access', response.data.access);
+    localStorage.setItem('refresh', response.data.refresh);
+    localStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
+    setUser(localStorage.getItem('access')); // Recupera toda la respuesta del usuario
+    setCredential(JSON.parse(localStorage.getItem('credential')));
    console.log(response)
    console.log("FormValue",formValue)
   router.push('/catalogo')
@@ -47,6 +53,8 @@ export function AuthProvider({ children }) {
     console.log(response)
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
+    localStorage.removeItem('credential');
+    setCredential(null)
     setUser(null);
   } catch (error) {
     console.log(error.response)
