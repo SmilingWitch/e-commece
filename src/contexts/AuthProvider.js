@@ -34,6 +34,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
     setUser(localStorage.getItem('access')); // Recupera toda la respuesta del usuario
     setCredential(JSON.parse(localStorage.getItem('credential')));
+    console.log(credential)
    console.log(response)
    console.log("FormValue",formValue)
   router.push('/catalogo')
@@ -85,7 +86,7 @@ export function AuthProvider({ children }) {
 useEffect(() => {
   if (typeof window !== 'undefined') {
     const storedCredential = JSON.parse(localStorage.getItem('credential')) || null;
-    const storedUser = localStorage.getItem('user') || null
+    const storedUser = localStorage.getItem('access') || null
     setUser(storedUser);
     setCredential(storedCredential);
   }
