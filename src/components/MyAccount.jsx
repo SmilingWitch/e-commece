@@ -10,10 +10,15 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import {VscClose} from "react-icons/vsc"
 import Switch from '@mui/material/Switch';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FiMoon } from "react-icons/fi";
 import { IoSunnyOutline } from "react-icons/io5";
 import { IoMoonOutline } from "react-icons/io5";
 import { useState } from "react";
+import Dialog from "./Dialog";
+import{ useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import Link from "next/link"
+import EditarDatos from "./EditarDatos";
+import ChangePassword from "./ChangePassword";
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const theme = createTheme({
@@ -45,21 +50,60 @@ const theme = createTheme({
     },
    });
 
-
-export default function MyAccount({SetMyAccount}) {
-
+    export default function MyAccount({SetMyAccount}) {
+    const { signOut } = useContext(AuthContext);
     const [isChecked, setIsChecked] = useState(false);
+    const [active, SetActive] = useState(false);
+    const [activeEdit, SetActiveEdit] = useState(false);
+    const [activechangePass, SetActivechangePass] = useState(false);
 
+    console.log(active)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+          const res = await signOut();
+          setError('');
+          console.log(res)
+        }catch(error){
+          console.log(error)
+        }
+       }
+
+    const edit = () => {
+        SetActive(false)
+        SetActiveEdit(true)
+    }
+
+    const closeAll = () => {
+        SetActive(false)
+        SetActiveEdit(false)
+        SetActivechangePass(false)
+    }
+
+    
 
     return(
         <div className={style.cont} onClick = {() => SetMyAccount(false)}>
-            <div className={style.bx} onClick = {(event) => {event.stopPropagation();}}>
+            {active === true ? <Dialog     header = "Cerrar Sesion" 
+                        content = "Estas seguro de que quieres cerrar sesion"
+                        active = {active}
+                        SetActive = {SetActive} 
+                        fnc = {handleSubmit}/>: ""}
+            {activeEdit && (<EditarDatos 
+                                SetActiveEdit = {SetActiveEdit}
+                                closeAll = {closeAll}/>)}
+            {activechangePass &&<ChangePassword 
+                                SetActivechangePass = {SetActivechangePass}
+                                closeAll = {closeAll}/>}
+            <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
                 <div className={style1.header}>
+                
                     <div className={style1.header1}>
                         <h2>Mi Perfil</h2>
                     </div>
                     <div>
-                       <VscClose className={style.icon} onClick = {() => SetCart(false)}/> 
+                       <VscClose className={style1.icon} onClick = {() =>  SetMyAccount(false)}/> 
                     </div>
                 </div>
 
@@ -71,20 +115,31 @@ export default function MyAccount({SetMyAccount}) {
                             height={110} 
                             src="/assets/images/imagenPorDefecto.png" alt="Imagen seleccionada" />
                         </div>
+                        <div className={style.info}>
+                            <div className={style.name}>
+                                <span>Daniela</span>
+                                <span> </span>
+                                <span>Yero</span>
+                            </div>
+                            <div className={style.userName}>
+                                SmilingWitch
+                            </div>
+
+                        </div>
                     </div>
-                    <div className={style.option}>
+                    <div className={style.option} onClick={edit}>
                         <div className={style.icon}><MdOutlineModeEdit/></div>
                         <div className={style.name}>Editar datos</div>
-                        <div className={style.icon1}><IoIosArrowForward/></div>
+                        <div className={style.icon1}><IoIosArrowForward/></div>                        
                     </div>
-                    <div className={style.option}>
+                    <div className={style.option} onClick={() => SetActivechangePass(true)}>
                         <div className={style.icon}><LiaExchangeAltSolid/></div>
                         <div className={style.name}>Cambiar la contrasena</div>
                         <div className={style.icon1}><IoIosArrowForward/></div>
                     </div>
-                    <div className={style.option}>
+                    <div className={style.option} onClick = {() => SetActive(true)}>
                         <div className={style.icon}><IoIosLogOut/></div>
-                        <div className={style.name}>Cerrar sesion</div>
+                        <div className={style.name} >Cerrar sesion</div>
                         <div className={style.icon1}><IoIosArrowForward/></div>
                     </div>
                     <div className={style.option}>
