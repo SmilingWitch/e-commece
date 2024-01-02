@@ -47,6 +47,7 @@
     color: var(--lightLetter);
     bottom: -80px;
     left: 30%;
+
     
 }
 .detail{
@@ -59,9 +60,11 @@
     font-family: 'PoppinsBold';
     padding-bottom: 5px;
     font-size: 1.5em;
+    color: var(--darkLetter);
 }
 .description{
     padding-bottom: 5px;
+    color: var(--darkLetter);
 }
 .price{
     position: relative;
@@ -77,6 +80,7 @@
 .priceDesc{
     text-decoration: line-through;
     font-size: 0.8em;
+    color: var(--darkLetter);
 }
 .buySection{
     position: relative;   

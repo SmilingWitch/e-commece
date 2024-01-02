@@ -19,9 +19,11 @@
 .header{
     font-family: "PoppinsBolder";
     font-size: 1.2em;
+    color: var(--darkLetter);
 }
 .content{
     padding-bottom: 20px;
+    color: var(--darkLetter);
 }
 .btnBx{
     position: relative;
