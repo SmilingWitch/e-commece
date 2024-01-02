@@ -12,7 +12,7 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
                 <div className={style1.header}>
                 
-                    <div className={style1.header1}>
+                    <div className={style.header1}>
                         <h2 className = {style1.iconH2} onClick = {() =>SetActiveEdit(false) } ><IoIosArrowBack/></h2>
                         <h2>Editar Datos</h2>
                     </div>
