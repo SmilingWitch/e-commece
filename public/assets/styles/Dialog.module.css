@@ -1,12 +1,12 @@
 .cont{
-    position: fixed;
+    position: absolute;
     background-color: rgba(135, 134, 134, 0.5);
-    z-index: 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
     width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 100000000000000000000;
 }
 .bx{
     position: relative;
@@ -50,6 +50,13 @@
 .btnBx button:nth-child(1){
     margin-right: 20px;
 }
+.centerLoader{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 @media(max-width: 408px){
     .bx{
         width: 300px;
@@ -60,5 +67,6 @@
     .content{
        font-size: 0.8em;
     }
+    
 }
 
