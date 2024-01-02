@@ -10,7 +10,7 @@ import axios from "axios"
 import { useRouter } from 'next/navigation'
 import{ useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
-
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 
 export default function Login(){
@@ -32,52 +32,34 @@ export default function Login(){
         [event.target.name]:event.target.value
       })
     }
-
-    /*const handleSubmit = async (e) => {
-        console.log("AUTENTICACION")
-        e.preventDefault();
-      try{
-        console.log("AUTENTICACION1")
-        console.log(formValue)
-        const res = await axios.post('https://zona0.onrender.com/accounts/login/',formValue)
-        console.log("response",res.data)
-        localStorage.setItem('access',res.data.access)
-        localStorage.setItem('refresh',res.datarefresh)
-        setError('')
-        console.log(error)
-        setRedirect(true)
-        console.log(redirect)
-      }catch(error){
-        console.log(error.response)
-        setError('Unable to log in with provided credentials.')
-      }
-    }*/
     const handleSubmit = async (e) => {
       e.preventDefault();
       try{
         const res = await signIn(formValue);
         setError('');
         console.log(res)
-        setRedirect(true)
+        
       }catch(error){
         setError('Unable to log in with provided credentials.')
         console.log(error)
       }
      }
     
+    //Para poner visible/invisible la contrasena
+    const [pass,setPass] = useState('password')
 
-
-    if (redirect === true) {
-        router.push('/catalogo');
+    const viewPass = () => {
+      if (pass === 'password'){
+        setPass('text')
       }
-    
+      else setPass('password')
+    }
     
     return (
         <div className={style.bx}>
             <div className={style.formBx}>
                 
                 <form className={style.form}>
-
                 <div className={style.logo}>
                     <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
                     <span>rca Store</span>
@@ -96,15 +78,23 @@ export default function Login(){
                       </div>
 
                     <div className={style.label}>Contrasena</div>
+
                     <div className={style.input}>
-                        <input 
-                        type="password" 
-                        placeholder="Contrasena"
-                        name = "password"
-                        value={formValue.password}
-                        onChange={handleChange} />
-                        <span><RiLockPasswordLine/></span>
+                      <input
+                          id="password-register"
+                          type={pass}
+                          name="password"
+                          className="form-control"
+                          required
+                          placeholder="Contrasena"
+                          value={formValue.password}
+                          onChange={handleChange}
+                        />
+                          <span onClick={viewPass}>
+                          {pass === 'password' ? <IoEyeOutline/>:<IoEyeOffOutline/>}
+                          </span>
                     </div>
+                      
                     <input
                     type="submit" 
                     value="Autenticar" 
