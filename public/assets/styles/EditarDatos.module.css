@@ -23,3 +23,9 @@
     align-items: center;
     padding: 10px;
 }
+@media(max-width:734px){
+    .bx {
+        width: 100%;
+        
+       }
+   }
