@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import{ useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-
+import BeatLoader from "react-spinners/BeatLoader"
 
 export default function Login(){
     const router = useRouter()
@@ -23,8 +23,8 @@ export default function Login(){
         email: ''
       });
 
-    const [redirect,setRedirect] = useState(false)
-    const [error,setError] = useState('')
+    const [loading,setLoading] = useState(false)
+    const [error,setError] = useState("")
 
     const handleChange= (event) => {
       setFormValue({
@@ -33,15 +33,17 @@ export default function Login(){
       })
     }
     const handleSubmit = async (e) => {
+      setLoading(true)
       e.preventDefault();
       try{
         const res = await signIn(formValue);
         setError('');
         console.log(res)
-        
+        setLoading(false)
       }catch(error){
         setError('Unable to log in with provided credentials.')
         console.log(error)
+        setLoading(false)
       }
      }
     
@@ -95,11 +97,20 @@ export default function Login(){
                           </span>
                     </div>
                       
-                    <input
+                    {loading ? 
+                    <div className="sweet-loading">
+                      <BeatLoader
+                        color="rgba(255, 68, 0,1)"
+                        cssOverride={{}}
+                        margin={10}
+                        size={10}
+                        speedMultiplier={1}
+                      />
+                    </div>:<input
                     type="submit" 
                     value="Autenticar" 
                     onClick={(e) => handleSubmit(e)}
-                    className={style.submit} />
+                    className={style.submit} /> }
                     <div className={style.resend}>
                         <Link href="/accounts/password-reset">Has olvidado tu contrasena?</Link>
                     </div>

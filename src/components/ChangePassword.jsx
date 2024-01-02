@@ -6,7 +6,7 @@ import {useState} from "react"
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import axios from "axios"
 import { FaRegCheckCircle } from "react-icons/fa";
-
+import BeatLoader from "react-spinners/BeatLoader"
 
 
 export default function ChangePassword({SetActivechangePass, closeAll}){
@@ -40,6 +40,7 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
     const [redirect,setRedirect] = useState(false)
     const [error,setError] = useState('')
     const [response,setResponse] = useState('')
+    const [loading,setLoading] = useState(false)
     
 
     const handleChange= (event) => {
@@ -52,6 +53,7 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('access')
+        setLoading(true)
       try{
         console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/accounts/password/change/',formValue,{
@@ -62,9 +64,11 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
         console.log("response",res.data)
         setError('')
         setResponse(res.data.detail)
+        setLoading(false)
       }catch(error){
         console.log(error.response)
         if (error.response) {
+          setLoading(false)
             // El servidor respondió con un estado fuera del rango de 2xx
             setError(error.response.data);
             console.log(error)
@@ -134,11 +138,21 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
                         </div>
                         {error.new_password2 === undefined ? "" : <div className={style.error}>{error.new_password2}</div>}
 
-                        <input
+                        {loading ? 
+                          <div className="sweet-loading">
+                          <BeatLoader
+                            color="rgba(255, 68, 0,1)"
+                            cssOverride={{}}
+                            margin={10}
+                            size={10}
+                            speedMultiplier={1}
+                          />
+                        </div>
+                        :<input
                             type="submit" 
                             value="Cambiar contrasena" 
                             onClick={(e) => handleSubmit(e)}
-                            className={style.submit} />
+                            className={style.submit} />}
 
                     </form>
                    { response !== "" ?

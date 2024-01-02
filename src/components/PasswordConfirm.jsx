@@ -24,6 +24,7 @@ export default function PasswordReset(){
 
     const [redirect,setRedirect] = useState(false)
     const [error,setError] = useState('')
+    const [loading,setLoading] = useState(false)
 
     const handleChange= (event) => {
       setFormValue({
@@ -34,13 +35,16 @@ export default function PasswordReset(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
       try{
         console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/accounts/password/reset/confirm/',formValue)
         console.log("response",res.data)
         setError('')
         router.push("/accounts/login")
+        setLoading(false)
       }catch(error){
+        setLoading(false)
         if (error.response) {
             // El servidor respondió con un estado fuera del rango de 2xx
             setError(error.response.data);
@@ -148,11 +152,21 @@ export default function PasswordReset(){
                     </div>
                     {error.uid === undefined ? "" : <div className={style.error}>{error.uid}</div>}
 
-                    <input
+                   { loading ? 
+                          <div className="sweet-loading">
+                          <BeatLoader
+                            color="rgba(255, 68, 0,1)"
+                            cssOverride={{}}
+                            margin={10}
+                            size={10}
+                            speedMultiplier={1}
+                          />
+                      </div>
+                    :<input
                     type="submit" 
                     value="Mandar" 
                     onClick={(e) => handleSubmit(e)}
-                    className={style.submit} />
+                    className={style.submit} />}
                     <div className={style.correct}>
                         <span><Link href = "/accounts/login">Volver al login</Link></span>
                     </div>

@@ -67,12 +67,12 @@ export default function EmailVerify(){
               <div className={style.spinner}>
               <div className="sweet-loading">
                   <BeatLoader
-                    color="rgba(255, 68, 0,1)"
-                    cssOverride={{}}
-                    margin={20}
-                    size={15}
-                    speedMultiplier={1}
-                  />
+                      color="rgba(255, 68, 0,1)"
+                      cssOverride={{}}
+                      margin={10}
+                      size={10}
+                      speedMultiplier={1}
+                    />
               </div>
           </div>}
 

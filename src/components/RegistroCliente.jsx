@@ -9,7 +9,7 @@ import {IoMdArrowBack} from "react-icons/io"
 import Image from "next/image"
 import { HiPlusCircle } from "react-icons/hi2";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-
+import BeatLoader from "react-spinners/BeatLoader"
 
 export default function Registro(){
 
@@ -27,6 +27,7 @@ export default function Registro(){
 
     const [error,setError] = useState('')
     const [correct,setCorrect] = useState(false)
+    const [loading,setLoading] = useState(false)
 
     const data = {
         username: formValue.username,
@@ -63,14 +64,17 @@ export default function Registro(){
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
       try{
         console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/register/client/', data)
         console.log("response",res.data)
         setError('')
+        setLoading(false)
         setCorrect(true)
       }catch(error){
         if (error.response) {
+          setLoading(false)
             // El servidor respondió con un estado fuera del rango de 2xx
             setError(error.response.data);
             console.log(error)
@@ -242,7 +246,17 @@ export default function Registro(){
             </div>
             {error.password === undefined ? "" : <div className={style.error}>{error.password}</div>}
                         
-            <input type="submit" value="Registrarse" className={style.submit} onClick={(e) => handleSubmit(e)}/>
+            {loading ? 
+            <div className="sweet-loading">
+            <BeatLoader
+              color="rgba(255, 68, 0,1)"
+              cssOverride={{}}
+              margin={10}
+              size={10}
+              speedMultiplier={1}
+            />
+          </div>
+            :<input type="submit" value="Registrarse" className={style.submit} onClick={(e) => handleSubmit(e)}/>}
             <div className={style.redirect}>
                 Ya tienes cuenta? 
                 <span><Link href = "/accounts/login">Autenticarse</Link></span>

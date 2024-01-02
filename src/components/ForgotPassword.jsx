@@ -21,6 +21,7 @@ export default function ForgotPassword(){
 
     const [correct,setCorrect] = useState(false)
     const [error,setError] = useState('')
+    const [loading,setLoading] = useState(false)
 
     const handleChange= (event) => {
       setFormValue({
@@ -32,16 +33,19 @@ export default function ForgotPassword(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
       try{
         const res = await axios.post('https://zona0.onrender.com/accounts/password/reset/',formValue)
         console.log("response",res.data)
         setError('')
         setCorrect(true)
+        setLoading(false)
       }catch(error){
         console.log(error)
         setCorrect(false)
         console.log(error.response)
         setError(error.response)
+        setLoading(false)
       }
     }
 

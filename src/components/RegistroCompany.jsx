@@ -9,6 +9,7 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { HiPlusCircle } from "react-icons/hi2";
 import Image from "next/image"
+import BeatLoader from "react-spinners/BeatLoader"
 
 export default function RegistroCompany(){
 
@@ -25,6 +26,7 @@ export default function RegistroCompany(){
 
     const [correct,setCorrect] = useState(false)
     const [error,setError] = useState('')
+    const [loading,setLoading] = useState(false)
 
     const handleChange= (event) => {
       setFormValue({
@@ -36,6 +38,7 @@ export default function RegistroCompany(){
     const handleSubmit = async (e) => {
         console.log("AUTENTICACION")
         e.preventDefault();
+        setLoading(true)
       try{
         console.log("AUTENTICACION1")
         console.log(formValue)
@@ -45,8 +48,10 @@ export default function RegistroCompany(){
         localStorage.setItem('refresh',res.data.data.refresh)
         setError('')
         setCorrect(true)
+        setLoading(false)
         console.log(correct)
       }catch(error){
+        setLoading(false)
         if (error.response) {
             // El servidor respondió con un estado fuera del rango de 2xx
             setError(error.response.data);
@@ -265,7 +270,17 @@ export default function RegistroCompany(){
             </div>
                 {error.password === undefined ? "" : <div className={style.error}>{error.password}</div>}
                 
-                <input type="submit" value="Registrar" className={style.submit} onClick={(e) => handleSubmit(e)} />
+                {loading ? 
+                    <div className="sweet-loading">
+                    <BeatLoader
+                      color="rgba(255, 68, 0,1)"
+                      cssOverride={{}}
+                      margin={10}
+                      size={10}
+                      speedMultiplier={1}
+                    />
+                </div>
+                :<input type="submit" value="Registrar" className={style.submit} onClick={(e) => handleSubmit(e)} />}
                 <div className={style.correct}>
                     Ya tienes cuenta? 
                     <span><Link href = "/accounts/login">Autenticarse</Link></span>
