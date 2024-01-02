@@ -61,7 +61,7 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                     id="" 
                     placeholder="Buscar"
                     onKeyDown={handleKeyDown} />
-                    <div className={style.icon}><Link href = "/catalogo"><MdSearch/></Link></div>
+                    <div className={style.icon}><Link href = "/catalogo" className={style.link}><MdSearch/></Link></div>
                 </div>
 
             </div>
