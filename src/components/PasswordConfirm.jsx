@@ -8,7 +8,7 @@ import Link from "next/link"
 import {useState, useEffect} from "react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
-
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 
 
@@ -55,6 +55,24 @@ export default function PasswordReset(){
           }
       }
     }
+
+    //Para poner visible/invisible la contrasena
+    const [pass,setPass] = useState('password')
+    const [pass2,setPass2] = useState('password')
+
+    const viewPass = () => {
+      if (pass === 'password'){
+        setPass('text')
+      }
+      else setPass('password')
+    }
+  
+    const viewPass2 = () => {
+      if (pass2 === 'password'){
+        setPass2('text')
+      }
+      else setPass2('password')
+    }
     
     
     return (
@@ -71,26 +89,38 @@ export default function PasswordReset(){
                     
                     <div  className= {error.new_password1 ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nueva Contrasena</div>
                     <div className={style.input}>
-                        <input 
-                        type="password" 
-                        placeholder="Contrasena"
-                        name = "new_password1"
-                        value={formValue.new_password1}
-                        onChange={handleChange} />
-                        <span><RiLockPasswordLine/></span>
+                      <input
+                          id="password-register"
+                          type={pass}
+                          name = "new_password1"
+                          className="form-control"
+                          required
+                          placeholder="Contrasena"
+                          value={formValue.new_password1}
+                          onChange={handleChange}
+                        />
+                      <span onClick={viewPass}>
+                      {pass === 'password' ? <IoEyeOutline/>:<IoEyeOffOutline/>}
+                      </span>
                     </div>
                     {error.new_password1 === undefined ? "" : <div className={style.error}>{error.new_password1}</div>}
 
 
                     <div className= {error.new_password2 ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Repetir Contrasena</div>
                     <div className={style.input}>
-                        <input 
-                        type="password" 
-                        placeholder="Contrasena"
-                        name = "new_password2"
-                        value={formValue.new_password2}
-                        onChange={handleChange} />
-                        <span><RiLockPasswordLine/></span>
+                      <input
+                          id="password-register"
+                          type={pass2}
+                          name = "new_password2"
+                          className="form-control"
+                          required
+                          placeholder="Contrasena"
+                          value={formValue.new_password2}
+                          onChange={handleChange}
+                        />
+                      <span onClick={viewPass2}>
+                      {pass2 === 'password' ? <IoEyeOutline/>:<IoEyeOffOutline/>}
+                      </span>
                     </div>
                     {error.new_password2 === undefined ? "" : <div className={style.error}>{error.new_password2}</div>}
 
@@ -98,7 +128,7 @@ export default function PasswordReset(){
                     <div className={style.input}>
                         <input 
                         type="text" 
-                        placeholder="Contrasena"
+                        placeholder="Codigo"
                         name = "token"
                         value={formValue.toquen}
                         onChange={handleChange} />
@@ -110,7 +140,7 @@ export default function PasswordReset(){
                     <div className={style.input}>
                         <input 
                         type="text" 
-                        placeholder="Contrasena"
+                        placeholder="Id"
                         name = "uid"
                         value={formValue.uid}
                         onChange={handleChange} />
