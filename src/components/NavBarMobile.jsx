@@ -6,9 +6,28 @@ import { LuShoppingCart } from "react-icons/lu";
 import { FaRegUserCircle } from "react-icons/fa";
 import { SlWallet } from "react-icons/sl";
 import Link from "next/link"
+import Image from "next/image"
 import Cart from "./Cart";
+import MyAccount from "./MyAccount";
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import useMediaQuery from '../components/functions/MediaQuery';
+
 
 export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
+
+    const { user } = useContext(AuthContext);
+    console.log("USER",user)
+    function handleKeyDown(event) {
+        if (event.key === 'Enter') {
+          if (router.pathname !== '/catalogo') {
+            router.push('/catalogo');
+          }
+        }
+       }
+
+       const isMobile = useMediaQuery('(max-width: 768px)');
+
     return(
         <div className={style.contMobile}>
             <section className={style.superiorMobile}>
@@ -19,26 +38,52 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
                 </div>
             </Link>
                 <div className={style.iconBx}>
-                    <div className={style.contIcon1}>
-                        <span className={style.icon1}><Link href = "/dasboard/wallet"><SlWallet/></Link></span>
-                        <div className={style.cont1}>Billetera</div>
-                    </div>
                     <div className={style.contIcon}>
                         <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
                     </div>
                     <div className={style.contIcon}>
                         <span><Link href = "/catalogo"><MdSearch/></Link></span>
                     </div>
-                    <div className={style.contIcon1}>
+                    {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
+                    </div>:
+                    <div className={style.contLogg}>
+                        <span className={style.iconLogg}>
+                        <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
+                            <div className={style.name}>Daniela</div> 
+                            <div className={style.circle}>
+                            <Image
+                                width={40}
+                                height={40} 
+                                src="/assets/images/imagenPorDefecto.png"  />
+                            </div>   
+                        </div></span>
                     </div>
+                     }
                 </div>
 
             </section>
+            {/*<section className={style.section2}>
+            <div className={style.inputBx}>
+                <div className={style.input}> 
+                    <input type="text" 
+                    name="" 
+                    id="" 
+                    placeholder="Buscar"
+                    onKeyDown={handleKeyDown} />
+                    <div className={style.icon}><Link href = "/catalogo"><MdSearch/></Link></div>
+                </div>
+
+            </div>
+                </section>*/}
             {cart && (
               <Cart SetCart = {SetCart} />
             )}
+            {myAccount && (
+                <MyAccount SetMyAccount = {SetMyAccount} />
+            )
+            }
         </div>
     )
 }
