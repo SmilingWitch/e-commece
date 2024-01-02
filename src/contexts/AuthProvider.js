@@ -8,9 +8,10 @@ import { useRouter } from 'next/navigation'
 
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('credential')) || null);
-  const [credential, setCredential] = useState(JSON.parse(localStorage.getItem('credential')) || null);
-  
+  const [user, setUser] = useState(null);
+  const [credential, setCredential] = useState(null);
+
+   
  
  const router = useRouter()
 
@@ -76,9 +77,18 @@ export function AuthProvider({ children }) {
   }
 };
 
-useEffect(() => {
+/*useEffect(() => {
   const intervalId = setInterval(verifyToken, 840000);
   return () => clearInterval(intervalId);
+}, []);*/
+
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const storedCredential = JSON.parse(localStorage.getItem('credential')) || null;
+    const storedUser = JSON.parse(localStorage.getItem('user')) || null
+    setUser(storedUser);
+    setCredential(storedCredential);
+  }
 }, []);
 
  return (

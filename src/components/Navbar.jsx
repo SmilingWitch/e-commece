@@ -84,12 +84,12 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                     <div className={style.contLogg}>
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
-                            <div className={style.name}>{credential.username}</div> 
+                        {credential && (<div className={style.name}>{credential.username}</div> )}
                             <div className={style.circle}>
-                            <Image
+                            {credential && (<Image
                                 width={40}
                                 height={40} 
-                                src={credential.image}  />
+                                src={credential.image}  />)}
                             </div>   
                         </div></span>
                     </div>

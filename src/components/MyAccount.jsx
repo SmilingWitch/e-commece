@@ -120,13 +120,13 @@ console.log(credential)
                         </div>
                         <div className={style.info}>
                             <div className={style.name}>
-                                <span>{credential.name}</span>
+                            {credential && (<span>{credential.name}</span>)}
                                 <span> </span>
-                                <span>{credential.last_name}</span>
+                            {credential && (<span>{credential.last_name}</span>)}
                             </div>
-                            <div className={style.userName}>
+                            {credential && (<div className={style.userName}>
                                 {credential.username}
-                            </div>
+                            </div>)}
 
                         </div>
                     </div>
