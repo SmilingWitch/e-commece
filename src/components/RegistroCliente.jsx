@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import {IoMdArrowBack} from "react-icons/io"
 import Image from "next/image"
 import { HiPlusCircle } from "react-icons/hi2";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 
 export default function Registro(){
@@ -20,10 +21,10 @@ export default function Registro(){
         ci: '',
         name:'',
         last_name: '',
-        movil: ''
+        movil: '',
+        image: null
       });
 
-    const [redirect,setRedirect] = useState(false)
     const [error,setError] = useState('')
     const [correct,setCorrect] = useState(false)
 
@@ -44,6 +45,12 @@ export default function Registro(){
     const handleFileChange = (event) => {
      setSelectedFile(event.target.files[0]);
      setImageUrl(URL.createObjectURL(event.target.files[0]));
+
+     setFormValue((prev) => ({
+        ...prev,
+        image: event.target.files[0],
+      }));
+
     }
 
 
@@ -77,6 +84,18 @@ export default function Registro(){
           }
       }
     }
+
+
+    //Para poner visible/invisible la contrasena
+    const [pass,setPass] = useState('password')
+
+    const viewPass = () => {
+      if (pass === 'password'){
+        setPass('text')
+      }
+      else setPass('password')
+    }
+    
 
 
     return(
@@ -123,12 +142,10 @@ export default function Registro(){
                     <div className={style.info} onChange={handleFileChange}>
                         {/*<input type="file" onChange={handleFileChange} />*/}
                         <label for="myInput" ><HiPlusCircle className={style.icon2}/></label>
-                        <input id="myInput" type="file" accept="image/*"/*style={{display: "none"}}*//>
-
+                        <input id="myInput" type="file" accept="image/*"/>
                     </div>
-                    
-               
             </div>
+
             <div className= {error.name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre</div>
             <div className={style.input}>
                 <input 
@@ -209,14 +226,19 @@ export default function Registro(){
                         
             <div className= {error.password ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Contrasena</div>
             <div className={style.input}>
-                <input 
-                type="password" 
-                name="password" 
-                id="" 
-                required
-                value={formValue.password}
-                onChange={handleChange}
-                placeholder="Password" />
+                <input
+                    id="password-register"
+                    type={pass}
+                    name="password"
+                    className="form-control"
+                    required
+                    placeholder="Contrasena"
+                    value={formValue.password}
+                    onChange={handleChange}
+                  />
+                <span onClick={viewPass}>
+                {pass === 'password' ? <IoEyeOutline/>:<IoEyeOffOutline/>}
+                </span>
             </div>
             {error.password === undefined ? "" : <div className={style.error}>{error.password}</div>}
                         

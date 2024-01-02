@@ -6,8 +6,9 @@ import {useState, useEffect} from "react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
 import { MdKeyboardArrowUp } from "react-icons/md";
-
-
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { HiPlusCircle } from "react-icons/hi2";
+import Image from "next/image"
 
 export default function RegistroCompany(){
 
@@ -22,7 +23,6 @@ export default function RegistroCompany(){
         email: ''
       });
 
-    const [redirect,setRedirect] = useState(false)
     const [correct,setCorrect] = useState(false)
     const [error,setError] = useState('')
 
@@ -62,6 +62,26 @@ export default function RegistroCompany(){
       }
     }
 
+    //Para seleccionar una imagen
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [imageUrl, setImageUrl] = useState("/assets/images/imagenPorDefecto.png");
+   
+    const handleFileChange = (event) => {
+     setSelectedFile(event.target.files[0]);
+     setImageUrl(URL.createObjectURL(event.target.files[0]));
+    }
+
+
+    //Para poner visible/invisible la contrasena
+    const [pass,setPass] = useState('password')
+
+    const viewPass = () => {
+      if (pass === 'password'){
+        setPass('text')
+      }
+      else setPass('password')
+    }
+
 
     return(
         <div className={style.bx}>
@@ -97,6 +117,18 @@ export default function RegistroCompany(){
                     <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
                     <span>rca Store</span>
                 </div>
+                <div className={style.insertPhoto}>
+                {imageUrl && <div className={style.selectedImageBx}>
+                    <Image
+                    width={110}
+                    height={110} 
+                    src={imageUrl} alt="Imagen seleccionada" /></div>}
+                    <div className={style.info} onChange={handleFileChange}>
+                        {/*<input type="file" onChange={handleFileChange} />*/}
+                        <label for="myInput" ><HiPlusCircle className={style.icon2}/></label>
+                        <input id="myInput" type="file" accept="image/*"/*style={{display: "none"}}*//>
+                    </div>
+            </div>
                 <div className= {error.company_name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre de la compania</div>
                 <div className={style.input}>
                     <input 
@@ -217,15 +249,20 @@ export default function RegistroCompany(){
 
                 <div className= {error.password ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Contrasena</div>
                 <div className={style.input}>
-                    <input 
-                    type="password" 
-                    name="password" 
-                    id="" 
+                <input
+                    id="password-register"
+                    type={pass}
+                    name="password"
+                    className="form-control"
                     required
+                    placeholder="Contrasena"
                     value={formValue.password}
                     onChange={handleChange}
-                    placeholder="Password" />
-                </div>
+                  />
+                <span onClick={viewPass}>
+                {pass === 'password' ? <IoEyeOutline/>:<IoEyeOffOutline/>}
+                </span>
+            </div>
                 {error.password === undefined ? "" : <div className={style.error}>{error.password}</div>}
                 
                 <input type="submit" value="Registrar" className={style.submit} onClick={(e) => handleSubmit(e)} />
