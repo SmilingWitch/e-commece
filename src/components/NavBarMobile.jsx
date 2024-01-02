@@ -17,7 +17,8 @@ import useMediaQuery from '../components/functions/MediaQuery';
 export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
 
     const { user } = useContext(AuthContext);
-    console.log("USER",user)
+    const { credential } = useContext(AuthContext);
+
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
           if (router.pathname !== '/catalogo') {
@@ -51,12 +52,12 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
                     <div className={style.contLogg}>
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
-                            <div className={style.name}>Daniela</div> 
+                            <div className={style.name}>{credential.username}</div> 
                             <div className={style.circle}>
                             <Image
                                 width={40}
                                 height={40} 
-                                src="/assets/images/imagenPorDefecto.png"  />
+                                src={credential.image}  />
                             </div>   
                         </div></span>
                     </div>

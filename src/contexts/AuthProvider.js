@@ -22,7 +22,11 @@ export function AuthProvider({ children }) {
    console.log("Autenticacion1")
    localStorage.setItem('access', response.data.access);
    localStorage.setItem('refresh', response.data.refresh);
-   setUser( response.data.access);
+   localStorage.setItem('credential', response.data.user);
+   console.log("MMMM",response.data.user)
+   setUser( localStorage.getItem('access'));
+   setCredential(response.data.user)
+   console.log("CREDenciales",credential)
    console.log(response)
    console.log("FormValue",formValue)
   router.push('/catalogo')
@@ -70,7 +74,7 @@ useEffect(() => {
 }, []);
 
  return (
- <AuthContext.Provider value={{ user, signIn, signOut }}>
+ <AuthContext.Provider value={{ user, signIn, signOut, credential }}>
  {children}
  </AuthContext.Provider>
  );

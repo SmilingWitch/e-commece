@@ -25,6 +25,7 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
     const [visible,Setvisible] = useState(false)
     
     const { user } = useContext(AuthContext);
+    const { credential } = useContext(AuthContext);
     console.log("USER",user)
 
     const router = useRouter();
@@ -82,12 +83,12 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                     <div className={style.contLogg}>
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
-                            <div className={style.name}>Daniela</div> 
+                            <div className={style.name}>{credential.username}</div> 
                             <div className={style.circle}>
                             <Image
                                 width={40}
                                 height={40} 
-                                src="/assets/images/imagenPorDefecto.png"  />
+                                src={credential.image}  />
                             </div>   
                         </div></span>
                     </div>

@@ -20,6 +20,7 @@ import Link from "next/link"
 import EditarDatos from "./EditarDatos";
 import ChangePassword from "./ChangePassword";
 
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const theme = createTheme({
     components: {
@@ -56,7 +57,9 @@ const theme = createTheme({
     const [active, SetActive] = useState(false);
     const [activeEdit, SetActiveEdit] = useState(false);
     const [activechangePass, SetActivechangePass] = useState(false);
+    const { credential } = useContext(AuthContext);
 
+console.log(credential)
     console.log(active)
 
     const handleSubmit = async (e) => {
@@ -113,16 +116,16 @@ const theme = createTheme({
                             <Image
                             width={110}
                             height={110} 
-                            src="/assets/images/imagenPorDefecto.png" alt="Imagen seleccionada" />
+                            src={credential.image} alt="Imagen seleccionada" />
                         </div>
                         <div className={style.info}>
                             <div className={style.name}>
-                                <span>Daniela</span>
+                                <span>{credential.name}</span>
                                 <span> </span>
-                                <span>Yero</span>
+                                <span>{credential.last_name}</span>
                             </div>
                             <div className={style.userName}>
-                                SmilingWitch
+                                {credential.username}
                             </div>
 
                         </div>
