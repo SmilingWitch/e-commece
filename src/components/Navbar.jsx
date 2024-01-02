@@ -9,13 +9,14 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Link from "next/link"
 import Image from "next/image"
 import Cart from "./Cart";
 import MyAccount from "./MyAccount";
-
+import { FaRegBell } from "react-icons/fa";
+import axios from "axios"
 
 
 export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
@@ -40,7 +41,7 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
         console.log(visible);
        }, [visible]);
 
-
+      
 
     return(
         <div className={style.cont}>
@@ -71,10 +72,13 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                     <div className={style.contIcon}>
                         <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
                     </div>
+                    <div className={style.contIcon}>
+                        <span><Link href = "/notificationes"><FaRegBell/></Link></span>
+                    </div>
                     {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
-                    </div>:
+                    </div>: 
                     <div className={style.contLogg}>
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
@@ -124,12 +128,10 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
             {cart && (
               <Cart SetCart = {SetCart} />
             )}
-            {myAccount && (
+            {myAccount && user !== null && (
                 <MyAccount SetMyAccount = {SetMyAccount} />
             )
-            }
-
-            
+            }     
         </div>
         ) 
 }
