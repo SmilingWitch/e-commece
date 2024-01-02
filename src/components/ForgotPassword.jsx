@@ -8,7 +8,7 @@ import Link from "next/link"
 import {useState, useEffect} from "react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
-
+import BeatLoader from "react-spinners/BeatLoader"
 
 export default function ForgotPassword(){
 
@@ -98,11 +98,22 @@ export default function ForgotPassword(){
                     onChange={handleChange} />
                     <span><MdOutlineMail/></span>
                   </div>
-                  <input
+                  
+                  {loading ? 
+                    <div className="sweet-loading">
+                    <BeatLoader
+                      color="rgba(255, 68, 0,1)"
+                      cssOverride={{}}
+                      margin={10}
+                      size={10}
+                      speedMultiplier={1}
+                    />
+                </div>
+                :<input
                     type="submit" 
                     value="Resetear contrasena" 
                     onClick={(e) => handleSubmit(e)}
-                    className={style.submit} />
+                    className={style.submit} />}
                 <div className={style.correct}>
                     <span><Link href = "/accounts/login">Volver al login</Link></span>
                 </div>

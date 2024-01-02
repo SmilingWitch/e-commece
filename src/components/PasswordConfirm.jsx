@@ -9,7 +9,7 @@ import {useState, useEffect} from "react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-
+import BeatLoader from "react-spinners/BeatLoader"
 
 
 export default function PasswordReset(){

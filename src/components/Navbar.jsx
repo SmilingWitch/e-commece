@@ -17,6 +17,7 @@ import Cart from "./Cart";
 import MyAccount from "./MyAccount";
 import { FaRegBell } from "react-icons/fa";
 import axios from "axios"
+import BeatLoader from "react-spinners/BeatLoader"
 
 
 export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
