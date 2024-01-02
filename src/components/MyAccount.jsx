@@ -21,7 +21,9 @@ import EditarDatos from "./EditarDatos";
 import ChangePassword from "./ChangePassword";
 
 
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
 const theme = createTheme({
     components: {
       MuiSwitch: {
@@ -52,6 +54,8 @@ const theme = createTheme({
    });
 
     export default function MyAccount({SetMyAccount}) {
+
+    const [loading,setLoading] = useState(false)    
     const { signOut } = useContext(AuthContext);
     const [isChecked, setIsChecked] = useState(false);
     const [active, SetActive] = useState(false);
@@ -64,7 +68,10 @@ console.log(credential)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("ACTIVE")
+        setLoading(true)
         try{
+          
           const res = await signOut();
           setError('');
           console.log(res)
@@ -74,12 +81,10 @@ console.log(credential)
        }
 
     const edit = () => {
-        SetActive(false)
         SetActiveEdit(true)
     }
 
     const closeAll = () => {
-        SetActive(false)
         SetActiveEdit(false)
         SetActivechangePass(false)
     }
@@ -88,18 +93,23 @@ console.log(credential)
 
     return(
         <div className={style.cont} onClick = {() => SetMyAccount(false)}>
-            {active === true ? <Dialog header = "Cerrar Sesion" 
-                        content = "Estas seguro de que quieres cerrar sesion"
-                        active = {active}
-                        SetActive = {SetActive} 
-                        fnc = {handleSubmit}/>: ""}
+            
             {activeEdit && (<EditarDatos 
                                 SetActiveEdit = {SetActiveEdit}
                                 closeAll = {closeAll}/>)}
             {activechangePass &&<ChangePassword 
                                 SetActivechangePass = {SetActivechangePass}
                                 closeAll = {closeAll}/>}
+            {active  === true ? <Dialog header = "Cerrar Sesion" 
+                        content = "Estas seguro de que quieres cerrar sesion"
+                        active = {active}
+                        SetActive = {SetActive} 
+                        fnc = {handleSubmit}
+                        loading = {loading}
+                        setLoading = {setLoading}/>: ""}
+                
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
+                
                 <div className={style1.header}>
                 
                     <div className={style1.header1}>
