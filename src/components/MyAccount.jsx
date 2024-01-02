@@ -88,7 +88,7 @@ console.log(credential)
 
     return(
         <div className={style.cont} onClick = {() => SetMyAccount(false)}>
-            {active === true ? <Dialog     header = "Cerrar Sesion" 
+            {active === true ? <Dialog header = "Cerrar Sesion" 
                         content = "Estas seguro de que quieres cerrar sesion"
                         active = {active}
                         SetActive = {SetActive} 
@@ -113,10 +113,10 @@ console.log(credential)
                 <div className={style.optionsBx}>
                     <div className={style.insertPhoto}>
                         <div className={style.selectedImageBx}>
-                            <Image
+                            {credential && (<Image
                             width={110}
                             height={110} 
-                            src={credential.image} alt="Imagen seleccionada" />
+                            src={credential.image} alt="Imagen seleccionada" />)}
                         </div>
                         <div className={style.info}>
                             <div className={style.name}>
