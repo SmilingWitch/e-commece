@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem('access', response.data.access);
     localStorage.setItem('refresh', response.data.refresh);
     localStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
+    console.log("CREDENTIAL",response.data.user)
     setUser(localStorage.getItem('access')); // Recupera toda la respuesta del usuario
     setCredential(JSON.parse(localStorage.getItem('credential')));
     console.log(credential)
@@ -85,7 +86,13 @@ export function AuthProvider({ children }) {
 
 useEffect(() => {
   if (typeof window !== 'undefined') {
-    const storedCredential = JSON.parse(localStorage.getItem('credential')) || null;
+    let storedCredential = null;
+      try {
+       storedCredential = JSON.parse(localStorage.getItem('credential')) || null;
+      } catch (error) {
+       console.error('Error al analizar los datos de localStorage:', error);
+      }
+
     const storedUser = localStorage.getItem('access') || null
     setUser(storedUser);
     setCredential(storedCredential);
