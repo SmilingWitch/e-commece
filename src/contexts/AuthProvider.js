@@ -4,9 +4,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation'
+
 
 export function AuthProvider({ children }) {
  const [user, setUser] = useState(null);
+ const [credential, setCredential] = useState(null);
+ 
+ const router = useRouter()
 
  /*--------------------SING IN-------------------- */
  const signIn = async (formValue) => {
@@ -17,9 +22,10 @@ export function AuthProvider({ children }) {
    console.log("Autenticacion1")
    localStorage.setItem('access', response.data.access);
    localStorage.setItem('refresh', response.data.refresh);
-   setUser(localStorage.getItem('access'));
+   setUser( response.data.access);
    console.log(response)
    console.log("FormValue",formValue)
+  router.push('/catalogo')
  } catch (error) {
    console.log(error.response)
    console.log("No se hizo la peticion")
@@ -30,15 +36,16 @@ export function AuthProvider({ children }) {
 
  /*--------------------SING OUT--------------------*/
  const signOut = async () => {
+  const token = localStorage.getItem('refresh')
   try {
-    const response = await axios.post('https://zona0.onrender.com/accounts/logout/',  formValue );
+    const response = await axios.post('https://zona0.onrender.com/accounts/logout/', {refresh : token} )
     console.log("logout")
     console.log(response)
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
     setUser(null);
   } catch (error) {
-    console.log(error)
+    console.log(error.response)
     console.log("No se hizo la peticion")
     
   }
