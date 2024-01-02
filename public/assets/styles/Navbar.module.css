@@ -42,6 +42,7 @@
     display:flex ;
     align-items: center;
     justify-content: center;
+    
 }
 .input{
     position: relative;
@@ -79,7 +80,7 @@
     position: relative;
     font-size: 1.5em;
     padding: 10px;
-    min-width: 250px;
+    width: 300px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -238,7 +239,27 @@
     width: 200px;
     border: 1px solid var(--hlColor);
     height: 35px;
+    }  
+}
+@media(max-width:410px){
+    .logo span{
+        font-size: 1em
     }
-
-    
+    .logo{
+        width: 100px;
+    }
+    .logo img{
+        width: 70px;
+        height: 70px;
+    }
+    .icon1,
+    .icon2, 
+    .contIcon span{
+        font-size: 0.9em;
+    }
+    .iconBx{
+        position: relative;
+        min-width: none;
+        width: 200px;
+    }
 }
