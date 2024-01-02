@@ -47,7 +47,7 @@
     padding-top: 5px;
 }
 .trash{
-    color: black;
+    color: var(--darkLetter);
 }
 .actions{
     position: relative;
@@ -59,10 +59,11 @@
     width: 100px;
     padding-left: 5px;
     padding-right: 5px;
-    transition: 0.3s;border-radius: 10px;
+    transition: 0.3s;
+    border-radius: 10px;
 }
 .actions:hover{
-    border: 1px solid black;
+    border: 1px solid var(--darkLetter);
 }
 .actions .input{
     position: relative;
@@ -70,7 +71,7 @@
 .actions .input .formControl{
     position: relative;
     width: 30px;
-    color: black;
+    color: var(--darkLetter);
     background: transparent;
     border: none;
     text-align: center;

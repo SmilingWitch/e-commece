@@ -8,7 +8,6 @@
     background-color: rgba(135, 134, 134, 0.5);
     overflow: hidden;
     transition: 0.5s;
-   
 }
 
 
@@ -38,16 +37,17 @@
     min-height: 10%;
     display: flex;
     justify-content: space-between;
+    
    }
    .header .icon{
-    color: black;
+    color: var(--darkLetter);
     font-size: 1.5em;
     cursor: pointer;
    }
    .header1{
     position: relative;
     display: flex;
-    /*flex-direction: column;*/
+    flex-direction: column;
     align-items: center;
     padding-top: 20px;
    }
@@ -68,7 +68,7 @@
     min-width: 20px;
     background: var(--hlColor);
     border-radius: 20px;
-    color: whitesmoke;
+    color: var(--lightLetter);
     cursor: pointer;
     transition: 0.3s;
    }
@@ -79,10 +79,10 @@
     position: relative;
     font-size: 1em;
     margin-right: 10px;
-    color: whitesmoke;
+    color: var(--lightLetter);
    }
    .header1 button span{
-    color: whitesmoke;
+    color: var(--lightLetter);
    }
    
    .cartCardBx{
@@ -114,7 +114,7 @@
     transition: 0.3s;
    }
    .btn span{
-    color: whitesmoke;
+    color: var(--lightLetter);
    }
    .btn:hover{
     background: rgb(246, 99, 45);

@@ -16,7 +16,7 @@
     width: 400px;
     height: 100%;
     z-index: 10;
-    background: white;
+    background: var(--lightBg);
     overflow: hidden;
     transition: 0.5s;
     display: flex;
@@ -43,7 +43,7 @@
     font-size: 1.2em;
 }
 .userName{
-    color: black;
+    color: var(--darkLetter);
 }
 .selectedImageBx{
     position: relative;
@@ -107,7 +107,7 @@
     transition: 0.5s;
 }
 .option:hover{
-    background: rgb(246, 99, 45);
+    background: var(--hlColorHover);
 }
 .option .icon1{
     position: relative;
@@ -142,14 +142,14 @@
 }
 .text span:nth-child(1){
     font-family: "PoppinsBolder";
-    color: rgb(70, 70, 70);
+    color: var(--darkLetter);
 }
 .text span:nth-child(2){
     font-size: 0.8em;
-    color: rgb(70, 70, 70);
+    color: var(--darkLetter);
 }
 .iconAj{
-    color: rgb(70, 70, 70);
+    color: var(--darkLetter);
     font-size: 1.2em;
     height: 100%;
     display: flex;

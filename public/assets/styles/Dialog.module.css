@@ -11,10 +11,10 @@
 .bx{
     position: relative;
     width: 400px;
-    background: white;
+    background: var(--lightBg);
     border-radius: 20px;
     padding: 20px;
-    color: black;
+    color: var(--darkLetter);
 }
 .header{
     font-family: "PoppinsBolder";
@@ -40,12 +40,12 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: white;
+    color: var(--lightLetter);
     cursor: pointer;
     transition: 0.3s;
 }
 .btnBx button:hover{
-    background: rgb(246, 99, 45);
+    background: var(--hlColorHover);
 }
 .btnBx button:nth-child(1){
     margin-right: 20px;

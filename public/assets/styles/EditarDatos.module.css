@@ -15,7 +15,7 @@
     width: 400px;
     height: 100%;
     z-index: 10;
-    background: white;
+    background: var(--lightBg);
     overflow: hidden;
     transition: 0.5s;
     display: flex;
@@ -23,6 +23,12 @@
     align-items: center;
     padding: 10px;
 }
+.header1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+   }
 @media(max-width:734px){
     .bx {
         width: 100%;

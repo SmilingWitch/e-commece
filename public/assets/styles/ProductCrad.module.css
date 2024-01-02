@@ -44,14 +44,14 @@
     padding-right: 10px;
     border-radius: 20px;
     font-size: 0.8em;
-    color: white;
+    color: var(--lightLetter);
     bottom: -80px;
     left: 30%;
     
 }
 .detail{
     position: relative;
-    color: black;
+    color: var(--darkLetter);
     padding-left: 10px;
     font-size: 0.8em;
 }
@@ -104,7 +104,7 @@
 .actions .input .formControl{
     position: relative;
     width: 30px;
-    color: black;
+    color: var(--darkLetter);
     background: transparent;
     border: none;
     text-align: center;
@@ -125,7 +125,7 @@
     justify-content: center;
     padding: 10px;
     background: var(--hlColor);
-    color: white;
+    color: var(--lightLetter);
     height: 35px;
     border-radius: 10px;
     margin: 0 auto;
@@ -163,7 +163,7 @@
         padding-right: 10px;
         border-radius: 20px;
         font-size: 0.8em;
-        color: white;
+        color: var(--lightLetter);
         bottom: -50px;
         left: 30%;
         
