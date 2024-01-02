@@ -85,7 +85,7 @@ export function AuthProvider({ children }) {
 useEffect(() => {
   if (typeof window !== 'undefined') {
     const storedCredential = JSON.parse(localStorage.getItem('credential')) || null;
-    const storedUser = JSON.parse(localStorage.getItem('user')) || null
+    const storedUser = localStorage.getItem('user') || null
     setUser(storedUser);
     setCredential(storedCredential);
   }
