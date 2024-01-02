@@ -18,12 +18,16 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --hlColor: orangered;
+  --hlColor: rgb(255, 69, 0);
+  --hlColorHover: rgb(246, 99, 45);
   --cardColor: #BA9985;
   --lightColor: #F6E2D9;
   --buttonColor: #F2CFC2;
   --darkColor: #AE7A55;
   --deseableColor: rgb(190, 187, 187);
+  --darkLetter: rgb(70, 70, 70);
+  --lightLetter: rgb(245, 245, 245);
+  --lightBg: white;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -90,6 +94,9 @@
     --callout-border-rgb: 108, 108, 108;
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
+
+
+    
   }
 }
 
@@ -111,7 +118,11 @@ body {
   background: white;
 }
 h1,h2,h3,p,span{
-  color: black;
+  /*color: black;*/
+  color: var(--darkLetter);
+}
+div{
+  color: var(--lightLetter)
 }
 
 a {
