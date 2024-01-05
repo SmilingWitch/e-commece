@@ -4,13 +4,21 @@ import { LuArrowDownToLine, LuArrowUpFromLine } from "react-icons/lu";
 import { BiDonateHeart } from "react-icons/bi";
 import Transaction from "./Transaction";
 import {useState} from "react"
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Wallet() {
-
+  const { user } = useContext(AuthContext);
   const [showTransactions, setShowTransactions] = useState(10);
 
   const showMoreTransactions = () => {
     setShowTransactions(prevTransactions => prevTransactions + 10);
+   };
+
+   const showLessTransactions = () => {
+    setShowTransactions( 10);
    };
 
   const transactions = [
@@ -31,7 +39,7 @@ export default function Wallet() {
 
 
     return (
-        <div className={style.cont} >
+        user !== null ?<div className={style.cont} >
           <div className={style.header}>
             <div className={style.line}></div>
             <h3>Operaciones</h3> 
@@ -79,12 +87,19 @@ export default function Wallet() {
              <Transaction key={transaction.id} {...transaction} />
             ))}
 
-            <button onClick={showMoreTransactions}>Ver más</button>
+             {showTransactions > 10 ?<button onClick={showLessTransactions}>Ver menos</button> :<button onClick={showMoreTransactions}>Ver más</button>}
 
             </div>
           </div>
           
           
+        </div> :
+        <div className={style.cont1}>
+          <Image src = "/assets/images/undraw_login_re_4vu2.svg" width = {300} height={300}></Image>
+          <div className={style.subHeader}>
+            Debe autenticarse primero
+          </div>
+          <Link href = "/accounts/login"><button>Autenticarse</button></Link>
         </div>
     )
   }
