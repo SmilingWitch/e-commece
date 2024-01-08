@@ -54,26 +54,9 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                     <span>rca Store</span>
                 </div>
             </Link>
-            <div className={style.inputBx}>
-                <div className={style.input}> 
-                    <input type="text" 
-                    name="" 
-                    id="" 
-                    placeholder="Buscar"
-                    onKeyDown={handleKeyDown} />
-                    <div className={style.icon}><Link href = "/catalogo" className={style.link}><MdSearch/></Link></div>
-                </div>
 
-            </div>
                 
                 <div className={style.iconBx}>
-                    <div className={style.contIcon1}>
-                        <span className={style.icon1}><Link href = "/dasboard/wallet"><SlWallet/></Link></span>
-                        <div className={style.cont1}>Billetera</div>
-                    </div>
-                    <div className={style.contIcon}>
-                        <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
-                    </div>
                     <div className={style.contIcon}>
                         <span><Link href = "/notificationes"><FaRegBell/></Link></span>
                     </div>
@@ -98,38 +81,7 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                 </div>
 
             </section>
-            <section className={style.section2}>
-                <div className={style.productsBx}>
-                    <div className={style.btnProducts} onClick={() => Setvisible(!visible)}>
-                        <span>Productos</span>
-                        <span><MdKeyboardArrowDown/></span>
-                    </div>
-                    <div className={ visible === true ? `${style.productList}` : `${style.invisible}`}  >
-                        <ul>
-                            <li>Laptops</li>
-                            <li>Telefonos</li>
-                            <li>Ropa</li>
-                            <li>Camara</li>
-                            <li>Mochilas</li>
-                            <li>Mandos</li>
-                        </ul>
 
-                    </div>
-
-                </div>
-                <div className={style.routes}>
-                    <ul>
-                        <li><Link href = "/dasboard/wallet" className={`link ${pathname === '/dasboard/wallet' ? `${style.active} `: ''}`}>Billetera OrcaMarket</Link></li>
-                        <li><Link href = "/home">Ofertas</Link></li>
-                        <li><Link href = "/catalogo" className={`link ${pathname === '/catalogo' ? `${style.active} `: ''}`}>Catalogo</Link></li>
-                        <li><Link href = "/home">Preguntas frecuentes</Link></li>
-                    </ul>
-                </div>
-            </section>
-
-            {cart && (
-              <Cart SetCart = {SetCart} />
-            )}
             {myAccount && user !== null && (
                 <MyAccount SetMyAccount = {SetMyAccount} />
             )
