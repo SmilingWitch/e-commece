@@ -20,7 +20,7 @@ export default function InitialPage(){
     
     useEffect(() => {
         const timer = setTimeout(() => {
-          router.push('/home');
+          router.push('/dashboard/wallet');
         }, 5000);
      
         return () => clearTimeout(timer);
@@ -28,7 +28,6 @@ export default function InitialPage(){
 
 
 return(
-
 
 
     <div className={style.cont}>
