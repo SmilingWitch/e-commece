@@ -14,7 +14,7 @@ export default function Wallet() {
   const [showTransactions, setShowTransactions] = useState(10);
 
   const showMoreTransactions = () => {
-    setShowTransactions(prevTransactions => prevTransactions + 10);
+    setShowTransactions(prevTransactions => prevTransactions + 20);
    };
 
    const showLessTransactions = () => {
