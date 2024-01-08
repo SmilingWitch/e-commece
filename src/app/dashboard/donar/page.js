@@ -1,9 +1,10 @@
 "use-client"
 
-import Wallet from "@/components/dashboard/Wallet"
+import Donar from "@/components/dashboard/Donar"
+
 
 export default function Index() {
   return (
-    <Wallet/>
+    <Donar/>
   )
 }

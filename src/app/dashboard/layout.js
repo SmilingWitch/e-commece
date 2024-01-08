@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import NavBarMobile from '@/components/NavBarMobile';
 import {MdSearch} from "react-icons/md"
 import {useState} from "react"
+import SideBar from '@/components/SideBar';
 
 
 export default function RootLayout({ children }) {
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
    <>
      {isMobile ? <NavBarMobile SetCart = {SetCart} cart = {cart} SetMyAccount = {SetMyAccount} myAccount = {myAccount}/> :
                  <Navbar SetCart = {SetCart} cart = {cart} SetMyAccount = {SetMyAccount} myAccount = {myAccount}/>}
-
+      <SideBar/>
      <main >{children}</main>
  
    </>
