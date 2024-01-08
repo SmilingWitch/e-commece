@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
    <>
      {isMobile ? <NavBarMobile SetCart = {SetCart} cart = {cart} SetMyAccount = {SetMyAccount} myAccount = {myAccount}/> :
                  <Navbar SetCart = {SetCart} cart = {cart} SetMyAccount = {SetMyAccount} myAccount = {myAccount}/>}
-     <MenuFloatinButton/>
+
      <main >{children}</main>
  
    </>
