@@ -1,0 +1,85 @@
+.cont{
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    background: red;
+    z-index: 10;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    padding: 40px;
+    padding-top: 100px;
+    padding-bottom: 180px;
+    color: var(--darkLetter);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    
+}
+.cont h3{
+    text-transform: uppercase;
+    font-size: 0.8em;
+    padding-bottom: 10px;
+}
+.cont ul{
+    list-style: none;
+}
+.cont ul li{
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    transition: 0.5s;
+    left: 0;
+    padding: 5px 0 5px 0;
+}
+.cont ul li:hover{
+    left: 15px;
+}
+.cont ul li:hover span{
+    color: var(--hlColor);
+}
+.icon{
+    position: relative;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+.cont button{
+    position: relative;
+    border: none;
+    background: var(--hlColor);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.cont button:hover{
+    background: var(--hlColorHover);
+}
+.cont button span{
+    color: var(--lightLetter);
+    
+}
+.btnIcon{
+    position: relative;
+    font-size: 1.5em;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.link{
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+.cont button .link{
+    align-items: center;
+    justify-content: center;
+}
