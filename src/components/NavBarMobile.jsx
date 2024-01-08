@@ -12,6 +12,7 @@ import MyAccount from "./MyAccount";
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import useMediaQuery from '../components/functions/MediaQuery';
+import { FaRegBell } from "react-icons/fa";
 
 
 export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
@@ -40,10 +41,7 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
             </Link>
                 <div className={style.iconBx}>
                     <div className={style.contIcon}>
-                        <span onClick = {() => SetCart(true)}><LuShoppingCart/></span>
-                    </div>
-                    <div className={style.contIcon}>
-                        <span><Link href = "/catalogo"><MdSearch/></Link></span>
+                        <span><Link href = "/notificationes"><FaRegBell/></Link></span>
                     </div>
                     {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
