@@ -1,0 +1,116 @@
+.cont{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top:30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow: hidden;
+   /* padding-top: 80px;*/
+    
+}
+.content{
+    position: relative;
+    width: calc(100vw - 350px);
+    height: 90vh;
+}
+.bx{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 100%;
+}
+.header{
+    position: relative;
+    height: 40px;
+    min-width: 250px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+.line{
+    position: relative;
+    height: 100%;
+    width: 5px;
+    background: var(--hlColor);
+    border-radius: 50px;
+    margin-right: 10px;
+}
+.input{
+    position: relative;
+    width: 700px;
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-end;
+    color: var(--darkLetter);
+}
+.input input{
+    position: relative;
+    margin-left: 15px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--darkLetter);
+    border-bottom: 1px solid rgb(216, 215, 215);
+    width: 500px;
+}
+.cont button{
+    position: relative;
+    border: none;
+    background: var(--hlColor);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.cont button:hover{
+    background: var(--hlColorHover);
+}
+.regalo{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media(max-width:1036px){
+    .input{
+        width: 100%;
+    }
+    .input input{
+        color: var(--darkLetter);
+        width: 90%;
+    }
+    .input span{
+        font-size: 1em;
+        width: 10%;
+    }
+}
+@media(max-width:768px){
+    .content{
+        position: relative;
+        width: 100%;
+    }
+}
+
+@media(max-width: 389px){
+    .input label{
+        font-size: 0.8em;
+    }
+    .input input{
+        font-size: 0.8em;
+    }
+
+}
