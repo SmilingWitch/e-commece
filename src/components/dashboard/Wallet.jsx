@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import Image from "next/image"
 import Link from "next/link"
+import { SiMicrosoftexcel } from "react-icons/si";
 
 export default function Wallet() {
   const { user } = useContext(AuthContext);
@@ -69,26 +70,27 @@ export default function Wallet() {
 
             <div className={style.header}>
               <div className={style.line}></div>
-              <h3>Transacciones Completadas</h3> 
+              <h3>Transacciones</h3> 
             </div>
 
             <div className={style.options}>
+              <button><SiMicrosoftexcel/></button>
               <div className={style.transactions}>
               <div className={style.slider}>
                 <div className={style.header1}>
                     <span onClick={() => setCurrentComponent(0)}
-                        className = {currentComponent === 0 ? `${style.active}`: ""}
+                        className = {currentComponent === 0 ? `${style.active}`: `${style.inActive}`}
                     >Transacciones Completadas </span>
                     <span onClick={() => setCurrentComponent(1)}
-                        className = {currentComponent === 1 ? `${style.active}`: ""}
+                        className = {currentComponent === 1 ? `${style.active}`: `${style.inActive}`}
                     >Pendientes </span>
                     <span onClick={() => setCurrentComponent(2)}
-                        className = {currentComponent === 2 ? `${style.active}`: ""}
+                        className = {currentComponent === 2 ? `${style.active}`: `${style.inActive}`}
                     >Enviado </span>
                     <span onClick={() => setCurrentComponent(3)}
-                        className = {currentComponent === 3 ? `${style.active}`: ""}
+                        className = {currentComponent === 3 ? `${style.active}`: `${style.inActive}`}
                     >Recibido</span>
-                    <span>Exportar .xls</span>
+                    {/*<span className={style.inActive}>Exportar .xls</span>*/}
                 </div>
                 <div className={style.transactionBx}>
                 {currentComponent === 0 && transactions.slice(0, showTransactions).filter(transaction => transaction.status === "realizada").map(transaction => (
