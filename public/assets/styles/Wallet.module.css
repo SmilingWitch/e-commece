@@ -136,6 +136,12 @@
 }
 .active{
     color: var(--hlColor);
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+.inActive{
+    font-size: 0.8em;
+    text-transform: uppercase;
 }
 /*--------------TRANSACCIONES------------*/
 .tranBx{
@@ -210,6 +216,40 @@
 .cont1 button:hover, .transactions button:hover{
     background: var(--hlColorHover);
 }
+.options button{
+    position: relative;
+    border: none;
+    padding: 10px;
+    background: var(--hlColor);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--lightLetter);
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: "PoppinsBold";
+    top: 20px;
+    font-size: 1.2em;
+}
+@media(max-width: 1520px){
+    .transactions{
+        width: 90%;
+    }
+}
+@media(max-width:1066px){
+    .transactions{
+        width: 100%;
+    }
+    .active,.inActive{
+        font-size: 0.6em;
+    }
+    .content{
+        position: relative;
+        width: calc(100vw - 320px);
+    }
+}
 
 @media(max-width: 820px){
     .total span{
@@ -230,13 +270,26 @@
     }
 }
 
-@media(max-width:512px){
+@media(max-width:768px){
+    .content{
+        position: relative;
+        width: 100%;
+    }
+}
+
+@media(max-width:518px){
     .options{
         width: 100%;
     }
     .transactions{
         width: 100%;
-        padding: 0;
+        padding: 5px;
+    }
+
+    .cont{
+        padding-left: 10px;
+        padding-right: 10px;
+
     }
 }
 @media(max-width:482px){
@@ -246,10 +299,14 @@
         margin: 0 auto;
     }
 }
+
 @media(max-width: 398px){
 
     .detail {
         font-size:  0.8em;
+    }
+    .header1 span:nth-child(1){
+        width: 100px;
     }
 
     .ts{
