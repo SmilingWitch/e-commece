@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
     console.log(credential)
    console.log(response)
    console.log("FormValue",formValue)
-  router.push('/catalogo')
+  router.push('/dashboard/wallet')
  } catch (error) {
    console.log(error.response)
    console.log("No se hizo la peticion")
