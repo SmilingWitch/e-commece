@@ -1,10 +1,22 @@
+"use client"
+
 import style from "../../public/assets/styles/Dialog.module.css"
 import BeatLoader from "react-spinners/BeatLoader"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 
 export default function Dialog({header, content,SetActive,fnc, loading, setLoading}){
+    
+    useEffect(() => {
+        AOS.init({
+          duration:200
+      });
+      }, []);
+    
     return(
         <div className={style.cont} onClick = {(event) => {event.stopPropagation()}}>
-            <div className={style.bx}>
+            <div className={style.bx} data-aos="zoom-in">
                 <div className={style.header}>
                     {header}
                 </div>
