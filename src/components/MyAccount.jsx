@@ -12,14 +12,14 @@ import Switch from '@mui/material/Switch';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IoSunnyOutline } from "react-icons/io5";
 import { IoMoonOutline } from "react-icons/io5";
-import { useState } from "react";
 import Dialog from "./Dialog";
-import{ useContext } from 'react';
+import{ useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Link from "next/link"
 import EditarDatos from "./EditarDatos";
 import ChangePassword from "./ChangePassword";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -55,6 +55,13 @@ const theme = createTheme({
 
     export default function MyAccount({SetMyAccount}) {
 
+        const [link, SetLink] = useState(false)
+        useEffect(() => {
+            AOS.init({
+              duration:200
+          });
+          }, []);
+
     const [loading,setLoading] = useState(false)    
     const { signOut } = useContext(AuthContext);
     const [isChecked, setIsChecked] = useState(false);
@@ -63,7 +70,7 @@ const theme = createTheme({
     const [activechangePass, SetActivechangePass] = useState(false);
     const { credential } = useContext(AuthContext);
 
-console.log(credential)
+    console.log(credential)
     console.log(active)
 
     const handleSubmit = async (e) => {
@@ -92,7 +99,7 @@ console.log(credential)
     
 
     return(
-        <div className={style.cont} onClick = {() => SetMyAccount(false)}>
+        <div className={style.cont} onClick = {() => SetMyAccount(false)} >
             
             {activeEdit && (<EditarDatos 
                                 SetActiveEdit = {SetActiveEdit}
@@ -108,7 +115,7 @@ console.log(credential)
                         loading = {loading}
                         setLoading = {setLoading}/>: ""}
                 
-            <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
+            <div className={style.bx} onClick = {(event) => {event.stopPropagation()}} data-aos="fade-left">
                 
                 <div className={style1.header}>
                 
