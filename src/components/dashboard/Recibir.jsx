@@ -6,9 +6,16 @@ import { useState, useEffect } from "react";
 import Image from "next/image"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import QRCode from "react-qr-code";
+import { IoMdCopy } from "react-icons/io";
+import copyToClipboard from "../functions/copyToClipboard"
+import axios from "axios"
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import Link from "next/link"
 
 export default function Recibir(){
-
+        const { user } = useContext(AuthContext);
         const [link, SetLink] = useState(false)
         useEffect(() => {
             AOS.init({
@@ -16,9 +23,30 @@ export default function Recibir(){
           });
           }, []);
 
+          const [copyLink, setCopyLink] = useState("UYGbiyui67532e61532");
+
+          const createLink = async () =>{
+                const token = localStorage.getItem('access')
+                console.log(token)
+                console.log("Peticion")
+                try {
+                    const response = await axios.post('https://zona0.onrender.com/transfer/create-receive/', {amount: 30}, { 
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                      });
+                      
+
+                    console.log(response);
+                    SetLink(true);
+                   } catch(error) {
+                    console.log(error.response);
+                   }
+                   
+          }
 
     return(
-        <div className={style.cont}>
+        user !== null ? <div className={style.cont}>
         <div className={style.content}>
             <div className={style.header}>
               <div className={style.line}></div>
@@ -33,24 +61,29 @@ export default function Recibir(){
                         <span>SOP</span>
                     </div>
                 </div>
-                <button onClick = {() => SetLink(true)}>Generar Link</button>
+                <button onClick = {createLink}>Generar Link</button>
 
                 <div className={style.description}>
                     <span>Description: </span>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae possimus, non repellendus consequatur expedita dolorem dignissimos ullam hic cum illo quos reiciendis accusamus, ut voluptatibus libero, mollitia culpa. Placeat, nam?</p>
                 </div>
-
+                    
                 {link && <div className={style.linkDetails} data-aos="zoom-in-up">
                     <div className={style.imageBx} data-aos="zoom-in-up">
-                        <Image src = "/assets/images/QR.png"
-                        layout="fill"
-                        objectFit="cover" // Ajusta la imagen para cubrir todo el contenedor
-                        objectPosition="center"></Image>
+                        <QRCode
+                             value="https://example.com"
+                             bgColor="#FFFFFF"
+                             fgColor="#000000"
+                             level="H"
+                             style={{ height: "auto", width: "100%" }}/> 
                     </div>
-                    <div className={style.details} data-aos="zoom-in-up">
+                    <div className={style.details} >
                         <div className={style.detail}>
-                            <span>Codigo: </span>
-                            <span>UYGbiyui67532e61532</span>
+                            <span className={style.name}>Codigo: </span>
+                            <span className={style.link}>
+                                <span>UYGbiyui67532e61532</span>
+                                <span className={style.icon} onClick={() => copyToClipboard(copyLink)}><IoMdCopy/></span>
+                            </span>
                         </div>
                         <div className={style.detail}>
                             <span>Monto a pagar: </span>
@@ -64,12 +97,14 @@ export default function Recibir(){
                     </div>
 
                 </div>}
-                
-
             </div>
-
         </div>
-
-    </div>
+    </div>: <div className={style.cont1}>
+          <Image src = "/assets/images/undraw_login_re_4vu2.svg" width = {300} height={300}></Image>
+          <div className={style.subHeader}>
+            Debe autenticarse primero
+          </div>
+          <Link href = "/accounts/login"><button>Autenticarse</button></Link>
+        </div>
     )
 }
