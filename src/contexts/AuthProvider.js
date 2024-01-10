@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [credential, setCredential] = useState(null);
 
-   
+  
  
  const router = useRouter()
 
@@ -22,13 +22,6 @@ export function AuthProvider({ children }) {
  try {
    const response = await axios.post('https://zona0.onrender.com/accounts/login/',  formValue );
    console.log("Autenticacion1")
-  /* localStorage.setItem('access', response.data.access);
-   localStorage.setItem('refresh', response.data.refresh);
-   localStorage.setItem('credential', response.data.user);
-   console.log("MMMM",response.data.user)
-   setUser( localStorage.getItem('access'));
-   setCredential(response.data.user)
-   console.log("CREDenciales",credential)*/
     localStorage.setItem('access', response.data.access);
     localStorage.setItem('refresh', response.data.refresh);
     localStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
