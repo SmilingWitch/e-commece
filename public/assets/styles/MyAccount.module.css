@@ -32,6 +32,9 @@
     align-items: center;
     padding-bottom: 20px;
 }
+.name{
+    color: var(--lightLetter)
+}
 .info{
     position: relative;
     padding-left: 20px;
