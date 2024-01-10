@@ -8,10 +8,15 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { LuLink } from "react-icons/lu";
 import { HiOutlineHome } from "react-icons/hi2";
 import Link from "next/link"
+import{ useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function SideBar(){
+
+    const { user } = useContext(AuthContext);
+
     return (
-        <div className={style.cont}>
+        user !== null ? <div className={style.cont}>
             <button>
                 <Link  href="/dashboard/wallet" className={style.link}>
                     <span className={style.btnIcon}><HiOutlineHome/></span>
@@ -87,10 +92,7 @@ export default function SideBar(){
                         </li>
                 </ul>
 
-            </div>
-            
-            
-            
-        </div>
+            </div>  
+        </div>: ""
     )
 }
