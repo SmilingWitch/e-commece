@@ -5,6 +5,8 @@ import { MdOutlineMenu } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
 import useMediaQuery from '../components/functions/MediaQuery';
 import Link from "next/link"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function MenuFloatinButton(){
  const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +18,16 @@ export default function MenuFloatinButton(){
  };
 
  useEffect(() => {
+    AOS.init({
+      duration:100
+  });
   const handleScroll = () => {
     const isScrolled = window.scrollY > window.innerHeight;
     setIsScrolled(isScrolled);
-  };
 
+    
+  };
+    
   window.addEventListener('scroll', handleScroll);
 
   return () => {
@@ -39,13 +46,13 @@ export default function MenuFloatinButton(){
           <MdOutlineMenu/> 
         </button>: ""}
         {isOpen && isMobile && (
-          <div className={style.menu}>
+          <div className={style.menu}  data-aos="fade-left">
             <div className={style.menuCont}>
               <ul>
-               <li><Link Link href = "/wallet" className={style.link}>Billetera OrcaStore</Link></li>
-               <li><Link Link href = "/home" className={style.link}>Ofertas</Link></li>
-               <li><Link Link href = "/catalogo" className={style.link}>Catalogo</Link></li>
-               <li><Link href = "/home" className={style.link}>Preguntas frecuentes</Link></li>
+               <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/wallet" className={style.link}>Vista Principal</Link></li>
+               <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/enviar" className={style.link}>Enviar</Link></li>
+               <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/recibir" className={style.link}>Recibir</Link></li>
+               <li onClick={() => setIsOpen(false)}><Link href = "/dashboard/recompensa" className={style.link}>Cangear Codigo</Link></li>
               </ul>
             </div>
         </div>
