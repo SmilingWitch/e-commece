@@ -56,6 +56,7 @@ const theme = createTheme({
     export default function MyAccount({SetMyAccount}) {
 
         const [link, SetLink] = useState(false)
+        
         useEffect(() => {
             AOS.init({
               duration:200
@@ -80,7 +81,7 @@ const theme = createTheme({
         try{
           
           const res = await signOut();
-          setError('');
+          /*setError('');*/
           console.log(res)
         }catch(error){
           console.log(error)
