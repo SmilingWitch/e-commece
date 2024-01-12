@@ -119,7 +119,7 @@
     justify-content: center;
     align-items: center;*/
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
 
 }
 .imageBx{
@@ -136,7 +136,7 @@
     position: relative;
     padding-left: 30px;
     margin: 0 auto;
-    width: 300px;
+   width: 100%;
     
 }
 .detail{
@@ -156,13 +156,14 @@
     padding: 5px;
     border: 1px solid rgb(225, 224, 224);
     border-radius: 10px;
-    width: 230px !important;
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
     
 }
 .link span{
+    position: relative;
     font-family: "PoppinsRegular" !important;
     
 }
@@ -192,9 +193,38 @@
     color: var(--darkLetter);
     font-size: 1.2em;
 }
+.code{
+    position: relative;
+    width: 380px;
+   
+}
+.deseableBtn{
+    background: rgb(173, 172, 172) !important;
+}
+@media(max-width: 1392px){
+    .linkDetails{
+        grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    }
 
+    .link{
+        position: relative;
+        width: 80%;    
+    }
+    .detail{
+        width: 100%;
+    }
+    .details{
 
-
+        padding-left: 0px;
+        
+    }
+    .detail{
+        position: relative;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+}
 @media(max-width:768px){
     .content{
         position: relative;
