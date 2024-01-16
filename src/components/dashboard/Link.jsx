@@ -30,7 +30,7 @@ export default function Link(){
 
     useEffect(() => {
         const recibos = async () =>{
-            const token = localStorage.getItem('access')
+            const token = sessionStorage.getItem('access')
             console.log(token)
             console.log("Peticion")
             
@@ -76,7 +76,7 @@ export default function Link(){
 
      //Para eliminar el codigo
      const DeleteRecieves = async (id) =>{
-        const token = localStorage.getItem('access')
+        const token = sessionStorage.getItem('access')
         setLoading(true)
         console.log(token)
         console.log("Peticion")

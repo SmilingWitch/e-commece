@@ -44,7 +44,7 @@ export default function Recibir(){
         
 
           const createLink = async () =>{
-                const token = localStorage.getItem('access')
+                const token = sessionStorage.getItem('access')
                 console.log(token)
                 console.log("Peticion")
                 try {
