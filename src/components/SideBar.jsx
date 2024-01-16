@@ -16,7 +16,7 @@ export default function SideBar(){
     const { user } = useContext(AuthContext);
 
     return (
-        user !== null ? <div className={style.cont}>
+         <div className={style.cont}>
             <button>
                 <Link  href="/dashboard/wallet" className={style.link}>
                     <span className={style.btnIcon}><HiOutlineHome/></span>
@@ -75,7 +75,7 @@ export default function SideBar(){
                     <li>
                         <Link  href="/dashboard/link"  className={style.link}>
                             <span className={style.icon}><LuLink/></span>
-                            <span>Links de pago</span>    
+                            <span>Codigos de pago</span>    
                         </Link> 
                     </li>
                 </ul>
@@ -93,6 +93,6 @@ export default function SideBar(){
                 </ul>
 
             </div>  
-        </div>: ""
+        </div>
     )
 }
