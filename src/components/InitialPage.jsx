@@ -4,6 +4,8 @@ import style from "../../public/assets/styles/InitialPage.module.css"
 import { useState, useEffect} from "react";
 import BeatLoader from "react-spinners/BeatLoader"
 import { useRouter } from 'next/navigation'
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 const override = {
     display: "block",
@@ -17,10 +19,17 @@ export default function InitialPage(){
     const router = useRouter()
     let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
+    const { user } = useContext(AuthContext);
     
     useEffect(() => {
+      
         const timer = setTimeout(() => {
-          router.push('/dashboard/wallet');
+          if(user === null) {
+            router.push('/accounts/login');
+          } else{
+            router.push('/dashboard/wallet');
+          }
+         
         }, 5000);
      
         return () => clearTimeout(timer);
