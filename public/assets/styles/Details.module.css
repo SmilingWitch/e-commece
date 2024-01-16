@@ -1,7 +1,7 @@
 
 .cont{
     position: fixed;
-    z-index: 100000000000000000000000000000000000000;
+    z-index: 100000000;
     width: 100vw;
     height: 100vh;
     padding-left: 20px;
