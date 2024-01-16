@@ -28,8 +28,8 @@ export function AuthProvider({ children }) {
    sessionStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
 
     console.log("CREDENTIAL",response.data.user)
-    setUser(localStorage.getItem('access')); // Recupera toda la respuesta del usuario
-    setCredential(JSON.parse(localStorage.getItem('credential')));
+    setUser(sessionStorage.getItem('access')); // Recupera toda la respuesta del usuario
+    setCredential(JSON.parse(sessionStorage.getItem('credential')));
     console.log(credential)
    console.log(response)
    console.log("FormValue",formValue)
@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
 
  /*--------------------SING OUT--------------------*/
  const signOut = async () => {
-  const token = localStorage.getItem('refresh')
+  const token = sessionStorage.getItem('refresh')
   try {
     const response = await axios.post('https://zona0.onrender.com/accounts/logout/', {refresh : token} )
     console.log("logout")
@@ -106,12 +106,12 @@ useEffect(() => {
   if (typeof window !== 'undefined') {
     let storedCredential = null;
       try {
-       storedCredential = JSON.parse(localStorage.getItem('credential')) || null;
+       storedCredential = JSON.parse(sessionStorage.getItem('credential')) || null;
       } catch (error) {
        console.error('Error al analizar los datos de localStorage:', error);
       }
 
-    const storedUser = localStorage.getItem('access') || null
+    const storedUser = sessionStorage.getItem('access') || null
     setUser(storedUser);
     setCredential(storedCredential);
   }
