@@ -3,10 +3,10 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    padding-left: 20px;
+    /*padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
-    padding-top:30px;
+    padding-top:30px;*/
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -25,6 +25,7 @@
     justify-content: flex-start;
     height: 90vh;
     width: 100%;
+    margin-top: 50px;
 }
 .header{
     position: relative;
@@ -99,6 +100,7 @@
     position: relative;
     width: 90%;
     margin-top: 30px;
+    text-align: center;
 }
 .description span{
     font-family: "PoppinsBolder";
@@ -201,6 +203,14 @@
 .deseableBtn{
     background: rgb(173, 172, 172) !important;
 }
+
+
+
+/*-----------------DETAILS--------------*/
+
+
+
+
 @media(max-width: 1392px){
     .linkDetails{
         grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
