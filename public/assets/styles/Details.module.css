@@ -1,0 +1,246 @@
+
+.cont{
+    position: fixed;
+    z-index: 100000000000000000000000000000000000000;
+    width: 100vw;
+    height: 100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(135, 134, 134, 0.5);
+}
+.content{
+    position: relative;
+    background: white;
+    padding: 20px; 
+    border-radius: 20px;
+}
+
+.input{
+    position: relative;
+    width: 500px;
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-end;
+    color: var(--darkLetter);
+}
+.input .inputBx{
+    position: relative;
+    margin-left: 15px;
+    color: var(--darkLetter);
+    border-bottom: 1px solid rgb(216, 215, 215);
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input .inputBx input{
+    color: var(--darkLetter);
+}
+.inputBx span{
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+.inputBx span:hover{
+    color: var(--hlColor);
+}
+.inputBx input{
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+
+.linkDetails{
+    position: relative;
+    padding-top: 80px;
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.imageBx{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    padding: 15px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+.details{
+    position: relative;
+    padding-left: 30px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.detail{
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    width: 500px;
+}
+.detail span:nth-child(1){
+    font-family: "PoppinsBolder";
+}
+.detail span:nth-child(2){
+    margin-left: 10px;
+}
+.link{
+    position: relative;
+    padding: 5px;
+    border: 1px solid rgb(225, 224, 224);
+    border-radius: 10px;
+    width: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.link span{
+    position: relative;
+    font-family: "PoppinsRegular" !important;
+    
+}
+.icon{
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+.icon:hover{
+    color: var(--hlColor);
+}
+
+
+.cont1 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.subHeader{
+    color: var(--darkLetter);
+    font-size: 1.2em;
+}
+.code{
+    position: relative;
+    width: 380px;
+   
+}
+.deseableBtn{
+    background: rgb(173, 172, 172) !important;
+}
+
+.iconBx{
+    position: relative;
+    width: 100%;
+    color: var(--darkLetter);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.iconClose{
+    cursor: pointer;
+    font-size: 1.8em;
+}
+
+
+
+
+/*@media(max-width: 1392px){
+    .linkDetails{
+        grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    }
+
+    .link{
+        position: relative;
+        width: 80%;    
+    }
+    .detail{
+        width: 100%;
+    }
+    .details{
+
+        padding-left: 0px;
+        
+    }
+    .detail{
+        position: relative;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+}
+@media(max-width:768px){
+    .content{
+        position: relative;
+        width: 100%;
+    }
+}
+@media(max-width:589px){
+    .linkDetails{
+        flex-direction: column;
+        margin-top: 50px;
+    }
+    
+    
+    .details{
+        margin-top: 20px;
+    }
+    .detail{
+        padding: 5px;
+    }
+}
+@media(max-width:518px){
+    .input{
+        width: 100%;
+    }
+    .input .inputBx{
+        margin-left: 5px;
+        width: 200px;
+
+    }
+    .input .inputBx input{
+        color: var(--darkLetter);
+        width: 90%;
+    }
+    .inputBx span{
+        font-size: 1em;
+        width: 10%;
+    }
+}
+@media(max-width: 389px){
+    .input label{
+        font-size: 0.8em;
+    }
+    .inputBx span{
+        font-size: 0.8em;
+    }
+    .description{
+        font-size: 0.8em;
+    }
+    .detail{
+        font-size: 0.8em;
+    }
+}*/
