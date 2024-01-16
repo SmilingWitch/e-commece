@@ -1,6 +1,6 @@
 
 .cont{
-    position: fixed;
+    position: absolute;
     z-index: 100000000000000000000000000000000000000;
     width: 100vw;
     height: 100vh;
