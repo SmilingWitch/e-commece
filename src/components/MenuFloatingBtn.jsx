@@ -52,6 +52,7 @@ export default function MenuFloatinButton(){
                <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/wallet" className={style.link}>Vista Principal</Link></li>
                <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/enviar" className={style.link}>Enviar</Link></li>
                <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/recibir" className={style.link}>Recibir</Link></li>
+               <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/link" className={style.link}>Codigos de pago</Link></li>
                <li onClick={() => setIsOpen(false)}><Link href = "/dashboard/recompensa" className={style.link}>Cangear Codigo</Link></li>
               </ul>
             </div>
