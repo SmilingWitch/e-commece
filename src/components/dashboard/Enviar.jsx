@@ -5,13 +5,15 @@ import Image from "next/image"
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import Link from "next/link"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Enviar(){
 
     const { user } = useContext(AuthContext);
 
     return(
-        user !== null ? <div className={style.cont}>
+         <div className={style.cont}>
             <div className={style.content}>
                 <div className={style.header}>
                   <div className={style.line}></div>
@@ -39,13 +41,7 @@ export default function Enviar(){
                     </div>
                 </div>
             </div>
-        </div> : <div className={style.cont1}>
-          <Image src = "/assets/images/undraw_login_re_4vu2.svg" width = {300} height={300}></Image>
-          <div className={style.subHeader}>
-            Debe autenticarse primero
-          </div>
-          <Link href = "/accounts/login"><button>Autenticarse</button></Link>
-        </div>
+        </div> 
         
     )
 }
