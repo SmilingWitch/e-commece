@@ -20,12 +20,10 @@ export default function Link(){
     const [loading, setLoading] = useState(false)
     let codesFromLocalStorage = [];
     if (typeof window !== 'undefined') {
-     codesFromLocalStorage = JSON.parse(localStorage.getItem('codigoPago')) || [];
+     codesFromLocalStorage = JSON.parse(localStorage.getItem('payCode')) || [];
+     /*localStorage.setItem('payCode', "")*/
     }
     const [code, SetCode] = useState(codesFromLocalStorage);
-
-
-    console.log("CODE", code)
 
 
     useEffect(() => {
@@ -41,25 +39,47 @@ export default function Link(){
                    }
                  });
                  SetRes(response.data)
-                 console.log(response);
-
                  
-                 SetCode(JSON.parse(localStorage.getItem('codigoPago')))
+                 SetCode(JSON.parse(localStorage.getItem('payCode')))
                     
-                    let codigos = JSON.parse(localStorage.getItem('codigoPago')) || [];
+                    // Obtén los datos del almacenamiento local
+                let codigosLocalStorage = JSON.parse(localStorage.getItem('payCode')) || [];
+                            
+                // Obtén los datos de la respuesta de la petición
+                let codigosResponse = response.data;
+                            
+                // Para cada elemento en los datos de la respuesta de la petición
+                codigosResponse.forEach(codigoResponse => {
+                   // Verifica si el elemento ya existe en el almacenamiento local
+                   let existeEnLocalStorage = codigosLocalStorage.some(codigoLocalStorage => codigoLocalStorage.id === codigoResponse.id);
+                
+                   // Si el elemento no existe en el almacenamiento local, agrégalo
+                   if (!existeEnLocalStorage) {
+                       codigosLocalStorage.push(codigoResponse);
+                   }
+                });
+                
+                // Para cada elemento en el almacenamiento local
+                codigosLocalStorage.forEach((codigoLocalStorage, index) => {
+                   // Verifica si el elemento existe en los datos de la respuesta de la petición
+                   let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigoLocalStorage.id);
+                
+                   // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
+                   if (!existeEnResponse) {
+                       codigosLocalStorage.splice(index, 1);
+                   }
+                });
+                
+                // Guarda los datos actualizados en el almacenamiento local
+                localStorage.setItem('payCode', JSON.stringify(codigosLocalStorage));
+                SetCode(codigosLocalStorage);
 
-                    console.log("1234", codigos )
 
-                    // Filtrar los códigos que no existen en la respuesta de la petición
-                    /*codigos = codigos.filter(codigo => res.some(resCodigo => resCodigo.id === codigo.id));*/
+                    
 
-                    /*// Almacenar el arreglo filtrado en el localStorage
-                    localStorage.setItem('codigoPago', JSON.stringify(codigos));
 
-                    // Actualizar el estado code con el nuevo arreglo
-                    SetCode(codigos);*/
-                    console.log("Codigo",codigos)
                     console.log("Code", code)
+                   
                     
                 
                } catch(error) {
@@ -94,10 +114,22 @@ export default function Link(){
 
 
             // Eliminar el código del arreglo en el localStorage
-            let codigos = JSON.parse(localStorage.getItem('codigoPago')) || [];
+            /*let codigos = JSON.parse(localStorage.getItem('payCode')) || [];
             codigos = codigos.filter(codigo => codigo.id !== id);
-            localStorage.setItem('codigoPago', JSON.stringify(codigos));
-            SetCode(codigos);
+            localStorage.setItem('payCode', JSON.stringify(codigos));
+            SetCode(codigos);*/
+
+            // Obtén los datos del almacenamiento local
+            let codigosLocalStorage = JSON.parse(localStorage.getItem('payCode')) || [];
+
+            // Filtra los datos para excluir el elemento que deseas eliminar
+            codigosLocalStorage = codigosLocalStorage.filter(codigo => codigo.id !== id);
+
+            // Guarda los datos actualizados en el almacenamiento local
+            localStorage.setItem('payCode', JSON.stringify(codigosLocalStorage));
+            SetCode(codigosLocalStorage);
+
+            console.log("CODE", code);
             
            } catch(error) {
             console.log(error.response);
