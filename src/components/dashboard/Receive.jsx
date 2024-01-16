@@ -10,7 +10,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import axios from "axios"
 
 
-export default function Receive({res, key, SetVisible, counter, setSelected, setDialog,id}){
+export default function Receive({res, id, SetVisible, counter, setSelected, setDialog}){
     const [copyLink, setCopyLink] = useState("");
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);
@@ -24,11 +24,11 @@ export default function Receive({res, key, SetVisible, counter, setSelected, set
        }
     
     return(
-        <div>
-            <div className={style.reciboBx} key = {key} >
+        <div key = {id + 1}>
+            <div className={style.reciboBx} key = {id + 2} >
 
-            <div className={style.detail} key = {key}>
-                <div className={style.qr} key = {key} onClick = {() => {SetVisible(true)}}>
+            <div className={style.detail} key = {id + 3}>
+                <div className={style.qr} key = {id + 4} onClick = {() => {SetVisible(true)}}>
                     <QRCode
                         value={res.code}
                         bgColor="#FFFFFF"
@@ -38,34 +38,35 @@ export default function Receive({res, key, SetVisible, counter, setSelected, set
                         /> 
                 </div>
                
-                <div className={style.detail2} key = {key}>
-                <div className={style.date} key = {key}>
-                    <span className={style.link} key = {key}>
-                        <span className={style.code} key = {key}>{res.code}</span>
-                        <span className={style.icon} key = {key}
+                <div className={style.detail2} key = {id + 5}>
+                <div className={style.date} key = {id + 6 }>
+                    <span className={style.link} key = {id + 7}>
+                        <span className={style.code} key = {id + 8}>{res.code}</span>
+                        <span className={style.icon} key = {id + 9}
                             onClick={() => {setCopyLink(res.code);
                             copyToClipboard(copyLink)}}><IoMdCopy/>
                         </span>
                     </span>        
                 </div>
 
-                    <div className={style.monto} key = {key}>
-                        <span className={style.monto} key = {key}>Monto:</span> 
-                        <span key = {key}>{res.amount} OSP</span>
+                    <div className={style.monto} key = {id + 10}>
+                        <span className={style.monto} key = {id + 11}>Monto:</span> 
+                        <span key = {id + 12}>{res.amount} OSP</span>
                     </div>
-                    <div className={style.ts} key = {key}>
+                    <div className={style.ts} key = {id + 13}>
                        {res.date}
+                       
                     </div>
                 </div>
                 
 
             </div>
             
-            <div className={style.estatus}  key = {key}>
+            <div className={style.estatus}  key = {id + 14}>
                 {res.state}
             </div>
-            <div  key = {key}>
-                <FaRegTrashAlt className={style.iconTrash} onClick = {() => setDialog(true)}  key = {key}/>
+            <div  key = {id + 15}>
+                <FaRegTrashAlt className={style.iconTrash} onClick = {() => setDialog(true)}  key = {id + 16}/>
             </div>
 
         </div>

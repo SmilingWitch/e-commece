@@ -158,7 +158,8 @@ export default function Link(){
                {code.map((item, index)=>{
                    const uniqueKey = uuidv4(); // Generar un UUID para cada elemento
                    return <Receive  res = {item} 
-                                    key = {uniqueKey} 
+                                    id = {item.id} 
+                                    key = {uniqueKey}
                                     SetVisible = {SetVisible} 
                                     setCounter = {item.id} 
                                     setSelected = {createLink.bind(this, index)}
