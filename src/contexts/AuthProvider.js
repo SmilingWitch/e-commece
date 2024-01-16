@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [credential, setCredential] = useState(null);
+  /*const [credential, setCredential] = useState(null);*/
 
   
  
@@ -22,9 +23,10 @@ export function AuthProvider({ children }) {
  try {
    const response = await axios.post('https://zona0.onrender.com/accounts/login/',  formValue );
    console.log("Autenticacion1")
-    localStorage.setItem('access', response.data.access);
-    localStorage.setItem('refresh', response.data.refresh);
-    localStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
+   sessionStorage.setItem('access', response.data.access);
+   sessionStorage.setItem('refresh', response.data.refresh);
+   sessionStorage.setItem('credential', JSON.stringify(response.data.user)); // Guarda toda la respuesta del usuario
+
     console.log("CREDENTIAL",response.data.user)
     setUser(localStorage.getItem('access')); // Recupera toda la respuesta del usuario
     setCredential(JSON.parse(localStorage.getItem('credential')));
@@ -47,9 +49,9 @@ export function AuthProvider({ children }) {
     const response = await axios.post('https://zona0.onrender.com/accounts/logout/', {refresh : token} )
     console.log("logout")
     console.log(response)
-    localStorage.removeItem('access');
-    localStorage.removeItem('refresh');
-    localStorage.removeItem('credential');
+    sessionStorage.removeItem('access');
+    sessionStorage.removeItem('refresh');
+    sessionStorage.removeItem('credential');
     setCredential(null)
     setUser(null);
   } catch (error) {
@@ -62,7 +64,7 @@ export function AuthProvider({ children }) {
  /*--------------------VERIFY TOKEN--------------------*/
  const verifyToken = async () => {
   try {
-    const accessToken = localStorage.getItem('access');
+    const accessToken =  sessionStorage.getItem('access');
     const response = await axios.post('https://zona0.onrender.com/accounts/accounts/token/verify/', { token: accessToken });
     if (!response.data.valid) {
       signOut();
@@ -71,6 +73,29 @@ export function AuthProvider({ children }) {
     console.error(error);
   }
 };
+
+
+/*--------------------OBTEIN PAY CODES--------------------*/
+
+const recibos = async () =>{
+  const token = localStorage.getItem('access')
+  console.log(token)
+  console.log("Peticion")
+  try {
+      const response = await axios.get('https://zona0.onrender.com/transfer/list-unpaid-receive/', { 
+         headers: {
+             'Authorization': 'Bearer ' + token
+         }
+       });
+       
+      console.log(response);
+      localStorage.setItem('codes', response.data);
+     } catch(error) {
+      console.log(error.response);
+     }    
+   }
+   
+
 
 /*useEffect(() => {
   const intervalId = setInterval(verifyToken, 840000);
@@ -90,6 +115,7 @@ useEffect(() => {
     setUser(storedUser);
     setCredential(storedCredential);
   }
+  /*recibos()*/
 }, []);
 
  return (
