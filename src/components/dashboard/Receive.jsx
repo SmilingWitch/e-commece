@@ -3,19 +3,25 @@ import style from "../../../public/assets/styles/Link.module.css"
 import QRCode from "react-qr-code";
 import copyToClipboard from "../functions/copyToClipboard"
 import { IoMdCopy } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import Details from "./Details";
 import { FaRegTrashAlt } from "react-icons/fa";
 import axios from "axios"
 
 
-export default function Receive({res, key, SetVisible, counter, setSelected, setDialog}){
+export default function Receive({res, key, SetVisible, counter, setSelected, setDialog,id}){
     const [copyLink, setCopyLink] = useState("");
     const router = useRouter();
+    const [isMounted, setIsMounted] = useState(false);
 
+    useEffect(() => {
+        setIsMounted(true);
+       }, []);
 
-     
+       if (!isMounted) {
+        return null; // Or some placeholder content
+       }
     
     return(
         <div>

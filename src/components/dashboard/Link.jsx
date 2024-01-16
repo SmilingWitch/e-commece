@@ -41,7 +41,7 @@ export default function Link(){
                  SetRes(response.data)
                  
                  SetCode(JSON.parse(localStorage.getItem('payCode')))
-                    
+                 console.log("CODE1",code ) 
                     // Obtén los datos del almacenamiento local
                 let codigosLocalStorage = JSON.parse(localStorage.getItem('payCode')) || [];
                             
@@ -74,7 +74,7 @@ export default function Link(){
                 localStorage.setItem('payCode', JSON.stringify(codigosLocalStorage));
                 SetCode(codigosLocalStorage);
 
-
+                console.log("CODE2",code )
                     
 
 
@@ -114,11 +114,6 @@ export default function Link(){
 
 
             // Eliminar el código del arreglo en el localStorage
-            /*let codigos = JSON.parse(localStorage.getItem('payCode')) || [];
-            codigos = codigos.filter(codigo => codigo.id !== id);
-            localStorage.setItem('payCode', JSON.stringify(codigos));
-            SetCode(codigos);*/
-
             // Obtén los datos del almacenamiento local
             let codigosLocalStorage = JSON.parse(localStorage.getItem('payCode')) || [];
 
