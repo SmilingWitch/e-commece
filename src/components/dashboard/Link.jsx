@@ -140,7 +140,7 @@ export default function Link(){
         <div className={style.cont} >
             {visible && <Details 
             SetVisible = {SetVisible}
-            recibir = {res[selected]}
+            recibir = {code[selected]}
             /> }
             {dialog && <Dialog header = "Borrar Codigo de Pago"
                                 content = "Estas seguro que quieres borrar este Codigo de Pago?"

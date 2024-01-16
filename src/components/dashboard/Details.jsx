@@ -26,7 +26,7 @@ export default function Details({SetVisible, recibir}){
                 <div className={style.linkDetails} data-aos="zoom-in-up">
                             <div className={style.imageBx} data-aos="zoom-in-up">
                                 <QRCode
-                                     value={ recibir.code}
+                                     value={recibir.code}
                                      bgColor="#FFFFFF"
                                      fgColor="#000000"
                                      level="H"
