@@ -25,7 +25,7 @@ export default function Recibir(){
         const [visible, SetVisible] = useState(false)
         let code = [];
         if (typeof window !== 'undefined') {
-         code = JSON.parse(localStorage.getItem('codigoPago')) || [];
+         code = JSON.parse(localStorage.getItem('payCode')) || [];
         }
         const [codigo, setCodigo] = useState(code);
 
@@ -58,15 +58,15 @@ export default function Recibir(){
                         setCodigo(response.data);
 
                         // Recuperar los datos existentes del localStorage
-                        let codigos = JSON.parse(localStorage.getItem('codigoPago')) || [];
+                        let codigos = JSON.parse(localStorage.getItem('payCode')) || [];
 
                         // Agregar el nuevo código al arreglo
                         codigos.push(response.data);
 
                         // Almacenar el arreglo actualizado en el localStorage
-                        localStorage.setItem('codigoPago', JSON.stringify(codigos));
+                        localStorage.setItem('payCode', JSON.stringify(codigos));
 
-                      console.log("CODIGO",localStorage.getItem('codigoPago'))
+                      console.log("CODIGO",localStorage.getItem('payCode'))
 
                     SetRes(response.data)
                     console.log(response);
