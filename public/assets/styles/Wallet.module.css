@@ -121,12 +121,15 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     padding: 5px 0 10px 0;
     border-bottom: 1px solid #a2a2a2;
 }
 .header1 span{
     cursor: pointer;
+}
+.header1 span:nth-child(2){
+    margin-left: 15px;
 }
 .transactionBx{
     position: relative;
@@ -242,9 +245,7 @@
     .transactions{
         width: 100%;
     }
-    .active,.inActive{
-        font-size: 0.6em;
-    }
+
     .content{
         position: relative;
         width: calc(100vw - 320px);
@@ -305,10 +306,6 @@
     .detail {
         font-size:  0.8em;
     }
-    .header1 span:nth-child(1){
-        width: 100px;
-    }
-
     .ts{
         font-size: 0.6em;
     }
