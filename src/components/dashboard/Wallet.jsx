@@ -44,7 +44,7 @@ export default function Wallet() {
 
 
     return (
-        user !== null ?<div className={style.cont} >
+        /*user !== null ?*/<div className={style.cont} >
           <div className={style.content}>
             <div className={style.operations}>
               <div className={style.total}>
@@ -80,30 +80,16 @@ export default function Wallet() {
                 <div className={style.header1}>
                     <span onClick={() => setCurrentComponent(0)}
                         className = {currentComponent === 0 ? `${style.active}`: `${style.inActive}`}
-                    >Transacciones Completadas </span>
+                    >Efectuadas </span>
                     <span onClick={() => setCurrentComponent(1)}
                         className = {currentComponent === 1 ? `${style.active}`: `${style.inActive}`}
                     >Pendientes </span>
-                    <span onClick={() => setCurrentComponent(2)}
-                        className = {currentComponent === 2 ? `${style.active}`: `${style.inActive}`}
-                    >Enviado </span>
-                    <span onClick={() => setCurrentComponent(3)}
-                        className = {currentComponent === 3 ? `${style.active}`: `${style.inActive}`}
-                    >Recibido</span>
-                    {/*<span className={style.inActive}>Exportar .xls</span>*/}
                 </div>
                 <div className={style.transactionBx}>
                 {currentComponent === 0 && transactions.slice(0, showTransactions).filter(transaction => transaction.status === "realizada").map(transaction => (
                  <Transaction key={transaction.id} {...transaction} />
                 ))}
                 {currentComponent === 1 && transactions.slice(0, showTransactions).filter(transaction => transaction.status === "pendiente").map(transaction => (
-                 <Transaction key={transaction.id} {...transaction} />
-                ))}
-
-                {currentComponent === 2 && transactions.slice(0, showTransactions).filter(transaction => transaction.type === "gasto").map(transaction => (
-                 <Transaction key={transaction.id} {...transaction} />
-                ))}
-                {currentComponent === 3 && transactions.slice(0, showTransactions).filter(transaction => transaction.type === "ganancia").map(transaction => (
                  <Transaction key={transaction.id} {...transaction} />
                 ))}
 
@@ -115,14 +101,14 @@ export default function Wallet() {
             </div>
 
           </div>
-        </div> :
+        </div> /*:
         <div className={style.cont1}>
           <Image src = "/assets/images/undraw_login_re_4vu2.svg" width = {300} height={300}></Image>
           <div className={style.subHeader}>
             Debe autenticarse primero
           </div>
           <Link href = "/accounts/login"><button>Autenticarse</button></Link>
-        </div>
+        </div>*/
     )
   }
   
