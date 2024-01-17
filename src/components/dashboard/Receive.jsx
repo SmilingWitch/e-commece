@@ -11,7 +11,6 @@ import axios from "axios"
 
 
 export default function Receive({res, id, SetVisible, counter, setSelected, setDialog}){
-    const [copyLink, setCopyLink] = useState("");
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -43,8 +42,7 @@ export default function Receive({res, id, SetVisible, counter, setSelected, setD
                     <span className={style.link} key = {id + 7}>
                         <span className={style.code} key = {id + 8}>{res.code}</span>
                         <span className={style.icon} key = {id + 9}
-                            onClick={() => {setCopyLink(res.code);
-                            copyToClipboard(copyLink)}}><IoMdCopy/>
+                            onClick={() => {copyToClipboard(res.code)}}><IoMdCopy/>
                         </span>
                     </span>        
                 </div>
@@ -54,8 +52,7 @@ export default function Receive({res, id, SetVisible, counter, setSelected, setD
                         <span key = {id + 12}>{res.amount} OSP</span>
                     </div>
                     <div className={style.ts} key = {id + 13}>
-                       {res.date}
-                       
+                       {res.date} 
                     </div>
                 </div>
                 
