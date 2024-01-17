@@ -10,9 +10,8 @@ import {VscClose} from "react-icons/vsc"
 
 
 export default function Details({SetVisible, recibir}){
-    const { id } = useParams();
-    const [productId, setProductId] = useState('');
-    const [copyLink, setCopyLink] = useState("");
+
+
 
 
  return(
@@ -40,8 +39,7 @@ export default function Details({SetVisible, recibir}){
                                     <span className={style.name}>Codigo: </span>
                                     <span className={style.link}>
                                         <span className={style.code}>{ recibir.code}</span>
-                                        <span className={style.icon} onClick={() => {setCopyLink( recibir.code);
-                                                                                    copyToClipboard(copyLink)}}><IoMdCopy/></span>
+                                        <span className={style.icon} onClick={() => {copyToClipboard(recibir.code)}}><IoMdCopy/></span>
                                     </span>
                                 </div>
                                 <div className={style.detail}>
@@ -51,6 +49,10 @@ export default function Details({SetVisible, recibir}){
                                 <div className={style.detail}>
                                     <span>Estado: </span>
                                     <span>No efectuado</span>
+                                </div>
+                                <div className={style.detail}>
+                                    <span>{recibir.date}</span> <span>  </span>
+                                    <span> {recibir.time}</span>
                                 </div>
                                         
                             </div>          
