@@ -10,6 +10,7 @@ import { HiOutlineHome } from "react-icons/hi2";
 import Link from "next/link"
 import{ useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { FaBalanceScale } from "react-icons/fa";
 
 export default function SideBar(){
 
@@ -42,8 +43,8 @@ export default function SideBar(){
                     </li>
                     <li>
                         <Link  href="/dashboard/guardar"  className={style.link}>
-                            <span className={style.icon}><GrSave/></span>
-                            <span>Guardar</span>
+                            <span className={style.icon}><FaBalanceScale/></span>
+                            <span>Bancarizar</span>
                         </Link> 
                         
                     </li>
@@ -62,7 +63,7 @@ export default function SideBar(){
                     <li>
                         <Link  href="/dashboard/recompensa"  className={style.link}>
                             <span className={style.icon}><IoGiftOutline /></span>
-                            <span>Cangear Codigo</span>    
+                            <span>Canjear Codigo</span>    
                         </Link> 
                         
                     </li>
