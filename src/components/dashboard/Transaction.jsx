@@ -2,22 +2,22 @@ import style from "../../../public/assets/styles/Wallet.module.css"
 import { HiOutlineArrowTrendingUp } from "react-icons/hi2";
 import { HiOutlineArrowTrendingDown } from "react-icons/hi2";
 
-export default function Transaction({type, detail,amount,ts}){
+export default function Transaction({res}){
     return (
-        type === "gasto" ? 
+        res.state === "Unpaid" ? 
         <div className={style.tranBx}>
             <div className={style.tranCont}>
-                <div className={style.icon}><HiOutlineArrowTrendingDown/></div>
+                
                 <div className={style.detailBx}>
                     <div className={style.detail}>
-                        {detail}
+                        {res.code}
                     </div>
-                    <div className={style.ts}>{ts}</div>
+                    <div className={style.ts}>{res.date}, {res.time}</div>
                 </div>
             </div>
             
             <div className={style.amount}>
-               - {amount} GOP
+               - {res.amount} GOP
             </div>
         </div> 
         
@@ -25,16 +25,15 @@ export default function Transaction({type, detail,amount,ts}){
 
         <div className={style.tranBx}>
             <div className={style.tranCont}>
-                <div className={style.icon}><HiOutlineArrowTrendingUp/></div>
                 <div className={style.detailBx}>
                     <div className={style.detail}>
-                        {detail}
+                    {res.code}
                     </div>
-                    <div className={style.ts}>{ts}</div>
+                    <div className={style.ts}>{res.date}, {res.time}</div>
                 </div>
             </div>
             <div className={style.amount}>
-                {amount} GOP
+            {res.amount} GOP
             </div>
         </div>
     )
