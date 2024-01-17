@@ -30,15 +30,6 @@ export default function Enviar(){
                        
                     </div>
                     <button>Verificar</button>
-                    <div>
-                        <div className={style.imageBx}>
-                            <Image src = "/assets/images/undraw_transfer_money_re_6o1h.svg"
-                            layout="fill"
-                            objectFit="contain" // Ajusta la imagen para cubrir todo el contenedor
-                            objectPosition="center"></Image>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div> 
