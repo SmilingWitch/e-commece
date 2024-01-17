@@ -31,7 +31,7 @@
     margin: 5px;
     display: flex;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 50px;
 }
 .line{
     position: relative;
@@ -43,9 +43,10 @@
 }
 .operations{
     position: relative;
-    width: 400px;
+    /*width: 400px;
     background: whitesmoke;
-    box-shadow:  4px 4px 8px #a2a2a2;
+    box-shadow:  4px 4px 8px #a2a2a2;*/
+    width: 100% !important;
     padding: 30px 20px 20px 20px;
     display: flex;
     flex-direction: column;
@@ -61,11 +62,39 @@
     position: relative;
     display: flex;
     padding-top: 30px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    padding: 30px 20px 20px 20px;
+    border-radius: 20px;
+    margin-top: 50px;
+    display: grid;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto auto;
+}
+.total{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    
 }
 .total span{
-    position: relative;
-    font-size: 2em;
+    position: absolute;
+    z-index: 10000;
+    font-size: 2.3em;
     font-family: "PoppinsBolder";
+    color: var(--lightLetter);
+}
+.total .balance{
+    position: absolute;
+    z-index: 10000;
+    color: var(--lightLetter);
+    margin-bottom: 100px;
 }
 .opp{
     position: relative;
@@ -85,6 +114,8 @@
     align-items: center;
     transition: 0.3s;
     color: white;
+    font-size: 1.2em;
+
 }
 .opp div:hover{
     background: var(--hlColorHover);
@@ -92,7 +123,8 @@
 .opp span{
     position: relative;
     padding-top: 10px;
-    font-family: "PoppinsBold";
+   /* font-family: "PoppinsBold";*/
+    
     
 }
 .options{
@@ -100,6 +132,10 @@
     width: 100%;
     height: 100%;
     padding-left:20px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .transactions{
     position: relative;
@@ -110,6 +146,8 @@
     box-shadow:  4px 4px 8px #a2a2a2;
     width: 60%;
     height: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
 
 }
 .slider{
@@ -145,6 +183,16 @@
 .inActive{
     font-size: 0.8em;
     text-transform: uppercase;
+}
+.empty{
+    color: var(--darkLetter);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
 }
 /*--------------TRANSACCIONES------------*/
 .tranBx{
@@ -192,6 +240,9 @@
 .detail{
 
     font-family: "PoppinsBold";
+}
+.ts{
+    font-size: 0.8em;
 }
 .subHeader{
     color: var(--darkLetter);
@@ -275,6 +326,18 @@
     .content{
         position: relative;
         width: 100%;
+
+    }
+    .imgBxWallet{
+        width: 100%;
+    }
+    .total{
+
+        width: 100%;
+    }
+    .operations{
+
+        width: 100%;
     }
 }
 
@@ -299,6 +362,17 @@
         top: 30px ;
         margin: 0 auto;
     }
+    .oppBx{
+        width: 100%;
+        
+        grid-template-rows: auto auto auto;
+        grid-template-columns: auto auto;
+    }
+    .opp span{
+        font-size: 0.8em;
+    }
+    
+    
 }
 
 @media(max-width: 398px){
