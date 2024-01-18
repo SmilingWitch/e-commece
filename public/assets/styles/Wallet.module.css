@@ -5,12 +5,15 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    
+
 
 }
 .content{
     position: relative;
     width: calc(100vw - 350px);
     height: 90vh;
+    
 
 }
 .cont1 {
@@ -131,6 +134,7 @@
 
     padding-left:20px ;
     padding-bottom:20px ;
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -241,7 +245,6 @@
     font-size: 0.8em;
 }
 .detail{
-
     font-family: "PoppinsBold";
 }
 .ts{
@@ -342,6 +345,9 @@
 
         width: 100%;
     }
+    .header{
+        margin-top: 50px;
+    }
 }
 
 @media(max-width:518px){
@@ -352,12 +358,8 @@
         width: 100%;
         padding: 5px;
     }
-
-    .cont{
-        padding-left: 10px;
-        padding-right: 10px;
-
-    }
+    
+    
 }
 @media(max-width:482px){
     .operations{
