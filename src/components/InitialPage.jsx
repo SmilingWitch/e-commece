@@ -6,6 +6,7 @@ import BeatLoader from "react-spinners/BeatLoader"
 import { useRouter } from 'next/navigation'
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import Image from "next/image"
 
 const override = {
     display: "block",
@@ -40,10 +41,13 @@ return(
 
 
     <div className={style.cont}>
-        <div className={style.logo}>
-            <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
-            <span>rca Store</span>
-        </div>
+        
+            <Image 
+            width = {200}
+            height = {200}
+            src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+            {/*<span>rca Store</span>*/}
+        
         <div className={style.spinner}>
             <div className="sweet-loading">
                 <BeatLoader
