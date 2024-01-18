@@ -1,11 +1,13 @@
 import style from "../../../public/assets/styles/Wallet.module.css"
-import { HiOutlineArrowTrendingUp } from "react-icons/hi2";
-import { HiOutlineArrowTrendingDown } from "react-icons/hi2";
 
-export default function Transaction({res}){
+export default function Transaction({res, SetVisible,setSelected,setDialog, visible, index}){
+    
+
+
     return (
         res.state === "Unpaid" ? 
-        <div className={style.tranBx}>
+        <div className={style.tranBx} onClick={() => {SetVisible(true);
+                                                        setSelected(index)}} >
             <div className={style.tranCont}>
                 
                 <div className={style.detailBx}>
@@ -17,13 +19,14 @@ export default function Transaction({res}){
             </div>
             
             <div className={style.amount}>
-               - {res.amount} GOP
+                {res.amount} GOP
             </div>
         </div> 
         
         : 
 
-        <div className={style.tranBx}>
+        <div className={style.tranBx} /*onClick={() => {SetVisible(true);
+                                                        setSelected(index)}}*/>
             <div className={style.tranCont}>
                 <div className={style.detailBx}>
                     <div className={style.detail}>
