@@ -46,11 +46,17 @@
     cursor: pointer;
     transition: 0.3s;
 }
-.btnBx button:hover{
-    background: var(--hlColorHover);
+.btnBx button:hover, .cancel:hover{
+    background: var(--hlColorHover) !important;
+    color: var(--lightLetter) !important;
 }
 .btnBx button:nth-child(1){
     margin-right: 20px;
+}
+.cancel{
+    background: transparent !important;
+    color: var(--darkLetter) !important;
+    transition: 0.3s;
 }
 .centerLoader{
     position: relative;
