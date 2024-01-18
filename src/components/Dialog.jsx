@@ -24,8 +24,9 @@ export default function Dialog({header, content,SetActive,fnc, loading, setLoadi
                     {content}
                 </div>
                 {loading === false ? <div className={style.btnBx}>
+                    
+                    <button onClick = {() => SetActive(false)} className={style.cancel}>Cancelar</button>
                     <button onClick = {fnc}>Aceptar</button>
-                    <button onClick = {() => SetActive(false)}>Cancelar</button>
                 </div>: <div className={style.centerLoader}>
                     <div className="sweet-loading">
                           <BeatLoader
