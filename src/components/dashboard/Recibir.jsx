@@ -27,7 +27,7 @@ export default function Recibir(){
         const [loading,setLoading] = useState(false)
         let code = [];
         if (typeof window !== 'undefined') {
-         code = JSON.parse(localStorage.getItem('pay')) || [];
+         code = JSON.parse(sessionStorage.getItem('pay')) || [];
         }
         const [codigo, setCodigo] = useState(code);
 
@@ -60,16 +60,16 @@ export default function Recibir(){
                       // Guardar la nueva información del código en el estado
                         setCodigo(response.data);
 
-                        // Recuperar los datos existentes del localStorage
-                        let codigos = JSON.parse(localStorage.getItem('pay')) || [];
+                        // Recuperar los datos existentes del sessionStorage
+                        let codigos = JSON.parse(sessionStorage.getItem('pay')) || [];
 
                         // Agregar el nuevo código al arreglo
                         codigos.push(response.data);
 
-                        // Almacenar el arreglo actualizado en el localStorage
-                        localStorage.setItem('pay', JSON.stringify(codigos));
+                        // Almacenar el arreglo actualizado en el sessionStorage
+                        sessionStorage.setItem('pay', JSON.stringify(codigos));
 
-                      console.log("CODIGO",localStorage.getItem('pay'))
+                      console.log("CODIGO",sessionStorage.getItem('pay'))
 
                     SetRes(response.data)
                     console.log(response);
