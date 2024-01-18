@@ -15,6 +15,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import Link from "next/link"
 import { grey } from "@mui/material/colors";
 import Details from "./Details";
+import BeatLoader from "react-spinners/BeatLoader"
 
 export default function Recibir(){
         const router = useRouter();
@@ -23,9 +24,10 @@ export default function Recibir(){
         const [res, SetRes] = useState([])
         const [copyLink, setCopyLink] = useState("");
         const [visible, SetVisible] = useState(false)
+        const [loading,setLoading] = useState(false)
         let code = [];
         if (typeof window !== 'undefined') {
-         code = JSON.parse(localStorage.getItem('payCode')) || [];
+         code = JSON.parse(localStorage.getItem('pay')) || [];
         }
         const [codigo, setCodigo] = useState(code);
 
@@ -47,6 +49,7 @@ export default function Recibir(){
                 const token = sessionStorage.getItem('access')
                 console.log(token)
                 console.log("Peticion")
+                setLoading(true)
                 try {
                     const response = await axios.post('https://zona0.onrender.com/transfer/create-receive/', {amount: formValue.amount}, { 
                         headers: {
@@ -58,24 +61,25 @@ export default function Recibir(){
                         setCodigo(response.data);
 
                         // Recuperar los datos existentes del localStorage
-                        let codigos = JSON.parse(localStorage.getItem('payCode')) || [];
+                        let codigos = JSON.parse(localStorage.getItem('pay')) || [];
 
                         // Agregar el nuevo código al arreglo
                         codigos.push(response.data);
 
                         // Almacenar el arreglo actualizado en el localStorage
-                        localStorage.setItem('payCode', JSON.stringify(codigos));
+                        localStorage.setItem('pay', JSON.stringify(codigos));
 
-                      console.log("CODIGO",localStorage.getItem('payCode'))
+                      console.log("CODIGO",localStorage.getItem('pay'))
 
                     SetRes(response.data)
                     console.log(response);
                     SetLink(true);
                     setCopyLink(res.code)
                     SetVisible(true)
-                    
+                    setLoading(false)
                    } catch(error) {
                     console.log(error.response);
+                    setLoading(false)
                    }
                    
           }
@@ -101,7 +105,7 @@ export default function Recibir(){
             <div className={style.bx}>
 
                 <div className={style.description}>
-                    <span>Description: </span>
+                    <span>Entre el monto:</span>
                     <p>Introduzca la cantidad de SOP que desea recibir para generar un codigo de pago.</p>
                 </div>
 
@@ -124,7 +128,15 @@ export default function Recibir(){
                     </div>
                 </div>
                 {formValue.amount === "" ? <button className={style.deseableBtn}>Generar Link</button> :
-                <button onClick = {createLink}>Generar Codigo</button>}
+                loading  ? <div className={style.loader}>
+                   <BeatLoader
+                color="rgba(255, 68, 0,1)"
+                cssOverride={{}}
+                margin={10}
+                size={10}
+                speedMultiplier={1}
+              />
+                </div> : <button onClick = {createLink}>Generar Codigo</button>}
             </div>
         </div>
     </div>
