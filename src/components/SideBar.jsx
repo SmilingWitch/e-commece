@@ -70,18 +70,6 @@ export default function SideBar(){
                 </ul>
 
             </div>
-            <div className={style.config}>
-                <h3>Configuracion</h3>
-                <ul>
-                    <li>
-                        <Link  href="/dashboard/link"  className={style.link}>
-                            <span className={style.icon}><LuLink/></span>
-                            <span>Codigos de pago</span>    
-                        </Link> 
-                    </li>
-                </ul>
-
-            </div>
             <div className={style.juego}>
                 <h3>Juegos</h3>
                 <ul>
