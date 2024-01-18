@@ -38,22 +38,22 @@ export default function Wallet() {
     const [resSend, SetResSend] = useState([])
     const [resEffect, SetEffect] = useState([])
     
-    let codesFromLocalStorage = [];
-    let pointsFromLocalStorage = 0;
-    let codesEfectFromLocalStorage = [];
-    let codesEnvioFromLocalStorage = [];
+    let codesFromsessionStorage = [];
+    let pointsFromsessionStorage = 0;
+    let codesEfectFromsessionStorage = [];
+    let codesEnvioFromsessionStorage = [];
     if (typeof window !== 'undefined') {
     
-     codesFromLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
-     pointsFromLocalStorage = JSON.parse(localStorage.getItem('points')) || [];
-     codesEfectFromLocalStorage = JSON.parse(localStorage.getItem('payCodeEfect')) || [];
-     codesEnvioFromLocalStorage= JSON.parse(localStorage.getItem('send')) || [];
-     /*localStorage.setItem('pay', "")*/
+     codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
+     pointsFromsessionStorage = JSON.parse(sessionStorage.getItem('points')) || [];
+     codesEfectFromsessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
+     codesEnvioFromsessionStorage= JSON.parse(sessionStorage.getItem('send')) || [];
+     /*sessionStorage.setItem('pay', "")*/
     }
-    const [code, SetCode] = useState(codesFromLocalStorage || []);
+    const [code, SetCode] = useState(codesFromsessionStorage || []);
     const [points, SetPoints] = useState(0);
-    const [codeEfect, SetCodeEfect] = useState(codesEfectFromLocalStorage);
-    const [codeEnvios, SetCodeEnvios] = useState(codesEnvioFromLocalStorage);
+    const [codeEfect, SetCodeEfect] = useState(codesEfectFromsessionStorage);
+    const [codeEnvios, SetCodeEnvios] = useState(codesEnvioFromsessionStorage);
     const [receiveIdToDelete, setReceiveIdToDelete] = useState(null);
 
      useEffect(() => { 
@@ -94,10 +94,10 @@ export default function Wallet() {
              });
              SetRes(response.data)
              
-             SetCode(JSON.parse(localStorage.getItem('pay')))
+             SetCode(JSON.parse(sessionStorage.getItem('pay')))
              console.log("CODE1",code ) 
                 // Obtén los datos del almacenamiento local
-            let codigosLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
+            let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
                         
             // Obtén los datos de la respuesta de la petición
             let codigosResponse = response.data;
@@ -105,28 +105,28 @@ export default function Wallet() {
             // Para cada elemento en los datos de la respuesta de la petición
             codigosResponse.forEach(codigoResponse => {
                // Verifica si el elemento ya existe en el almacenamiento local
-               let existeEnLocalStorage = codigosLocalStorage.some(codigoLocalStorage => codigoLocalStorage.id === codigoResponse.id);
+               let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
             
                // Si el elemento no existe en el almacenamiento local, agrégalo
-               if (!existeEnLocalStorage) {
-                   codigosLocalStorage.push(codigoResponse);
+               if (!existeEnsessionStorage) {
+                   codigossessionStorage.push(codigoResponse);
                }
             });
             
             // Para cada elemento en el almacenamiento local
-            codigosLocalStorage.forEach((codigoLocalStorage, index) => {
+            codigossessionStorage.forEach((codigosessionStorage, index) => {
                // Verifica si el elemento existe en los datos de la respuesta de la petición
-               let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigoLocalStorage.id);
+               let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
             
                // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
                if (!existeEnResponse) {
-                   codigosLocalStorage.splice(index, 1);
+                   codigossessionStorage.splice(index, 1);
                }
             });
             
             // Guarda los datos actualizados en el almacenamiento local
-            localStorage.setItem('pay', JSON.stringify(codigosLocalStorage));
-            SetCode(codigosLocalStorage);
+            sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
+            SetCode(codigossessionStorage);
             console.log("CODE2",code )
             console.log("Code", code)
                
@@ -151,10 +151,10 @@ export default function Wallet() {
                });
                SetEffect(response.data)
                
-               SetCodeEfect(JSON.parse(localStorage.getItem('payCodeEfect')))
+               SetCodeEfect(JSON.parse(sessionStorage.getItem('payCodeEfect')))
                console.log("CODE1",codeEfect ) 
                   // Obtén los datos del almacenamiento local
-              let codigosLocalStorage = JSON.parse(localStorage.getItem('payCodeEfect')) || [];
+              let codigossessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
                           
               // Obtén los datos de la respuesta de la petición
               let codigosResponse = response.data;
@@ -162,28 +162,28 @@ export default function Wallet() {
               // Para cada elemento en los datos de la respuesta de la petición
               codigosResponse.forEach(codigoResponse => {
                  // Verifica si el elemento ya existe en el almacenamiento local
-                 let existeEnLocalStorage = codigosLocalStorage.some(codigoLocalStorage => codigoLocalStorage.id === codigoResponse.id);
+                 let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
               
                  // Si el elemento no existe en el almacenamiento local, agrégalo
-                 if (!existeEnLocalStorage) {
-                     codigosLocalStorage.push(codigoResponse);
+                 if (!existeEnsessionStorage) {
+                     codigossessionStorage.push(codigoResponse);
                  }
               });
               
               // Para cada elemento en el almacenamiento local
-              codigosLocalStorage.forEach((codigoLocalStorage, index) => {
+              codigossessionStorage.forEach((codigosessionStorage, index) => {
                  // Verifica si el elemento existe en los datos de la respuesta de la petición
-                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigoLocalStorage.id);
+                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
               
                  // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
                  if (!existeEnResponse) {
-                     codigosLocalStorage.splice(index, 1);
+                     codigossessionStorage.splice(index, 1);
                  }
               });
               
               // Guarda los datos actualizados en el almacenamiento local
-              localStorage.setItem('payCodeEfect', JSON.stringify(codigosLocalStorage));
-              SetCodeEfect(codigosLocalStorage);
+              sessionStorage.setItem('payCodeEfect', JSON.stringify(codigossessionStorage));
+              SetCodeEfect(codigossessionStorage);
               console.log("CODE2",codeEfect)
               console.log("Code", codeEfect)
                  
@@ -209,10 +209,10 @@ export default function Wallet() {
                SetResSend(response.data)
                console.log("envios",response.data)
                
-               SetCodeEnvios(JSON.parse(localStorage.getItem('send')))
+               SetCodeEnvios(JSON.parse(sessionStorage.getItem('send')))
                console.log("CODE1",codeEfect ) 
                   // Obtén los datos del almacenamiento local
-              let codigosLocalStorage = JSON.parse(localStorage.getItem('send')) || [];
+              let codigossessionStorage = JSON.parse(sessionStorage.getItem('send')) || [];
                           
               // Obtén los datos de la respuesta de la petición
               let codigosResponse = response.data;
@@ -220,29 +220,29 @@ export default function Wallet() {
               // Para cada elemento en los datos de la respuesta de la petición
               codigosResponse.forEach(codigoResponse => {
                  // Verifica si el elemento ya existe en el almacenamiento local
-                 let existeEnLocalStorage = codigosLocalStorage.some(codigoLocalStorage => codigoLocalStorage.id === codigoResponse.id);
+                 let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
               
                  // Si el elemento no existe en el almacenamiento local, agrégalo
-                 if (!existeEnLocalStorage) {
-                     codigosLocalStorage.push(codigoResponse);
+                 if (!existeEnsessionStorage) {
+                     codigossessionStorage.push(codigoResponse);
                  }
               });
               
               // Para cada elemento en el almacenamiento local
-              codigosLocalStorage.forEach((codigoLocalStorage, index) => {
+              codigossessionStorage.forEach((codigosessionStorage, index) => {
                  // Verifica si el elemento existe en los datos de la respuesta de la petición
-                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigoLocalStorage.id);
+                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
               
                  // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
                  if (!existeEnResponse) {
-                     codigosLocalStorage.splice(index, 1);
+                     codigossessionStorage.splice(index, 1);
                  }
               });
               
               // Guarda los datos actualizados en el almacenamiento local
-              localStorage.setItem('send', JSON.stringify(codigosLocalStorage));
-              SetCodeEnvios(codigosLocalStorage);
-              console.log("CODE ENVIOS",codigosLocalStorage)
+              sessionStorage.setItem('send', JSON.stringify(codigossessionStorage));
+              SetCodeEnvios(codigossessionStorage);
+              console.log("CODE ENVIOS",codigossessionStorage)
               
                  
                   
@@ -269,10 +269,10 @@ export default function Wallet() {
 
                console.log("RESPONSE",response.data)
                
-              /* SetCodeEnvios(JSON.parse(localStorage.getItem('points')))
+              /* SetCodeEnvios(JSON.parse(sessionStorage.getItem('points')))
                console.log("CODE1",codeEfect ) 
                   // Obtén los datos del almacenamiento local
-              let codigosLocalStorage = JSON.parse(localStorage.getItem('points')) || [];
+              let codigossessionStorage = JSON.parse(sessionStorage.getItem('points')) || [];
                           
               // Obtén los datos de la respuesta de la petición
               let codigosResponse = response.data;
@@ -280,28 +280,28 @@ export default function Wallet() {
               // Para cada elemento en los datos de la respuesta de la petición
               codigosResponse.forEach(codigoResponse => {
                  // Verifica si el elemento ya existe en el almacenamiento local
-                 let existeEnLocalStorage = codigosLocalStorage.some(codigoLocalStorage => codigoLocalStorage.id === codigoResponse.id);
+                 let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
               
                  // Si el elemento no existe en el almacenamiento local, agrégalo
-                 if (!existeEnLocalStorage) {
-                     codigosLocalStorage.push(codigoResponse);
+                 if (!existeEnsessionStorage) {
+                     codigossessionStorage.push(codigoResponse);
                  }
               });
               
               // Para cada elemento en el almacenamiento local
-              codigosLocalStorage.forEach((codigoLocalStorage, index) => {
+              codigossessionStorage.forEach((codigosessionStorage, index) => {
                  // Verifica si el elemento existe en los datos de la respuesta de la petición
-                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigoLocalStorage.id);
+                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
               
                  // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
                  if (!existeEnResponse) {
-                     codigosLocalStorage.splice(index, 1);
+                     codigossessionStorage.splice(index, 1);
                  }
               });
               
               // Guarda los datos actualizados en el almacenamiento local
-              localStorage.setItem('send', JSON.stringify(codigosLocalStorage));
-              SetCodeEnvios(codigosLocalStorage);
+              sessionStorage.setItem('send', JSON.stringify(codigossessionStorage));
+              SetCodeEnvios(codigossessionStorage);
               console.log("CODE2",codeEfect)
               console.log("Code", codeEfect)
                  */
@@ -332,19 +332,19 @@ export default function Wallet() {
           setLoading(false)
 
 
-          // Eliminar el código del arreglo en el localStorage
+          // Eliminar el código del arreglo en el sessionStorage
           // Obtén los datos del almacenamiento local
-          let codigosLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
+          let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
 
           // Filtra los datos para excluir el elemento que deseas eliminar
-          codigosLocalStorage = codigosLocalStorage.filter(codigo => codigo.id !== id);
+          codigossessionStorage = codigossessionStorage.filter(codigo => codigo.id !== id);
 
           // Guarda los datos actualizados en el almacenamiento local
-          localStorage.setItem('pay', JSON.stringify(codigosLocalStorage));
+          sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
 
-          SetCode(codigosLocalStorage);
+          SetCode(codigossessionStorage);
 
-          console.log("CODE5", codigosLocalStorage);
+          console.log("CODE5", codigossessionStorage);
           
          } catch(error) {
           console.log(error.response);
@@ -510,22 +510,26 @@ export default function Wallet() {
               <div className={style.line}></div>
               <h3>Envios</h3> 
             </div>
-            <div className={style.transactions}>
-            {codeEnvios.length > 0 ? 
-                  resSend.map((item, index) => (
-                    <TransactionSend
-                            key={item.id} 
-                            res = {item}
-                            />
-                  )) : (
-                    currentComponent !== 0 ? (
-                      ""
-                    ) : (
-                      <div className={style.empty}>No existen solicitudes de envio.</div>
-                    )
-                  )}
-              
+            <div className={style.options}>
+              <div className={style.transactions}>
+              {codeEnvios.length > 0 ? 
+                    resSend.map((item, index) => (
+                      <TransactionSend
+                              key={item.id} 
+                              res = {item}
+                              />
+                    )) : (
+                      currentComponent !== 0 ? (
+                        ""
+                      ) : (
+                        <div className={style.empty}>No existen solicitudes de envio.</div>
+                      )
+                    )}
+
+              </div>
+
             </div>
+            
 
           </div>
         </div> 
