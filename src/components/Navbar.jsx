@@ -72,7 +72,7 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                             {credential && (<Image
                                 width={40}
                                 height={40} 
-                                src="/assets/images/imagenPorDefecto.png"/*credential.image*/ />)}
+                                src={credential.image}  />)}
                             </div>   
                         </div></span>
                     </div>
