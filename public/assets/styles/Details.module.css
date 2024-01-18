@@ -58,7 +58,7 @@
 
 .linkDetails{
     position: relative;
-    padding-top: 80px;
+    padding-top: 20px;
     margin: 0 auto;
     width: 80%;
     height: 100%;
@@ -82,6 +82,7 @@
     position: relative;
     padding-left: 30px;
     margin: 0 auto;
+    margin-top: 50px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -94,18 +95,17 @@
     padding: 10px;
     width: 100%;
     display: flex;
+    flex-direction: column;
     width: 500px;
 }
 .detail span:nth-child(1){
     font-family: "PoppinsBolder";
 }
-.detail span:nth-child(2){
-    margin-left: 10px;
-}
+
 .link{
     position: relative;
     padding: 5px;
-    border: 1px solid rgb(225, 224, 224);
+   /* border: 1px solid rgb(225, 224, 224);*/
     border-radius: 10px;
     width: 380px;
     display: flex;
@@ -142,6 +142,7 @@
 .subHeader{
     color: var(--darkLetter);
     font-size: 1.2em;
+    
 }
 .code{
     position: relative;
@@ -165,82 +166,71 @@
     font-size: 1.8em;
 }
 
-
-
-
-/*@media(max-width: 1392px){
-    .linkDetails{
-        grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    }
-
-    .link{
-        position: relative;
-        width: 80%;    
-    }
-    .detail{
-        width: 100%;
-    }
-    .details{
-
-        padding-left: 0px;
-        
-    }
-    .detail{
-        position: relative;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-    }
+.headerDetail{
+    color: var(--darkLetter);
+    margin-bottom: 20px;
+    font-family: "PoppinsBolder";
 }
+.btn{
+    position: relative;
+    height: 60px;
+}
+.btn button{
+    position: relative;
+    border: none;
+    padding: 15px;
+    background: var(--hlColor);
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--lightLetter);
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: "PoppinsBold";
+    top: 20px;
+}
+.btn button span:nth-child(1){
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn button span{
+    color: var(--lightLetter);
+}
+.btn button:hover{
+    background: var(--hlColorHover);
+}
+
 @media(max-width:768px){
+    .cont{
+        padding: 0;
+    }
     .content{
         position: relative;
         width: 100%;
+        height: 100%;
+        border-radius: 0;
     }
 }
-@media(max-width:589px){
+
+@media(max-width:478px){
     .linkDetails{
-        flex-direction: column;
-        margin-top: 50px;
-    }
-    
-    
-    .details{
-        margin-top: 20px;
-    }
-    .detail{
-        padding: 5px;
-    }
-}
-@media(max-width:518px){
-    .input{
         width: 100%;
     }
-    .input .inputBx{
-        margin-left: 5px;
-        width: 200px;
-
-    }
-    .input .inputBx input{
-        color: var(--darkLetter);
-        width: 90%;
-    }
-    .inputBx span{
-        font-size: 1em;
-        width: 10%;
-    }
-}
-@media(max-width: 389px){
-    .input label{
-        font-size: 0.8em;
-    }
-    .inputBx span{
-        font-size: 0.8em;
-    }
-    .description{
-        font-size: 0.8em;
+    .details{
+        width: 100%;
+        padding: 0;
     }
     .detail{
-        font-size: 0.8em;
+        width: 100%;
     }
-}*/
+    .link{
+        width: 100%;
+    }
+
+}
+
