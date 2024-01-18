@@ -134,7 +134,7 @@ const theme = createTheme({
                             {credential && (<Image
                             width={110}
                             height={110} 
-                            src="/assets/images/imagenPorDefecto.png"/*credential.image*/ alt="Imagen seleccionada" />)}
+                            src={credential.image} alt="Imagen seleccionada" />)}
                         </div>
                         <div className={style.info}>
                             <div className={style.name}>
