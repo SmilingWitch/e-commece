@@ -2,18 +2,16 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-top:30px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    padding-top: 80px;
+
 }
 .content{
     position: relative;
     width: calc(100vw - 350px);
+    height: 90vh;
+
 }
 .cont1 {
     position: relative;
@@ -31,7 +29,7 @@
     margin: 5px;
     display: flex;
     align-items: center;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 .line{
     position: relative;
@@ -130,12 +128,14 @@
 .options{
     position: relative;
     width: 100%;
-    height: 100%;
+
     padding-left:20px ;
+    padding-bottom:20px ;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 0;
 }
 .transactions{
     position: relative;
@@ -148,7 +148,7 @@
     height: 500px;
     margin: 0 auto;
     margin-top: 50px;
-
+    margin-bottom: 20px;
 }
 .slider{
     position: relative;
@@ -174,6 +174,7 @@
     height: 100%;
     height: 420px;
     overflow-y: scroll;
+    
 }
 .active{
     color: var(--hlColor);
@@ -198,7 +199,7 @@
 .tranBx{
     display: flex;
     padding: 5px;
-    margin-top: 10px ;
+    /*margin-top: 10px ;*/
     width: 100%;
     align-items: center;
     justify-content: space-between;
@@ -206,6 +207,8 @@
     /*background: whitesmoke;*/
     border-radius: 10px;
     /*box-shadow:  4px 4px 8px #a2a2a2;*/
+    cursor: pointer;
+
 }
 .tranCont{
     position: relative;
