@@ -92,6 +92,7 @@
     transition: 0.3s;
     cursor: pointer;
     margin-top: 30px;
+    text-transform: uppercase;
 }
 .cont button:hover,
 .cont1 button:hover{
@@ -103,6 +104,15 @@
     height: 400px;
 
     margin-top: 80px;
+}
+.description{
+    position: relative;
+    width: 90%;
+    margin-top: 30px;
+    text-align: center;
+}
+.description span{
+    font-family: "PoppinsBolder";
 }
 .cont1 {
     position: relative;
@@ -117,6 +127,20 @@
 .subHeader{
     color: var(--darkLetter);
     font-size: 1.2em;
+}
+.deseableBtn{
+    background: rgb(173, 172, 172) !important;
+}
+.loader{
+    position: relative;
+    padding-top: 50px;
+}
+.error{
+    color: var(--lightLetter);
+    position: absolute;
+
+    width: 100%;
+    text-align: center;
 }
 @media(max-width:768px){
     .content{
