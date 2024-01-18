@@ -54,6 +54,11 @@ export function AuthProvider({ children }) {
     sessionStorage.removeItem('credential');
     setCredential(null)
     setUser(null);
+    sessionStorage.removeItem('pay');
+    sessionStorage.removeItem('points');
+    sessionStorage.removeItem('payCodeEfect');
+    sessionStorage.removeItem('send');
+    router.push('/accounts/login')
   } catch (error) {
     console.log(error.response)
     console.log("No se hizo la peticion")
@@ -78,7 +83,7 @@ export function AuthProvider({ children }) {
 /*--------------------OBTEIN PAY CODES--------------------*/
 
 const recibos = async () =>{
-  const token = localStorage.getItem('access')
+  const token = sessionStorage.getItem('access')
   console.log(token)
   console.log("Peticion")
   try {
@@ -89,7 +94,7 @@ const recibos = async () =>{
        });
        
       console.log(response);
-      localStorage.setItem('codes', response.data);
+      sessionStorage.setItem('codes', response.data);
      } catch(error) {
       console.log(error.response);
      }    
@@ -108,7 +113,7 @@ useEffect(() => {
       try {
        storedCredential = JSON.parse(sessionStorage.getItem('credential')) || null;
       } catch (error) {
-       console.error('Error al analizar los datos de localStorage:', error);
+       console.error('Error al analizar los datos de sessionStorage:', error);
       }
 
     const storedUser = sessionStorage.getItem('access') || null
