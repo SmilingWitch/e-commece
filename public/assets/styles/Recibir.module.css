@@ -93,6 +93,7 @@
     transition: 0.3s;
     cursor: pointer;
     margin-top: 30px;
+    text-transform: uppercase;
 }
 .cont button:hover,
 .cont1 button:hover{
@@ -205,7 +206,10 @@
 .deseableBtn{
     background: rgb(173, 172, 172) !important;
 }
-
+.loader{
+    position: relative;
+    padding-top: 50px;
+}
 
 
 /*-----------------DETAILS--------------*/
