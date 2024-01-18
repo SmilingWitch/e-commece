@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(135, 134, 134, 0.5);
+    
 }
 .content{
     position: relative;
@@ -190,7 +191,7 @@
     transition: 0.3s;
     text-transform: uppercase;
     font-family: "PoppinsBold";
-    top: 20px;
+    
 }
 .btn button span:nth-child(1){
     margin-right: 10px;
@@ -208,12 +209,17 @@
 @media(max-width:768px){
     .cont{
         padding: 0;
+        
     }
     .content{
         position: relative;
         width: 100%;
         height: 100%;
         border-radius: 0;
+        
+    }
+    .btn button{
+        margin-top: 20px;
     }
 }
 
