@@ -18,10 +18,10 @@ export default function Details({SetVisible, recibir}){
     const [loadingDialod, setLoadingDialog] = useState(false)
     const [dialog, setDialog] = useState(false)
 
-    let codesFromLocalStorage = [];
+    let codesFromsessionStorage = [];
     if (typeof window !== 'undefined') {
-     codesFromLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
-     /*localStorage.setItem('pay', "")*/
+     codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
+     /*sessionStorage.setItem('pay', "")*/
     }
 
     const DeleteRecieves = async (id) =>{
@@ -42,16 +42,16 @@ export default function Details({SetVisible, recibir}){
             setLoading(false)
             SetVisible(false)
 
-            // Eliminar el código del arreglo en el localStorage
+            // Eliminar el código del arreglo en el sessionStorage
             // Obtén los datos del almacenamiento local
-            let codigosLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
+            let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
 
             // Filtra los datos para excluir el elemento que deseas eliminar
-            codigosLocalStorage = codigosLocalStorage.filter(codigo => codigo.id !== id);
+            codigossessionStorage = codigossessionStorage.filter(codigo => codigo.id !== id);
 
             // Guarda los datos actualizados en el almacenamiento local
-            localStorage.setItem('pay', JSON.stringify(codigosLocalStorage));
-            SetCode(codigosLocalStorage);
+            sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
+            SetCode(codigossessionStorage);
 
             console.log("CODE", code);
             
