@@ -21,8 +21,7 @@ export default function Registro(){
         ci: '',
         name:'',
         last_name: '',
-        movil: '',
-        image: null
+        movil: ''
       });
 
     const [error,setError] = useState('')
@@ -49,7 +48,7 @@ export default function Registro(){
 
      setFormValue((prev) => ({
         ...prev,
-        image: event.target.files[0],
+        image:event.target.files[0],
       }));
 
     }
@@ -67,6 +66,8 @@ export default function Registro(){
         setLoading(true)
       try{
         console.log(formValue)
+        let formData = new FormData();
+        formData.append('image', selectedFile);
         const res = await axios.post('https://zona0.onrender.com/register/client/', data)
         console.log("response",res.data)
         setError('')
@@ -137,18 +138,7 @@ export default function Registro(){
                 <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
                 <span>rca Store</span>
             </div>
-            <div className={style.insertPhoto}>
-                {imageUrl && <div className={style.selectedImageBx}>
-                    <Image
-                    width={110}
-                    height={110} 
-                    src={imageUrl} alt="Imagen seleccionada" /></div>}
-                    <div className={style.info} onChange={handleFileChange}>
-                        {/*<input type="file" onChange={handleFileChange} />*/}
-                        <label for="myInput" ><HiPlusCircle className={style.icon2}/></label>
-                        <input id="myInput" type="file" accept="image/*"/>
-                    </div>
-            </div>
+            
 
             <div className= {error.name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre</div>
             <div className={style.input}>
