@@ -21,8 +21,7 @@ export default function RegistroCompany(){
         last_name: '',
         username:'',
         password:'',
-        email: '',
-        /*image: null*/
+        email: ''
       });
 
     const [correct,setCorrect] = useState(false)
@@ -75,11 +74,6 @@ export default function RegistroCompany(){
     const handleFileChange = (event) => {
      setSelectedFile(event.target.files[0]);
      setImageUrl(URL.createObjectURL(event.target.files[0]));
-
-     setFormValue((prev) => ({
-        ...prev,
-        image: event.target.files[0],
-      }));
     }
 
 
@@ -128,7 +122,18 @@ export default function RegistroCompany(){
                     <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
                     <span>rca Store</span>
                 </div>
-                
+                <div className={style.insertPhoto}>
+                {imageUrl && <div className={style.selectedImageBx}>
+                    <Image
+                    width={110}
+                    height={110} 
+                    src={imageUrl} alt="Imagen seleccionada" /></div>}
+                    <div className={style.info} onChange={handleFileChange}>
+                        {/*<input type="file" onChange={handleFileChange} />*/}
+                        <label for="myInput" ><HiPlusCircle className={style.icon2}/></label>
+                        <input id="myInput" type="file" accept="image/*"/*style={{display: "none"}}*//>
+                    </div>
+            </div>
                 <div className= {error.company_name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre de la compania</div>
                 <div className={style.input}>
                     <input 
