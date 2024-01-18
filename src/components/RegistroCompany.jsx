@@ -131,7 +131,7 @@ export default function RegistroCompany(){
                     <div className={style.info} onChange={handleFileChange}>
                         {/*<input type="file" onChange={handleFileChange} />*/}
                         <label for="myInput" ><HiPlusCircle className={style.icon2}/></label>
-                        <input id="myInput" type="file" accept="image/*"/*style={{display: "none"}}*//>
+                        <input id="myInput" type="file" accept="image/*"style={{display: "none"}}/>
                     </div>
             </div>
                 <div className= {error.company_name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre de la compania</div>
