@@ -7,17 +7,71 @@ import copyToClipboard from "../functions/copyToClipboard"
 import QRCode from "react-qr-code";
 import { IoMdCopy } from "react-icons/io";
 import {VscClose} from "react-icons/vsc"
+import axios from "axios"
+import { FaRegTrashAlt } from "react-icons/fa";
+import Dialog from '../Dialog';
 
 
 export default function Details({SetVisible, recibir}){
+    const [resDelete, SetResDelete] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [loadingDialod, setLoadingDialog] = useState(false)
+    const [dialog, setDialog] = useState(false)
 
+    let codesFromLocalStorage = [];
+    if (typeof window !== 'undefined') {
+     codesFromLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
+     /*localStorage.setItem('pay', "")*/
+    }
 
+    const DeleteRecieves = async (id) =>{
+        const token = sessionStorage.getItem('access')
+        setLoading(true)
+        console.log(token)
+        console.log("Peticion")
+        try {
+            const response = await axios.delete(`https://zona0.onrender.com/transfer/list-delete-unpaid-receive/${id}`, { 
+               headers: {
+                   'Authorization': 'Bearer ' + token
+               }
+             });
+
+             SetResDelete(response.data)
+            console.log(response);
+            setDialog(false)
+            setLoading(false)
+            SetVisible(false)
+
+            // Eliminar el código del arreglo en el localStorage
+            // Obtén los datos del almacenamiento local
+            let codigosLocalStorage = JSON.parse(localStorage.getItem('pay')) || [];
+
+            // Filtra los datos para excluir el elemento que deseas eliminar
+            codigosLocalStorage = codigosLocalStorage.filter(codigo => codigo.id !== id);
+
+            // Guarda los datos actualizados en el almacenamiento local
+            localStorage.setItem('pay', JSON.stringify(codigosLocalStorage));
+            SetCode(codigosLocalStorage);
+
+            console.log("CODE", code);
+            
+           } catch(error) {
+            console.log(error.response);
+            setLoading(false)
+           }    
+         }
 
 
  return(
 
     <div className={style.cont} >
-
+        {dialog && <Dialog header = "Borrar Codigo de Pago"
+                                content = "Estas seguro que quieres borrar este Codigo de Pago?"
+                                SetActive = {setDialog}
+                                active = {dialog}
+                                fnc = {() => DeleteRecieves(recibir.id)}
+                                setLoading = {setLoadingDialog}
+                                loading = {loadingDialod}/>}
         <div className={style.content}>
             <div className={style.iconBx}>
                 <VscClose className={style.iconClose} onClick = {() =>  SetVisible(false)}/> 
@@ -32,7 +86,7 @@ export default function Details({SetVisible, recibir}){
                                      style={{ height: "auto", width: "100%" }}/> 
                             </div>
                             <div className={style.details} >
-                            <div>
+                            <div className={style.headerDetail}>
                                 Detalles
                             </div>
                                 <div className={style.detail}>
@@ -51,11 +105,17 @@ export default function Details({SetVisible, recibir}){
                                     <span>No efectuado</span>
                                 </div>
                                 <div className={style.detail}>
-                                    <span>{recibir.date}</span> <span>  </span>
-                                    <span> {recibir.time}</span>
+                                    <span>Fecha</span>
+                                    <span>{recibir.date},{recibir.time}</span>
                                 </div>
                                         
-                            </div>          
+                            </div>  
+
+                            <div className={style.btn}>
+                                <button onClick={() =>setDialog(true)}>
+                                    <span><FaRegTrashAlt/></span>
+                                    <span>Cancelar el recibo de pago</span></button>    
+                            </div>        
                         </div>                  
                 </div>
     </div>
