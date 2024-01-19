@@ -43,6 +43,7 @@ export default function Wallet() {
     const [currentComponent, setCurrentComponent] = useState(0);
     const [send, SetSend] = useState(false)
     const [visible, SetVisible] = useState(false)
+    const [visibleEffect, SetVisibleEffect] = useState(false)
     const [dialog, setDialog] = useState(false)
     const [selectedD, setSelectedD] = useState(0)
     const [loading, setLoading] = useState(false)
@@ -67,6 +68,12 @@ export default function Wallet() {
       });
     }, []);
 
+   /* useEffect(() => { 
+      
+      recibosPending() 
+     
+    }, [codesFromsessionStorage]);*/
+
 
     // functions
     const showLessTransactions = () => {
@@ -90,7 +97,6 @@ export default function Wallet() {
       const recibosPending = async () =>{
       const token = sessionStorage.getItem('access')
       console.log(token)
-      console.log("Peticion")
       
       try {
           const response = await axios.get('https://zona0.onrender.com/transfer/list-unpaid-receive/', { 
@@ -101,7 +107,6 @@ export default function Wallet() {
            SetRes(response.data)
            
            SetCode(JSON.parse(sessionStorage.getItem('pay')))
-           console.log("CODE1",code ) 
               // Obtén los datos del almacenamiento local
           let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
                       
@@ -133,8 +138,6 @@ export default function Wallet() {
           // Guarda los datos actualizados en el almacenamiento local
           sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
           SetCode(codigossessionStorage);
-          console.log("CODE2",code )
-          console.log("Code", code)
              
               
           
@@ -158,7 +161,6 @@ export default function Wallet() {
               SetEffect(response.data)
               
               SetCodeEfect(JSON.parse(sessionStorage.getItem('payCodeEfect')))
-              console.log("CODE1",codeEfect ) 
                  // Obtén los datos del almacenamiento local
              let codigossessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
                          
@@ -190,8 +192,7 @@ export default function Wallet() {
              // Guarda los datos actualizados en el almacenamiento local
              sessionStorage.setItem('payCodeEfect', JSON.stringify(codigossessionStorage));
              SetCodeEfect(codigossessionStorage);
-             console.log("CODE2",codeEfect)
-             console.log("Code", codeEfect)
+             console.log("CODE EFFECT",codeEfect)
                 
                  
              
@@ -308,7 +309,7 @@ export default function Wallet() {
                });
              
                SetResDelete(response.data)
-              console.log(response);
+              /*console.log(response);*/
               setDialog(false)
               setLoading(false)
              
@@ -324,12 +325,23 @@ export default function Wallet() {
               sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
              
               SetCode(codigossessionStorage);
-             
-              console.log("CODE5", codigossessionStorage);
-             
-             } catch(error) {
-              console.log(error.response);
+              setDialog(false)
+              /*console.log("CODE5", codigossessionStorage);*/
+             }catch(error) {
+              console.log(error)
+              setDialog(false)
               setLoading(false)
+              if(error.response.status === 404){
+                recibosPending() 
+                setLoading(true)
+
+                
+                console.log("ME CAGO EN TODO")
+              }
+              if(error.response.status === 500){
+                recibosPending()
+                setLoading(false) 
+              }
              }    
            }
          
@@ -344,6 +356,12 @@ export default function Wallet() {
           {visible && <Details
                         SetVisible = {SetVisible}
                         recibir = {code[selectedD]}
+                        SetCode = {SetCode}
+            /> }
+            {visibleEffect && <Details
+                        SetVisible = {SetVisibleEffect}
+                        recibir = {codeEfect[selectedD]}
+                        SetCode = {SetCode}
             /> }
         {dialog && <Dialog header = "Borrar Codigo de Pago"
                                 content = "Estas seguro que quieres borrar este Codigo de Pago?"
@@ -357,8 +375,11 @@ export default function Wallet() {
             <div className={style.operations} data-aos="fade-up">
             
               <div className={style.total}>
-                <div className={style.balance}>Balance Total</div>
-                <span>{points} OSP</span>
+                <div className={style.points}>
+                  <div className={style.balance}>Balance Total</div>
+                  <span>{points} OSP</span>
+                </div>
+                
                 
                 <div className={style.imgBxWallet}>
                   <Image 
@@ -427,7 +448,7 @@ export default function Wallet() {
               </div>
             </div>
 
-            <div className={style.header} data-aos="fade-up">
+            <div className={style.header}/* data-aos="fade-up"*/>
               <div className={style.line}></div>
               <h3>Recibos</h3> 
             </div>
@@ -451,6 +472,15 @@ export default function Wallet() {
                     <Transaction 
                             key={item.id} 
                             res = {item}
+                            SetVisible = { SetVisibleEffect}
+                            setSelected = {setSelectedD}
+                            setDialog = {() => {
+                              setReceiveIdToDelete(item.id);
+                              setDialog(true);
+                            }}
+                            visible={visible}
+                            index = {index}
+
                             />
                   )) : (
                     currentComponent !== 0 ? (
@@ -471,7 +501,8 @@ export default function Wallet() {
                         setDialog(true);
                       }}
                       visible={visible}
-                      index = {index}/>
+                      index = {index}
+                      />
                   )) : (
                     currentComponent !== 1 ? (
                       ""
