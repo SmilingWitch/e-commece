@@ -94,6 +94,7 @@
     cursor: pointer;
     margin-top: 30px;
     text-transform: uppercase;
+    color: var(--lightLetter);
 }
 .cont button:hover,
 .cont1 button:hover{

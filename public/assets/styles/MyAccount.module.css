@@ -108,6 +108,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.5s;
+    color: var(--lightLetter);
 }
 .option:hover{
     background: var(--hlColorHover);
