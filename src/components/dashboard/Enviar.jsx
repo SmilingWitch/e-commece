@@ -169,9 +169,13 @@ export default function Enviar(){
                         <p>Introduzca el codigo para proceder a pagar el monto establecido.</p>
                     </div>
                     <div className={style.input}>
-                        <label >Introducir Codigo:</label>
                         <div className={style.inputBx}>
-                            <input type="text" name="code" id="" value={formValue.code} onChange={handleChange} />
+                            <input type="text" 
+                                    name="code" 
+                                    id=""
+                                    placeholder="Codigo"
+                                    value={formValue.code} 
+                                    onChange={handleChange} />
                             <span><BsQrCodeScan/></span>
                         </div>
                        

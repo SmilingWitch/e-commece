@@ -24,7 +24,7 @@ export default function Recompensa(){
             <div className={style.content}>
                 <div className={style.header} data-aos="fade-up">
                   <div className={style.line}></div>
-                  <h3>Cangear Codigo</h3> 
+                  <h3>Canjear Codigo</h3> 
                 </div>
                 <div className={style.bx} data-aos="fade-up">
                     <div className={style.description}>
@@ -32,8 +32,7 @@ export default function Recompensa(){
                         <p>Aqui podras canjear codigos que esten disponibles para obtener OSP de manera gratuita.</p>
                     </div>
                     <div className={style.input}>
-                        <label >Cangear:</label>
-                        <input type="text" name="" id="" />
+                        <input type="text" name="" id="" placeholder="Codigo" />
                     </div>
                     <button>Recibir Premio</button>
                     <div className={style.regalo}>

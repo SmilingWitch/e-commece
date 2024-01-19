@@ -119,12 +119,13 @@ export default function Recibir(){
                 </div>
 
                 <div className={style.input}>
-                    <label >Monto a recibir:</label>
+                   {/* <label >Monto a recibir:</label>*/}
                     <div className={style.inputBx}>
                         <input  type="text" 
                                 name="amount" id=""
                                 value={formValue.amount}
                                 onChange={handleChange} 
+                                placeholder="Monto"
                                 onKeyDown={(event) => {
                                     const keyCode = event.keyCode;
                                     const isNumber = (keyCode >= 48 && keyCode <= 57);
@@ -133,7 +134,7 @@ export default function Recibir(){
                                       event.preventDefault();
                                     }
                                   }}/>
-                        <span>SOP</span>
+                        <span>OSP</span>
                     </div>
                 </div>
                 {formValue.amount === "" ? <button className={style.deseableBtn}>Generar Link</button> :
