@@ -86,10 +86,11 @@
     position: relative;
     font-size: 1.5em;
     padding: 10px;
-    width: 300px;
+    width: 150px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    
 }
 .iconBx .contIcon span,
 .iconBx .contIcon1 span{
