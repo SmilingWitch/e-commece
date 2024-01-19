@@ -5,20 +5,32 @@ import Image from "next/image"
 import Link from "next/link"
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useState, useEffect } from "react";
 
 export default function Recompensa(){
 
     const { user } = useContext(AuthContext);
 
+    useEffect(() => {
+        AOS.init({
+          duration:2000
+      });
+      }, []);
+
     return(
         <div className={style.cont}>
             <div className={style.content}>
-                <div className={style.header}>
+                <div className={style.header} data-aos="fade-up">
                   <div className={style.line}></div>
                   <h3>Cangear Codigo</h3> 
                 </div>
-                <div className={style.bx}>
+                <div className={style.bx} data-aos="fade-up">
+                    <div className={style.description}>
+                        <span>Entre el codigo:</span>
+                        <p>Aqui podras canjear codigos que esten disponibles para obtener OSP de manera gratuita.</p>
+                    </div>
                     <div className={style.input}>
                         <label >Cangear:</label>
                         <input type="text" name="" id="" />

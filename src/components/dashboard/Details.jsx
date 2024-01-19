@@ -10,20 +10,26 @@ import {VscClose} from "react-icons/vsc"
 import axios from "axios"
 import { FaRegTrashAlt } from "react-icons/fa";
 import Dialog from '../Dialog';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 export default function Details({SetVisible, recibir}){
-    const [resDelete, SetResDelete] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [loadingDialod, setLoadingDialog] = useState(false)
-    const [dialog, setDialog] = useState(false)
-
+    // variables
     let codesFromsessionStorage = [];
     if (typeof window !== 'undefined') {
      codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
      /*sessionStorage.setItem('pay', "")*/
     }
 
+    //states
+    const [resDelete, SetResDelete] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [loadingDialod, setLoadingDialog] = useState(false)
+    const [dialog, setDialog] = useState(false)
+
+    
+    //function
     const DeleteRecieves = async (id) =>{
         const token = sessionStorage.getItem('access')
         setLoading(true)
@@ -60,6 +66,12 @@ export default function Details({SetVisible, recibir}){
             setLoading(false)
            }    
          }
+
+         useEffect(() => {
+            AOS.init({
+              duration:250
+          });
+          }, []);
 
 
  return(

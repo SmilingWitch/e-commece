@@ -17,17 +17,29 @@ import { BiDonateHeart } from "react-icons/bi";
 import Details from "./Details";
 import Dialog from "../Dialog";
 import TransactionSend from "./TransactionSend";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 export default function Wallet() {
-  const [data, setData] = useState('No result');
-  const { user } = useContext(AuthContext);
-  const [showTransactions, setShowTransactions] = useState(30);
-  const [isMounted, setIsMounted] = useState(false);
-   const showLessTransactions = () => {
-    setShowTransactions( 10);
-   };
+    const { user } = useContext(AuthContext);
 
+    // variable
+    let codesFromsessionStorage = [];
+    let pointsFromsessionStorage = 0;
+    let codesEfectFromsessionStorage = [];
+    let codesEnvioFromsessionStorage = [];
+    if (typeof window !== 'undefined') {
+      codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
+      pointsFromsessionStorage = JSON.parse(sessionStorage.getItem('points')) || 0;
+      codesEfectFromsessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
+      codesEnvioFromsessionStorage= JSON.parse(sessionStorage.getItem('send')) || [];
+    }
+
+    // states
+    const [data, setData] = useState('No result');
+    const [showTransactions, setShowTransactions] = useState(30);
+    const [isMounted, setIsMounted] = useState(false);
     const [currentComponent, setCurrentComponent] = useState(0);
     const [send, SetSend] = useState(false)
     const [visible, SetVisible] = useState(false)
@@ -37,162 +49,156 @@ export default function Wallet() {
     const [res, SetRes] = useState([])
     const [resSend, SetResSend] = useState([])
     const [resEffect, SetEffect] = useState([])
-    
-    let codesFromsessionStorage = [];
-    let pointsFromsessionStorage = 0;
-    let codesEfectFromsessionStorage = [];
-    let codesEnvioFromsessionStorage = [];
-    if (typeof window !== 'undefined') {
-    
-     codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
-     pointsFromsessionStorage = JSON.parse(sessionStorage.getItem('points')) || 0;
-     codesEfectFromsessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
-     codesEnvioFromsessionStorage= JSON.parse(sessionStorage.getItem('send')) || [];
-     /*sessionStorage.setItem('pay', "")*/
-    }
     const [code, SetCode] = useState(codesFromsessionStorage || []);
     const [points, SetPoints] = useState(0);
     const [codeEfect, SetCodeEfect] = useState(codesEfectFromsessionStorage);
     const [codeEnvios, SetCodeEnvios] = useState(codesEnvioFromsessionStorage);
     const [receiveIdToDelete, setReceiveIdToDelete] = useState(null);
 
-     useEffect(() => { 
-        setIsMounted(true);
-        recibosPending() 
-        recibosEfectuados() 
-        envios()
-       getPoints()
-      }, []);
+    useEffect(() => { 
+      setIsMounted(true);
+      recibosPending() 
+      recibosEfectuados() 
+      envios()
+      getPoints()
+
+      AOS.init({
+        duration:2000
+      });
+    }, []);
 
 
-      const handleScan = (result, error) => {
-        if (result) {
-          setData(result.text);
-        }
-        if (error) {
-          console.info(error);
-        }
+    // functions
+    const showLessTransactions = () => {
+      setShowTransactions( 10);
+     };
+    const handleScan = (result, error) => {
+      if (result) {
+        setData(result.text);
+      }
+      if (error) {
+        console.info(error);
+      }};
+
+
+      const createLink = (index) => {
+        setSelectedD(index);
+        console.log(index)
       };
 
-
-         const createLink = (index) => {
-           setSelectedD(index);
-           console.log(index)
-        };
-        /*------------RECIBOS PENDRIENTES------------- */
-
-        const recibosPending = async () =>{
-        const token = sessionStorage.getItem('access')
-        console.log(token)
-        console.log("Peticion")
-        
-        try {
-            const response = await axios.get('https://zona0.onrender.com/transfer/list-unpaid-receive/', { 
-               headers: {
-                   'Authorization': 'Bearer ' + token
-               }
-             });
-             SetRes(response.data)
+    /*------------RECIBOS PENDRIENTES------------- */
+      const recibosPending = async () =>{
+      const token = sessionStorage.getItem('access')
+      console.log(token)
+      console.log("Peticion")
+      
+      try {
+          const response = await axios.get('https://zona0.onrender.com/transfer/list-unpaid-receive/', { 
+             headers: {
+                 'Authorization': 'Bearer ' + token
+             }
+           });
+           SetRes(response.data)
+           
+           SetCode(JSON.parse(sessionStorage.getItem('pay')))
+           console.log("CODE1",code ) 
+              // Obtén los datos del almacenamiento local
+          let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
+                      
+          // Obtén los datos de la respuesta de la petición
+          let codigosResponse = response.data;
+                      
+          // Para cada elemento en los datos de la respuesta de la petición
+          codigosResponse.forEach(codigoResponse => {
+             // Verifica si el elemento ya existe en el almacenamiento local
+             let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
+          
+             // Si el elemento no existe en el almacenamiento local, agrégalo
+             if (!existeEnsessionStorage) {
+                 codigossessionStorage.push(codigoResponse);
+             }
+          });
+          
+          // Para cada elemento en el almacenamiento local
+          codigossessionStorage.forEach((codigosessionStorage, index) => {
+             // Verifica si el elemento existe en los datos de la respuesta de la petición
+             let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
+          
+             // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
+             if (!existeEnResponse) {
+                 codigossessionStorage.splice(index, 1);
+             }
+          });
+          
+          // Guarda los datos actualizados en el almacenamiento local
+          sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
+          SetCode(codigossessionStorage);
+          console.log("CODE2",code )
+          console.log("Code", code)
              
-             SetCode(JSON.parse(sessionStorage.getItem('pay')))
-             console.log("CODE1",code ) 
-                // Obtén los datos del almacenamiento local
-            let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
-                        
-            // Obtén los datos de la respuesta de la petición
-            let codigosResponse = response.data;
-                        
-            // Para cada elemento en los datos de la respuesta de la petición
-            codigosResponse.forEach(codigoResponse => {
-               // Verifica si el elemento ya existe en el almacenamiento local
-               let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
-            
-               // Si el elemento no existe en el almacenamiento local, agrégalo
-               if (!existeEnsessionStorage) {
-                   codigossessionStorage.push(codigoResponse);
-               }
-            });
-            
-            // Para cada elemento en el almacenamiento local
-            codigossessionStorage.forEach((codigosessionStorage, index) => {
-               // Verifica si el elemento existe en los datos de la respuesta de la petición
-               let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
-            
-               // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
-               if (!existeEnResponse) {
-                   codigossessionStorage.splice(index, 1);
-               }
-            });
-            
-            // Guarda los datos actualizados en el almacenamiento local
-            sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
-            SetCode(codigossessionStorage);
-            console.log("CODE2",code )
-            console.log("Code", code)
-               
-                
-            
-           } catch(error) {
-            console.log(error.response);
-           }    
-         }
+              
+          
+         } catch(error) {
+          console.log(error.response);
+         }    
+       }
 
          /*------------RECIBOS EFECTUADOS------------- */
-         const recibosEfectuados = async () =>{
-          const token = sessionStorage.getItem('access')
-          console.log(token)
-          console.log("Peticion")
-          
-          try {
-              const response = await axios.get('https://zona0.onrender.com/transfer/list-paid-receive/', { 
-                 headers: {
-                     'Authorization': 'Bearer ' + token
-                 }
-               });
-               SetEffect(response.data)
-               
-               SetCodeEfect(JSON.parse(sessionStorage.getItem('payCodeEfect')))
-               console.log("CODE1",codeEfect ) 
-                  // Obtén los datos del almacenamiento local
-              let codigossessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
-                          
-              // Obtén los datos de la respuesta de la petición
-              let codigosResponse = response.data;
-                          
-              // Para cada elemento en los datos de la respuesta de la petición
-              codigosResponse.forEach(codigoResponse => {
-                 // Verifica si el elemento ya existe en el almacenamiento local
-                 let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
-              
-                 // Si el elemento no existe en el almacenamiento local, agrégalo
-                 if (!existeEnsessionStorage) {
-                     codigossessionStorage.push(codigoResponse);
-                 }
+        const recibosEfectuados = async () =>{
+         const token = sessionStorage.getItem('access')
+         console.log(token)
+         console.log("Peticion")
+         
+         try {
+             const response = await axios.get('https://zona0.onrender.com/transfer/list-paid-receive/', { 
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
               });
+              SetEffect(response.data)
               
-              // Para cada elemento en el almacenamiento local
-              codigossessionStorage.forEach((codigosessionStorage, index) => {
-                 // Verifica si el elemento existe en los datos de la respuesta de la petición
-                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
-              
-                 // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
-                 if (!existeEnResponse) {
-                     codigossessionStorage.splice(index, 1);
-                 }
-              });
-              
-              // Guarda los datos actualizados en el almacenamiento local
-              sessionStorage.setItem('payCodeEfect', JSON.stringify(codigossessionStorage));
-              SetCodeEfect(codigossessionStorage);
-              console.log("CODE2",codeEfect)
-              console.log("Code", codeEfect)
+              SetCodeEfect(JSON.parse(sessionStorage.getItem('payCodeEfect')))
+              console.log("CODE1",codeEfect ) 
+                 // Obtén los datos del almacenamiento local
+             let codigossessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
+                         
+             // Obtén los datos de la respuesta de la petición
+             let codigosResponse = response.data;
+                         
+             // Para cada elemento en los datos de la respuesta de la petición
+             codigosResponse.forEach(codigoResponse => {
+                // Verifica si el elemento ya existe en el almacenamiento local
+                let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
+             
+                // Si el elemento no existe en el almacenamiento local, agrégalo
+                if (!existeEnsessionStorage) {
+                    codigossessionStorage.push(codigoResponse);
+                }
+             });
+             
+             // Para cada elemento en el almacenamiento local
+             codigossessionStorage.forEach((codigosessionStorage, index) => {
+                // Verifica si el elemento existe en los datos de la respuesta de la petición
+                let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
+             
+                // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
+                if (!existeEnResponse) {
+                    codigossessionStorage.splice(index, 1);
+                }
+             });
+             
+             // Guarda los datos actualizados en el almacenamiento local
+             sessionStorage.setItem('payCodeEfect', JSON.stringify(codigossessionStorage));
+             SetCodeEfect(codigossessionStorage);
+             console.log("CODE2",codeEfect)
+             console.log("Code", codeEfect)
+                
                  
-                  
-              
-             } catch(error) {
-              console.log(error.response);
-             }    
-           }
+             
+            } catch(error) {
+             console.log(error.response);
+            }    
+          }
 
            /*------------ENVIOS------------- */
          const envios = async () =>{
@@ -289,48 +295,48 @@ export default function Wallet() {
 
 
             /*------------ELIMINAR EL CODIGO------------- */
-      const DeleteRecieves = async (id) =>{
-      const token = sessionStorage.getItem('access')
-      setLoading(true)
-      console.log(token)
-      console.log("Peticion")
-      try {
-          const response = await axios.delete(`https://zona0.onrender.com/transfer/list-delete-unpaid-receive/${id}`, { 
-             headers: {
-                 'Authorization': 'Bearer ' + token
-             }
-           });
-
-           SetResDelete(response.data)
-          console.log(response);
-          setDialog(false)
-          setLoading(false)
-
-
-          // Eliminar el código del arreglo en el sessionStorage
-          // Obtén los datos del almacenamiento local
-          let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
-
-          // Filtra los datos para excluir el elemento que deseas eliminar
-          codigossessionStorage = codigossessionStorage.filter(codigo => codigo.id !== id);
-
-          // Guarda los datos actualizados en el almacenamiento local
-          sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
-
-          SetCode(codigossessionStorage);
-
-          console.log("CODE5", codigossessionStorage);
-          
-         } catch(error) {
-          console.log(error.response);
-          setLoading(false)
-         }    
-       }
-
-  
-           if (!isMounted) {
-            return null; // Or some placeholder content
+          const DeleteRecieves = async (id) =>{
+          const token = sessionStorage.getItem('access')
+          setLoading(true)
+          console.log(token)
+          console.log("Peticion")
+          try {
+              const response = await axios.delete(`https://zona0.onrender.com/transfer/list-delete-unpaid-receive/${id}`, { 
+                 headers: {
+                     'Authorization': 'Bearer ' + token
+                 }
+               });
+             
+               SetResDelete(response.data)
+              console.log(response);
+              setDialog(false)
+              setLoading(false)
+             
+             
+              // Eliminar el código del arreglo en el sessionStorage
+              // Obtén los datos del almacenamiento local
+              let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
+             
+              // Filtra los datos para excluir el elemento que deseas eliminar
+              codigossessionStorage = codigossessionStorage.filter(codigo => codigo.id !== id);
+             
+              // Guarda los datos actualizados en el almacenamiento local
+              sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
+             
+              SetCode(codigossessionStorage);
+             
+              console.log("CODE5", codigossessionStorage);
+             
+             } catch(error) {
+              console.log(error.response);
+              setLoading(false)
+             }    
            }
+         
+         
+               if (!isMounted) {
+                return null; // Or some placeholder content
+               }
 
     return (
         <div className={style.cont} >
@@ -348,7 +354,7 @@ export default function Wallet() {
                                 loading = {loading}
             />}
           <div className={style.content}>
-            <div className={style.operations}>
+            <div className={style.operations} data-aos="fade-up">
             
               <div className={style.total}>
                 <div className={style.balance}>Balance Total</div>
@@ -364,7 +370,7 @@ export default function Wallet() {
                </div>
                 
               </div>
-              <div className={style.oppBx}>
+              <div className={style.oppBx} data-aos="fade-up">
 
               <Link href = "/dashboard/recibir">
                 <div className={style.opp}>
@@ -421,12 +427,12 @@ export default function Wallet() {
               </div>
             </div>
 
-            <div className={style.header}>
+            <div className={style.header} data-aos="fade-up">
               <div className={style.line}></div>
               <h3>Recibos</h3> 
             </div>
 
-            <div className={style.options}>
+            <div className={style.options} >
               {/*<button><SiMicrosoftexcel/></button>*/}
               <div className={style.transactions}>
               <div className={style.slider}>
@@ -481,11 +487,11 @@ export default function Wallet() {
               </div>
             </div>
 
-            <div className={style.header}>
+            <div className={style.header} >
               <div className={style.line}></div>
               <h3>Envios</h3> 
             </div>
-            <div className={style.options}>
+            <div className={style.options} >
               <div className={style.transactions}>
               {codeEnvios.length > 0 ? 
                     resSend.map((item, index) => (

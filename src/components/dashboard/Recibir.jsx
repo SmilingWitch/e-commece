@@ -20,32 +20,35 @@ import BeatLoader from "react-spinners/BeatLoader"
 export default function Recibir(){
         const router = useRouter();
         const { user } = useContext(AuthContext);
+
+        //variables
+        let code = [];
+        if (typeof window !== 'undefined') {
+         code = JSON.parse(sessionStorage.getItem('pay')) || [];
+        }
+
+        //states
         const [link, SetLink] = useState(false)
         const [res, SetRes] = useState([])
         const [copyLink, setCopyLink] = useState("");
         const [visible, SetVisible] = useState(false)
         const [loading,setLoading] = useState(false)
-        let code = [];
-        if (typeof window !== 'undefined') {
-         code = JSON.parse(sessionStorage.getItem('pay')) || [];
-        }
         const [codigo, setCodigo] = useState(code);
 
 
-
+        //functions
 
         const [formValue,setFormValue]=useState({
             amount:''
           });
-          const handleChange= (event) => {
+
+        const handleChange= (event) => {
             setFormValue({
               ...formValue,
               [event.target.name]:event.target.value
             })
           }
-        
-
-          const createLink = async () =>{
+        const createLink = async () =>{
                 const token = sessionStorage.getItem('access')
                 console.log(token)
                 console.log("Peticion")
@@ -84,6 +87,12 @@ export default function Recibir(){
                    
           }
 
+          useEffect(() => {
+            AOS.init({
+              duration:2000
+          });
+          }, []);
+
           /*if(link){
             router.push(`/dashboard/recibir/${res.code}`)
           }*/
@@ -97,12 +106,12 @@ export default function Recibir(){
                           recibir = {res}
                           />) }
         <div className={style.content}>
-            <div className={style.header}>
+            <div className={style.header} data-aos="fade-up">
               <div className={style.line}></div>
               <h3>Recibir OSP</h3> 
             </div>
 
-            <div className={style.bx}>
+            <div className={style.bx} data-aos="fade-up">
 
                 <div className={style.description}>
                     <span>Entre el monto:</span>

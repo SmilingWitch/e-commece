@@ -18,24 +18,26 @@ import Dialog from "../Dialog";
 export default function Enviar(){
 
     const { user } = useContext(AuthContext);
-    const [visible, SetVisible] = useState(false)
-    const [loading,setLoading] = useState(false)
-    const [error,SetError] = useState(false)
-    const [resDetails,SetResDetails] = useState(false)
-   
-   
 
-
+    // variables
     let code = [];
     if (typeof window !== 'undefined') {
      code = JSON.parse(sessionStorage.getItem('pay')) || [];
     }
+
+    //states
+    const [visible, SetVisible] = useState(false)
+    const [loading,setLoading] = useState(false)
+    const [error,SetError] = useState(false)
+    const [resDetails,SetResDetails] = useState(false)
     const [codigo, setCodigo] = useState(code);
 
 
+    // functions
     const [formValue,setFormValue]=useState({
         code:''
       });
+
       const handleChange= (event) => {
         setFormValue({
           ...formValue,
@@ -53,11 +55,10 @@ export default function Enviar(){
 
      useEffect(() => {
       AOS.init({
-        duration:200
+        duration:2000
     });
     }, []);
      
-
     const send = async () =>{
         const token = sessionStorage.getItem('access')
         console.log(token)
@@ -110,9 +111,6 @@ export default function Enviar(){
            
         }
 
-
-
-
         const detailReceive = async () =>{
           const token = sessionStorage.getItem('access')
           console.log(token)
@@ -149,8 +147,7 @@ export default function Enviar(){
                }
              
           }
-          //65adedd8-a837-4889-b30e-04b60a11300c
-
+         
     return(
          <div className={style.cont}>
               {visible && <Dialog header = "Enviar"
@@ -161,13 +158,13 @@ export default function Enviar(){
                                   setLoading={setLoading}/>}
           
             <div className={style.content}>
-                <div className={style.header}>
+                <div className={style.header} data-aos="fade-up">
                   <div className={style.line}></div>
                   <h3>Enviar OSP</h3> 
                 </div>
 
-                <div className={style.bx}>
-                    <div className={style.description}>
+                <div className={style.bx} data-aos="fade-up">
+                    <div className={style.description} >
                         <span>Entre el codigo:</span>
                         <p>Introduzca el codigo para proceder a pagar el monto establecido.</p>
                     </div>
