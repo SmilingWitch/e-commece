@@ -57,9 +57,6 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
 
                 
                 <div className={style.iconBx}>
-                    <div className={style.contIcon}>
-                        <span><Link href = "/dashboard/wallet"><FaRegBell/></Link></span>
-                    </div>
                     {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
@@ -67,17 +64,18 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                     <div className={style.contLogg}>
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
-                        {credential && (<div className={style.name}>{credential.username}</div> )}
                             <div className={style.circle}>
                             {credential && (<Image
-                                width={40}
-                                height={40} 
+                                width={50}
+                                height={50} 
                                 src={credential.image}  />)}
                             </div>   
                         </div></span>
                     </div>
                      }
-                    
+                    <div className={style.contIcon}>
+                        <span><Link href = "/dashboard/wallet"><FaRegBell/></Link></span>
+                    </div>
                 </div>
 
             </section>
