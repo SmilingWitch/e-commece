@@ -45,7 +45,7 @@ export default function Wallet() {
     if (typeof window !== 'undefined') {
     
      codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
-     pointsFromsessionStorage = JSON.parse(sessionStorage.getItem('points')) || [];
+     pointsFromsessionStorage = JSON.parse(sessionStorage.getItem('points')) || 0;
      codesEfectFromsessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
      codesEnvioFromsessionStorage= JSON.parse(sessionStorage.getItem('send')) || [];
      /*sessionStorage.setItem('pay', "")*/
@@ -265,46 +265,21 @@ export default function Wallet() {
                      'Authorization': 'Bearer ' + token
                  }
                });
-               SetPoints(response.data.orcaStore_point)
-
-               console.log("RESPONSE",response.data)
                
-              /* SetCodeEnvios(JSON.parse(sessionStorage.getItem('points')))
-               console.log("CODE1",codeEfect ) 
-                  // Obtén los datos del almacenamiento local
-              let codigossessionStorage = JSON.parse(sessionStorage.getItem('points')) || [];
-                          
-              // Obtén los datos de la respuesta de la petición
-              let codigosResponse = response.data;
-                          
-              // Para cada elemento en los datos de la respuesta de la petición
-              codigosResponse.forEach(codigoResponse => {
-                 // Verifica si el elemento ya existe en el almacenamiento local
-                 let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
-              
-                 // Si el elemento no existe en el almacenamiento local, agrégalo
-                 if (!existeEnsessionStorage) {
-                     codigossessionStorage.push(codigoResponse);
-                 }
-              });
-              
-              // Para cada elemento en el almacenamiento local
-              codigossessionStorage.forEach((codigosessionStorage, index) => {
-                 // Verifica si el elemento existe en los datos de la respuesta de la petición
-                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
-              
-                 // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
-                 if (!existeEnResponse) {
-                     codigossessionStorage.splice(index, 1);
-                 }
-              });
-              
-              // Guarda los datos actualizados en el almacenamiento local
-              sessionStorage.setItem('send', JSON.stringify(codigossessionStorage));
-              SetCodeEnvios(codigossessionStorage);
+
+               let numeroEnSessionStorage = sessionStorage.getItem("points");
+               
+               if (numeroEnSessionStorage !== response.data.orcaStore_point) {
+                // Si son diferentes, actualiza el número en sessionStorage
+                sessionStorage.setItem("points",response.data.orcaStore_point);
+               
+             }
+             SetPoints(sessionStorage.getItem("points"))
+             
+             
               console.log("CODE2",codeEfect)
               console.log("Code", codeEfect)
-                 */
+                 
                   
               
              } catch(error) {
