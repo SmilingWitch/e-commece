@@ -58,7 +58,7 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                 
                 <div className={style.iconBx}>
                     <div className={style.contIcon}>
-                        <span><Link href = "/notificationes"><FaRegBell/></Link></span>
+                        <span><Link href = "/dashboard/wallet"><FaRegBell/></Link></span>
                     </div>
                     {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
