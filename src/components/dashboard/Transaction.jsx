@@ -3,7 +3,6 @@ import style from "../../../public/assets/styles/Wallet.module.css"
 export default function Transaction({res, SetVisible,setSelected,setDialog, visible, index}){
     
 
-
     return (
         res.state === "Unpaid" ? 
         <div className={style.tranBx} onClick={() => {SetVisible(true);
@@ -25,8 +24,8 @@ export default function Transaction({res, SetVisible,setSelected,setDialog, visi
         
         : 
 
-        <div className={style.tranBx} /*onClick={() => {SetVisible(true);
-                                                        setSelected(index)}}*/>
+        <div className={style.tranBx} onClick={() => {SetVisible(true);
+                                                        setSelected(index)}}>
             <div className={style.tranCont}>
                 <div className={style.detailBx}>
                     <div className={style.detail}>
