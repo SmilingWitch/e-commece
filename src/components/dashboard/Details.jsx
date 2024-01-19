@@ -14,20 +14,22 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 
-export default function Details({SetVisible, recibir}){
+export default function Details({SetVisible, recibir,SetCode}){
     // variables
-    let codesFromsessionStorage = [];
+    /*let codesFromsessionStorage = [];
     if (typeof window !== 'undefined') {
      codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
-     /*sessionStorage.setItem('pay', "")*/
-    }
+     
+    }*/
 
     //states
     const [resDelete, SetResDelete] = useState([])
     const [loading, setLoading] = useState(false)
     const [loadingDialod, setLoadingDialog] = useState(false)
     const [dialog, setDialog] = useState(false)
+    /*const [code, SetCode] = useState(codesFromsessionStorage || []);*/
 
+    console.log("RECIBIR",recibir )
     
     //function
     const DeleteRecieves = async (id) =>{
@@ -58,14 +60,17 @@ export default function Details({SetVisible, recibir}){
             // Guarda los datos actualizados en el almacenamiento local
             sessionStorage.setItem('pay', JSON.stringify(codigossessionStorage));
             SetCode(codigossessionStorage);
-
             console.log("CODE", code);
             
            } catch(error) {
             console.log(error.response);
             setLoading(false)
+            setDialog(false)
+            SetVisible(false)
+
            }    
          }
+
 
          useEffect(() => {
             AOS.init({
@@ -75,7 +80,6 @@ export default function Details({SetVisible, recibir}){
 
 
  return(
-
     <div className={style.cont} >
         {dialog && <Dialog header = "Borrar Codigo de Pago"
                                 content = "Estas seguro que quieres borrar este Codigo de Pago?"
@@ -114,7 +118,7 @@ export default function Details({SetVisible, recibir}){
                                 </div>
                                 <div className={style.detail}>
                                     <span>Estado: </span>
-                                    <span>No efectuado</span>
+                                    <span>{ recibir.state}</span>
                                 </div>
                                 <div className={style.detail}>
                                     <span>Fecha</span>
@@ -123,11 +127,11 @@ export default function Details({SetVisible, recibir}){
                                         
                             </div>  
 
-                            <div className={style.btn}>
+                            {recibir.state === "Unpaid" ? <div className={style.btn}>
                                 <button onClick={() =>setDialog(true)}>
                                     <span><FaRegTrashAlt/></span>
                                     <span>Cancelar el recibo de pago</span></button>    
-                            </div>        
+                            </div> : ""}        
                         </div>                  
                 </div>
     </div>
