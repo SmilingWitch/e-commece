@@ -19,7 +19,7 @@ export default function MenuFloatinButton(){
 
  useEffect(() => {
     AOS.init({
-      duration:100
+      duration:200
   });
   const handleScroll = () => {
     const isScrolled = window.scrollY > window.innerHeight;
@@ -53,7 +53,7 @@ export default function MenuFloatinButton(){
                <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/enviar" className={style.link}>Enviar</Link></li>
                <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/recibir" className={style.link}>Recibir</Link></li>
                <li onClick={() => setIsOpen(false)}><Link Link href = "/dashboard/guardar" className={style.link}>Bancarizar</Link></li>
-               <li onClick={() => setIsOpen(false)}><Link href = "/dashboard/recompensa" className={style.link}>Cangear Codigo</Link></li>
+               <li onClick={() => setIsOpen(false)}><Link href = "/dashboard/recompensa" className={style.link}>Canjear Codigo</Link></li>
               </ul>
             </div>
         </div>
