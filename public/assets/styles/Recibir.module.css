@@ -3,10 +3,6 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    /*padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-top:30px;*/
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -14,8 +10,12 @@
 }
 .content{
     position: relative;
-    width: calc(100vw - 350px);
+    width: calc(100vw - 320px);
     height: 90vh;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .bx{
     position: relative;
@@ -25,16 +25,14 @@
     justify-content: flex-start;
     height: 90vh;
     width: 100%;
-
+    padding-top: 50px;
 }
 .header{
     position: relative;
     height: 40px;
-    min-width: 250px;
-    margin: 5px;
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    width: 100%;
 }
 .line{
     position: relative;
@@ -53,14 +51,12 @@
     align-items: flex-end;
     justify-content: center;
     color: var(--darkLetter);
- 
 }
 .input .inputBx{
     position: relative;
-    margin-left: 15px;
     color: var(--darkLetter);
     border-bottom: 1px solid rgb(216, 215, 215);
-    width: 300px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -213,11 +209,6 @@
 }
 
 
-/*-----------------DETAILS--------------*/
-
-
-
-
 @media(max-width: 1392px){
     .linkDetails{
         grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
@@ -246,7 +237,21 @@
     .content{
         position: relative;
         width: 100%;
+        margin: 0;
     }
+    .header{
+        margin-top: 0px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .input{
+        width: 90%;
+    }
+    .input .inputBx{
+        width: 100%;
+
+    }
+    
 }
 @media(max-width:589px){
     .linkDetails{
@@ -266,18 +271,9 @@
     }
 }
 @media(max-width:518px){
-    .input{
-        width: 100%;
-    }
-    .input .inputBx{
-        margin-left: 5px;
-        width: 200px;
 
-    }
-    .input .inputBx input{
-        color: var(--darkLetter);
-        width: 90%;
-    }
+    
+    
     .inputBx span{
         font-size: 1em;
         width: 10%;

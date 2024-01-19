@@ -5,15 +5,12 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    
-
-
 }
 .content{
     position: relative;
-    width: calc(100vw - 350px);
+    width: calc(100vw - 320px);
     height: 90vh;
-    
+    margin-right: 10px;
 
 }
 .cont1 {
@@ -29,10 +26,10 @@
     position: relative;
     height: 40px;
     min-width: 250px;
-    margin: 5px;
+    /*margin: 5px;*/
     display: flex;
     align-items: center;
-    /*margin-top: 50px;*/
+    margin-bottom: 0px;
 }
 .line{
     position: relative;
@@ -44,9 +41,7 @@
 }
 .operations{
     position: relative;
-    /*width: 400px;
-    background: whitesmoke;
-    box-shadow:  4px 4px 8px #a2a2a2;*/
+
     width: 100% !important;
     padding: 30px 20px 20px 20px;
     display: flex;
@@ -56,8 +51,6 @@
     border-radius: 20px;
     margin: 0 auto;
     margin-top: 30px;
-    
-
 }
 .oppBx{
     position: relative;
@@ -65,13 +58,14 @@
     padding-top: 30px;
     background: whitesmoke;
     box-shadow:  4px 4px 8px #a2a2a2;
-    padding: 30px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
     border-radius: 20px;
-    margin-top: 50px;
+    margin-top: 30px;
     display: grid;
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto auto auto;
+    margin-bottom: 50px;
 }
 .total{
     position: relative;
@@ -84,18 +78,29 @@
     justify-content: center ;
     
 }
-.total span{
+.points{
     position: absolute;
-    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(200, 198, 198, 0.5);
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    z-index: 1;
+}
+.total span{
+    position: relative;
+
     font-size: 2.3em;
     font-family: "PoppinsBolder";
     color: var(--lightLetter);
 }
-.total .balance{
-    position: absolute;
-    z-index: 10000;
+ .balance{
+    position: relative;
+
     color: var(--lightLetter);
-    margin-bottom: 100px;
+    
 }
 .opp{
     position: relative;
@@ -332,6 +337,7 @@
     .content{
         position: relative;
         width: 100%;
+        margin: 0;
 
     }
     .imgBxWallet{
@@ -342,42 +348,41 @@
         width: 100%;
     }
     .operations{
-
         width: 100%;
     }
     .header{
-        margin-top: 50px;
+        margin-top: 0px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .options{
+
+        padding: 0;
+    }
+    .transactions{
+        width: 90%;
+        padding: 5px;
+
+        margin-top: 20px ;
+        margin-bottom: 50px;
     }
 }
 
 @media(max-width:518px){
     .options{
         width: 100%;
-    }
-    .transactions{
-        width: 100%;
-        padding: 5px;
-    }
-    
-    
+    }   
 }
 @media(max-width:482px){
-    .operations{
-        width: 300px;
-        top: 30px ;
-        margin: 0 auto;
-    }
-    .oppBx{
-        width: 100%;
-        
+
+    .oppBx{     
         grid-template-rows: auto auto auto;
         grid-template-columns: auto auto;
     }
     .opp span{
         font-size: 0.8em;
-    }
-    
-    
+    } 
 }
 
 @media(max-width: 398px){
@@ -389,9 +394,7 @@
         font-size: 0.6em;
     }
     .amount{
-        
         font-size: 0.6em;
         min-width: 80px;
     }
-
 }
