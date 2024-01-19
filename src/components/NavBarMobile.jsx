@@ -50,7 +50,6 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
                     <div className={style.contLogg}>
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
-                        {credential && (<div className={style.name}>{credential.username}</div> )}
                             <div className={style.circle}>
                             {credential && (<Image
                                 width={40}
