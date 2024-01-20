@@ -123,7 +123,7 @@ const theme = createTheme({
                     <div className={style1.header1}>
                         <h2>Mi Perfil</h2>
                     </div>
-                    <div>
+                    <div className={style.trash}>
                        <VscClose className={style1.icon} onClick = {() =>  SetMyAccount(false)}/> 
                     </div>
                 </div>
