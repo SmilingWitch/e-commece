@@ -18,8 +18,8 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --hlColor: rgb(255, 69, 0);
-  --hlColorHover: rgb(246, 99, 45);
+  --hlColor:rgb(246, 99, 45) ;
+  --hlColorHover: rgb(255, 69, 0);
   --cardColor: #BA9985;
   --lightColor: #F6E2D9;
   --buttonColor: #F2CFC2;
