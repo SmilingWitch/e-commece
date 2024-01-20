@@ -2,11 +2,13 @@ import style1 from "../../public/assets/styles/Cart.module.css"
 import style from "../../public/assets/styles/ChangePassword.module.css"
 import style2 from "../../public/assets/styles/Login.module.css"
 import { IoIosArrowBack } from "react-icons/io";
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import axios from "axios"
 import { FaRegCheckCircle } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 export default function ChangePassword({SetActivechangePass, closeAll}){
@@ -52,7 +54,7 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('access')
+        const token = sessionStorage.getItem('access')
         setLoading(true)
       try{
         console.log(formValue)
@@ -66,7 +68,7 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
         setResponse(res.data.detail)
         setLoading(false)
       }catch(error){
-        console.log(error.response)
+        console.log(error.response.data)
         if (error.response) {
           setLoading(false)
             // El servidor respondió con un estado fuera del rango de 2xx
@@ -85,8 +87,14 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
       }
     }
 
+    useEffect(() => { 
+      AOS.init({
+        duration:200
+      });
+    }, []);
+
     return(
-        <div className={style.cont} onClick = {() =>{
+        <div className={style.cont} data-aos="fade-left" onClick = {() =>{
                                                     setResponse("");
                                                     closeAll}}>
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
