@@ -110,6 +110,10 @@
     transition: 0.5s;
     color: var(--lightLetter);
 }
+.trash{
+    position: relative;
+    top: 20px;
+}
 .option:hover{
     background: var(--hlColorHover);
 }
@@ -117,6 +121,7 @@
     position: relative;
     transition: 0.5s;
     left: 0;
+    color: var(--lightLetter);
 }
 .option:hover .icon1{
     left: 10px;
@@ -131,7 +136,7 @@
     width: 100%;
     padding: 15px;
     height: 70px;
-    background: rgba(255, 69, 0,0.3);
+    background: var(--lightColor);
     display: flex;
     align-items: center;
     justify-content: space-between;
