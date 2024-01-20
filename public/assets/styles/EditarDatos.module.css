@@ -29,6 +29,130 @@
     align-items: center;
     padding-top: 20px;
    }
+   .imageBx{
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+   }
+   .image{
+    position: relative;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   .iconBx{
+    position: absolute;
+    background: var(--hlColor);
+    z-index: 10000;
+    font-size: 1.5em;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    top: 100px;
+    cursor: pointer;
+    transition: 0.3s;
+   }
+   .iconBx:hover{
+    background: var(--hlColorHover);
+   }
+.form{
+    position: relative;
+    width: 95%;
+    padding: 15px;
+    /*background: var(--lightColor);*/
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form *{
+    position: relative;
+    padding: 5px;
+    /*margin: 10px;*/
+}
+.inputBx{
+    position: relative;
+    width: 100%;
+}
+.input{
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--hlColor);
+    border-radius: 20px;
+    padding: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    overflow: hidden;
+}
+.input input{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: var(--darkLetter);
+}
+
+.input span{
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input input:active, 
+.input input:focus{
+    outline: none;
+    border: none;
+}
+.label{
+    font-family: "PoppinsBold" ;
+    color: var(--darkLetter);
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+.datos{
+    color: var(--darkLetter);
+    font-family: "PoppinsBolder";
+}
+.btn{
+    position: relative;
+    border: none;
+    padding: 15px;
+    background: var(--hlColor);
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--lightLetter);
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: "PoppinsBold";
+    margin-top: 25px;
+}
+.btn:hover{
+    background: var(--hlColorHover);
+}
+.iconBx input{
+    color: transparent;
+    background: transparent;
+    border: none;
+}
+
 @media(max-width:734px){
     .bx {
         width: 100%;
