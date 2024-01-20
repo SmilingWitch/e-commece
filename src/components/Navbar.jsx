@@ -65,10 +65,13 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
                             <div className={style.circle}>
-                            {credential && (<Image
+                            {credential ? (<Image
                                 width={50}
                                 height={50} 
-                                src={credential.image}  />)}
+                                src={credential.image}  />):<Image
+                                width={50}
+                                height={50} 
+                                src="/assets/images/avatar.svg"  /> }
                             </div>   
                         </div></span>
                     </div>
