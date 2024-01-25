@@ -40,6 +40,8 @@ export default function Wallet() {
     const [showTransactions, setShowTransactions] = useState(30);
     const [isMounted, setIsMounted] = useState(false);
     const [currentComponent, setCurrentComponent] = useState(0);
+    const [currentReceiveComponent, setCurrentReceiveComponent] = useState(2);
+    const [currentSendComponent, setCurrentSendComponent] = useState(4);
     const [send, SetSend] = useState(false)
     const [visible, SetVisible] = useState(false)
     const [visibleEffect, SetVisibleEffect] = useState(false)
@@ -449,24 +451,38 @@ export default function Wallet() {
 
             <div className={style.header}/* data-aos="fade-up"*/>
               <div className={style.line}></div>
-              <h3>Recibos</h3> 
+              <h3>Ultimas Operaciones</h3> 
             </div>
 
             <div className={style.options} >
-              {/*<button><SiMicrosoftexcel/></button>*/}
+
               <div className={style.transactions}>
-              <div className={style.slider}>
-                <div className={style.header1}>
+
+                <div  className={style.headerTop}>
+                  <div className={style.switch}>
                     <span onClick={() => setCurrentComponent(0)}
-                        className = {currentComponent === 0 ? `${style.active}`: `${style.inActive}`}
-                    >Efectuados({codeEfect.length}) </span>
+                        className = {currentComponent === 0 ? `${style.activeTop}`: `${style.inActive}`}
+                    >Recibidos </span>
                     <span onClick={() => setCurrentComponent(1)}
-                        className = {currentComponent === 1 ? `${style.active}`: `${style.inActive}`}
-                    >Pendientes({code.length}) </span>
+                        className = {currentComponent === 1 ? `${style.activeTop}`: `${style.inActive}`}
+                    >Enviados </span>
+
+                  </div>
+                   
                 </div>
-                <div className={style.transactionBx}>
-    
-                  {currentComponent === 0 && codeEfect.length > 0 ? 
+
+                {currentComponent === 0 ? 
+                <div className={style.slider}>
+                  <div className={style.header1}>
+                    <span onClick={() => setCurrentReceiveComponent(2)}
+                        className = {currentReceiveComponent === 2 ? `${style.active}`: `${style.inActive}`}
+                    >Efectuados ({codeEfect.length})</span>
+                    <span onClick={() => setCurrentReceiveComponent(3)}
+                        className = {currentReceiveComponent === 3 ? `${style.active}`: `${style.inActive}`}
+                    >Pendientes({code.length})</span>
+                  </div> 
+
+                  {currentReceiveComponent === 2 && codeEfect.length > 0 ? 
                   codeEfect.map((item, index) => (
                     <Transaction 
                             key={item.id} 
@@ -482,13 +498,13 @@ export default function Wallet() {
 
                             />
                   )) : (
-                    currentComponent !== 0 ? (
+                    currentReceiveComponent !== 2 ? (
                       ""
                     ) : (
                       <div className={style.empty}>No hay solicitudes de recibos efectuados.</div>
                     )
                   )}
-                  {currentComponent === 1 && code.length > 0 ? 
+                  {currentReceiveComponent === 3 && code.length > 0 ? 
                   code.map((item, index) => (
                         <Transaction
                       key={item.id} 
@@ -503,21 +519,74 @@ export default function Wallet() {
                       index = {index}
                       />
                   )) : (
-                    currentComponent !== 1 ? (
+                    currentReceiveComponent !== 3 ? (
+                      ""
+                    ) : (
+                      <div className={style.empty}>No hay solicitudes de recibos pendientes.</div>
+                    )
+                  )}
+                </div>
+ 
+                
+                :
+
+                <div>
+                  <div className={style.header1}>
+                    <span onClick={() => setCurrentSendComponent(4)}
+                        className = {currentSendComponent === 4 ? `${style.active}`: `${style.inActive}`}
+                    >Transferencia({resSend.length})</span>
+                    <span onClick={() => setCurrentSendComponent(5)}
+                        className = {currentSendComponent === 5 ? `${style.active}`: `${style.inActive}`}
+                    >Donados</span> 
+                  </div>
+
+                  {currentSendComponent === 4 && codeEnvios.length > 0  ? 
+                   resSend.map((item, index) => (
+                    <TransactionSend
+                              key={item.id} 
+                              res = {item}
+                              />
+                  )) : (
+                    currentSendComponent !== 4 ? (
+                      ""
+                    ) : (
+                      <div className={style.empty}>No existen solicitudes de envio.</div>
+                    )
+                  )}
+                  {currentSendComponent === 5 && code.length > 0 ? 
+                  code.map((item, index) => (
+                    <h1>Donaciones</h1>
+                  )) : (
+                    currentSendComponent !== 5 ? (
                       ""
                     ) : (
                       <div className={style.empty}>No hay solicitudes de recibos pendientes.</div>
                     )
                   )}
 
+
+
+
                 </div>
-                
-            </div>
+                  }
+
+
+                  <div>
+                 
+
+
+                  </div>
+
+
+
+
 
               </div>
+
+              
             </div>
 
-            <div className={style.header} >
+           {/* <div className={style.header} >
               <div className={style.line}></div>
               <h3>Envios</h3> 
             </div>
@@ -539,7 +608,7 @@ export default function Wallet() {
 
               </div>
 
-            </div>
+            </div>*/}
             
 
           </div>
