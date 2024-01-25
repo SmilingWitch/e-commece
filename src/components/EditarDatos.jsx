@@ -21,6 +21,7 @@ import ImageDialog from "./ImageDialog"
 export default function EditarDatos({SetActiveEdit, closeAll}){
 
     const { credential } = useContext(AuthContext);
+    const { updateCredential } = useContext(AuthContext);
     const [selectedFile, setSelectedFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(credential.image);
     const fileInput = useRef(null);
@@ -45,14 +46,10 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
         AOS.init({
           duration:200
         });
+        setImageUrl(credential.image)
       }, []);
 
-      /*useEffect(() => {
-        if (imageUrl !== credential.image) {
-           // Aquí, actualizamos el contexto con la nueva imagen
-           dispatch({ type: 'UPDATE_IMAGE', payload: imageUrl });
-        }
-       }, [imageUrl, credential]);*/
+
 
       const handleChange= (event) => {
         setFormValue({
@@ -95,6 +92,10 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
         }
        }*/
 
+       
+
+       
+
 
        /*-----------------UPDATE PERSONAL INFORMATION------------------- */
 
@@ -122,9 +123,22 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
               /*SetResDetails(response.data)
               SetVisible(true)*/
               setLoading(false)
-              
 
-              
+              // Obtiene el objeto credential actual del sessionStorage
+                let updatedCredential = JSON.parse(sessionStorage.getItem('credential'));
+                        
+                // Actualiza los campos relevantes de credential
+                updatedCredential.username = formValue.username;
+                updatedCredential.ci = formValue.ci;
+                updatedCredential.name = formValue.name;
+                updatedCredential.last_name = formValue.last_name;
+                updatedCredential.movil = formValue.movil;
+                        
+                // Guarda el objeto credential actualizado en el sessionStorage
+                sessionStorage.setItem('credential', JSON.stringify(updatedCredential));
+                        
+                // Llama a updateCredential para actualizar el estado local
+                updateCredential(updatedCredential);
 
 
              } catch(error) {
@@ -148,9 +162,7 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
         }
    
 
-         /*-----------------UPDATE IMAGE------------------- */
-
-       
+         /*-----------------UPDATE IMAGE------------------- */      
         const updateImage = async (e) => {
           e.preventDefault();
           const token = sessionStorage.getItem('access');
@@ -172,9 +184,22 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
          
              console.log(response);
              setLoadingImage(false);
-             setImageUrl(response.data.image)
+             
              console.log(response.data.image)
-             /*dispatch({ type: 'UPDATE_CREDENTIAL', payload: response.data.image });*/
+             setImageUrl(response.data.image)
+             /*console.log("IMAGEN", imageUrl)*/
+             
+             
+              /*// Obtiene el objeto credential actual del sessionStorage
+              let credential = JSON.parse(sessionStorage.getItem('credential'));
+
+              // Actualiza el valor de la imagen
+              credential.image = response.data.image;
+
+              // Guarda el objeto credential actualizado en el sessionStorage
+              sessionStorage.setItem('credential', JSON.stringify(credential));
+              let credentialUpload = JSON.parse(sessionStorage.getItem('credential'));*/
+
              
 
           } catch (error) {
@@ -185,6 +210,23 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
             setLoadingImage(false);
           }
          }
+
+         useEffect(() => {
+          console.log("IMAGEN", imageUrl);
+          // Obtiene el objeto credential actual del sessionStorage
+          let credential = JSON.parse(sessionStorage.getItem('credential'));
+  
+          // Actualiza el valor de la imagen
+          credential.image = imageUrl;
+  
+          // Guarda el objeto credential actualizado en el sessionStorage
+          sessionStorage.setItem('credential', JSON.stringify(credential));
+          
+          console.log(credential)
+          setImageUrl(imageUrl)
+          updateCredential(credential)
+          
+         }, [imageUrl]);
 
 
         /*------------------------COMPRIMIR LA IMAGEN---------------------- */
