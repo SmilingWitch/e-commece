@@ -11,7 +11,15 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [credential, setCredential] = useState(null);
   /*const [credential, setCredential] = useState(null);*/
-
+  const updateCredential = (newCredential) => {
+    // Actualiza el estado de credential
+    setCredential(newCredential);
+   
+    // Actualiza el credential en sessionStorage
+    sessionStorage.setItem('credential', JSON.stringify(newCredential));
+   };
+   
+   
   
  
  const router = useRouter()
@@ -124,7 +132,7 @@ useEffect(() => {
 }, []);
 
  return (
- <AuthContext.Provider value={{ user, signIn, signOut, credential }}>
+ <AuthContext.Provider value={{ user, signIn, signOut, credential, updateCredential }}>
  {children}
  </AuthContext.Provider>
  );
