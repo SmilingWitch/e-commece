@@ -555,7 +555,7 @@ export default function Wallet() {
                   )}
                   {currentSendComponent === 5 && code.length > 0 ? 
                   code.map((item, index) => (
-                    <h1>Donaciones</h1>
+                    <h1 key = {index}>Donaciones</h1>
                   )) : (
                     currentSendComponent !== 5 ? (
                       ""
