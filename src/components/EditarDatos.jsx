@@ -15,7 +15,7 @@ import { BiImageAdd } from "react-icons/bi";
 import axios from "axios"
 import BeatLoader from "react-spinners/BeatLoader"
 import compress from 'browser-image-compression';
-import ImageDialog from "./ImageDialog"
+
 
 
 export default function EditarDatos({SetActiveEdit, closeAll}){
@@ -126,17 +126,17 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
 
               // Obtiene el objeto credential actual del sessionStorage
                 let updatedCredential = JSON.parse(sessionStorage.getItem('credential'));
-                        
+
                 // Actualiza los campos relevantes de credential
                 updatedCredential.username = formValue.username;
                 updatedCredential.ci = formValue.ci;
                 updatedCredential.name = formValue.name;
                 updatedCredential.last_name = formValue.last_name;
                 updatedCredential.movil = formValue.movil;
-                        
+
                 // Guarda el objeto credential actualizado en el sessionStorage
                 sessionStorage.setItem('credential', JSON.stringify(updatedCredential));
-                        
+
                 // Llama a updateCredential para actualizar el estado local
                 updateCredential(updatedCredential);
 
