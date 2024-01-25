@@ -175,7 +175,7 @@
 .header1 span{
     cursor: pointer;
 }
-.header1 span:nth-child(2){
+.header1 span{
     margin-left: 15px;
 }
 .transactionBx{
