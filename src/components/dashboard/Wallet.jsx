@@ -9,7 +9,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { SiMicrosoftexcel } from "react-icons/si";
 import axios from "axios"
-import { QrReader } from 'react-qr-reader';
 import { FaBalanceScale } from "react-icons/fa";
 import { IoGiftOutline } from "react-icons/io5";
 import { IoGameControllerOutline } from "react-icons/io5";
