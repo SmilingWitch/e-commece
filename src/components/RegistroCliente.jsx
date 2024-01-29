@@ -43,7 +43,7 @@ export default function Registro(){
     const [selectedFile, setSelectedFile] = useState(null);
     const [imageUrl, setImageUrl] = useState("/assets/images/imagenPorDefecto.png");
    
-    const handleFileChange = (e) => {
+    const handleFileChange = (event) => {
      setSelectedFile(event.target.files[0]);
      setImageUrl(URL.createObjectURL(event.target.files[0]));
 
