@@ -1,0 +1,97 @@
+.cont{
+    position: fixed;
+    background-color: rgba(135, 134, 134, 0.5);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000000000000000000;
+}
+.bx{
+    position: relative;
+    width: 400px;
+    background: var(--lightBg);
+    border-radius: 20px;
+    padding: 20px;
+    color: var(--darkLetter);
+}
+.header{
+    font-family: "PoppinsBolder";
+    font-size: 1.2em;
+    color: var(--darkLetter);
+}
+.content{
+    padding-bottom: 20px;
+    color: var(--darkLetter);
+}
+.content input{
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--hlColor);
+    border-radius: 20px;
+    padding: 10px;
+    color: var(--darkLetter);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    overflow: hidden;
+   background: transparent;
+   outline: none;
+   margin-top: 30px;
+   margin-bottom: 30px;
+}
+.btnBx{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.btnBx button{
+    border: none;
+    padding: 15px;
+    background: var(--hlColor);
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--lightLetter);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnBx button:hover, .cancel:hover{
+    background: var(--hlColorHover) !important;
+    color: var(--lightLetter) !important;
+}
+.btnBx button:nth-child(1){
+    margin-right: 20px;
+}
+.cancel{
+    background: transparent !important;
+    color: var(--darkLetter) !important;
+    transition: 0.3s;
+}
+.centerLoader{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media(max-width: 408px){
+    .bx{
+        width: 300px;
+    }
+    .header{
+        font-size: 1em;
+    }
+    .content{
+       font-size: 0.8em;
+    }
+    
+}
