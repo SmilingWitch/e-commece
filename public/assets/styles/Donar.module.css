@@ -1,0 +1,281 @@
+.cont{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    
+}
+.content{
+    position: relative;
+    width: calc(100vw - 320px);
+    height: 90vh;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header{
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+   
+}
+.line{
+    position: relative;
+    height: 100%;
+    width: 5px;
+    background: var(--hlColor);
+    border-radius: 50px;
+    margin-right: 10px;
+}
+.institutionBx{
+    position: relative;
+    display:grid ;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    width: 100%;
+    height: 100%;
+    grid-gap: 50px;
+    margin-top: 50px;
+}
+
+
+
+/*-----------------INSTITUTION-----------------*/
+.card{
+    position: relative;
+    height: 500px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    display: flex;
+    flex-direction: column;
+}
+.imageBx{
+    position: relative;
+    width: 100%;
+    height:100%;
+    overflow: hidden;
+
+}
+.info{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: var(--darkLetter);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.name{
+    position: relative;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+.bxCard{
+    position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+}
+.description{
+    position: relative;
+    top: 20px;
+    width: 100%;
+}
+
+.btn{
+    position: relative;
+    border: none;
+    padding: 5px;
+    background: var(--hlColor);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--lightLetter);
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: "PoppinsBold";
+    margin-top: 15px;
+    width: 100%;
+    height: 40px;
+}
+.btn:hover{
+    background: var(--hlColorHover);
+}
+
+
+
+/*---------------------DETALLES-------------------*/
+.infoDetails{
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+.imageBxDetail{
+    position: relative;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50px;
+    border-radius: 30px;
+    overflow: hidden;
+    
+}
+.gallery{
+    position: relative;
+    width: 100%;
+    height: 450px;
+    border-radius: 30px;
+    overflow: hidden;
+
+
+}
+.frontImage{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.frontImageBx{
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.imgBxGallery{
+    position: relative;
+    bottom: 50px;
+    display: flex;
+}
+.ImageBxGallery{
+    position: relative;
+    width: 200px;
+    height: 250px;
+    border: 5px solid var(--lightLetter);
+    margin: 0 10px 0 10px;
+    box-shadow:  4px 4px 8px #a2a2a2;
+}
+.nameInst{
+    position: absolute;
+    
+}
+.nameInst h1{
+    color: var(--lightLetter);
+    font-family: "PoppinsBolder";
+    font-size: 3em;
+    background-color: rgba(179, 177, 177, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.images{
+    position: relative;
+    width: /*200px*/ 100%;
+    height: 400px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+}
+.descriptionDetail{
+    color: var(--darkLetter);
+    padding: 50px;
+    width: 50%;
+}
+.button{
+    position: relative;
+    width: 200px;
+    margin-top: 30px;
+    margin: 0 auto;
+}
+.donado{
+    position: relative;
+    color: var(--darkLetter);
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+.bx{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.about{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.header1{
+    font-size: 2em;
+}
+.amount{
+    position: relative;
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-family: "PoppinsBold";
+}
+
+
+@media(max-width:768px){
+    .content{
+        position: relative;
+        width: 100%;
+        margin: 0;
+    }
+    .header{
+        margin-top: 0px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .institutionBx{
+        width: 90%;
+
+    }
+}
+
+@media(max-width:700px){
+    .ImageBxGallery{
+        width: 150px;
+        height: 200px;
+    }
+    .about{
+        flex-direction: column;
+    }
+    .descriptionDetail{
+        color: var(--darkLetter);
+        padding: 0px;
+        padding-bottom: 20px;
+        width: 90%;
+    }
+    
+}
+@media(max-width:508px){
+    .ImageBxGallery{
+        width: 100px;
+        height: 150px;
+    }
+}
