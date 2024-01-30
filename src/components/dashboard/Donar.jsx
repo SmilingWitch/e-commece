@@ -5,11 +5,21 @@ import { useState, useEffect } from "react"
 import InstitutionCard from "./InstitutionsCard"
 
 export default function Donar(){
-    const [institution, SetInstitution] = useState([])
+
+        
+    let institutionsFromsessionStorage = [];
+    if (typeof window !== 'undefined') {
+        institutionsFromsessionStorage= JSON.parse(sessionStorage.getItem('institutions')) || [];
+    }
+
+
+
+    const [institution, SetInstitution] = useState(institutionsFromsessionStorage)
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => { 
         institutions() 
-  
+        setIsMounted(true);
         /*AOS.init({
           duration:2000
         });*/
@@ -26,13 +36,11 @@ export default function Donar(){
                    'Authorization': 'Bearer ' + token
                }
              });
-             SetInstitution(response.data)
-             console.log("institutions",response.data)
              
-             /*SetCodeEnvios(JSON.parse(sessionStorage.getItem('send')))
-             console.log("CODE1",codeEfect ) 
+             SetInstitution(JSON.parse(sessionStorage.getItem('institutions')))
+             
                 // Obtén los datos del almacenamiento local
-            let codigossessionStorage = JSON.parse(sessionStorage.getItem('send')) || [];
+            let codigossessionStorage = JSON.parse(sessionStorage.getItem('institutions')) || [];
                         
             // Obtén los datos de la respuesta de la petición
             let codigosResponse = response.data;
@@ -60,20 +68,21 @@ export default function Donar(){
             });
             
             // Guarda los datos actualizados en el almacenamiento local
-            sessionStorage.setItem('send', JSON.stringify(codigossessionStorage));
-            SetCodeEnvios(codigossessionStorage);
-            console.log("CODE ENVIOS",codigossessionStorage)*/
-            
-               
-                
-            
+            sessionStorage.setItem('institutions', JSON.stringify(codigossessionStorage));
+            SetInstitution(codigossessionStorage);
+            console.log("CODE ENVIOS",codigossessionStorage)
+
+            console.log("institution",institution)
+  
            } catch(error) {
             console.log(error.response);
            }    
          }
 
 
-
+         if (!isMounted) {
+            return null; // Or some placeholder content
+           }
 
 
     return(
@@ -84,8 +93,8 @@ export default function Donar(){
                   <h3>Donar</h3>
                 </div>
                 <div className={style.institutionBx}>
-                    {institution.map((item/*, index*/) => (
-                    <InstitutionCard res = {item}/>
+                    {institution && institution.map((item, index) => (
+                    <InstitutionCard res = {item} key={item.id}  />
                     ))}
 
                 </div>
