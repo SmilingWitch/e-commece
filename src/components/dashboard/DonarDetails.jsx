@@ -235,7 +235,7 @@ export default function DonarDetails(){
               <div className={style.about}>
                   <div className={style.descriptionDetail}>
                     <div className={`${style.header} ${style.header1}`}>
-                      <h3>About us</h3>
+                      <h3>Sobre nosotros</h3>
                     </div>
                     <div className={style.descBx}>
                       {institution[0].description}
