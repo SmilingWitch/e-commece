@@ -25,12 +25,12 @@ export default function DonarDetails(){
     const id = Number(param.id)
     const { user } = useContext(AuthContext);
     const { credential } = useContext(AuthContext);
-    let institutionsFromsessionStorage = [];
+    let institutionsFromlocalStorage = [];
     let filteredInstitutions = []
     
     if (typeof window !== 'undefined') {
-        institutionsFromsessionStorage= JSON.parse(sessionStorage.getItem('institutions')) || [];
-        filteredInstitutions = institutionsFromsessionStorage.filter(institution => institution.id === id);
+        institutionsFromlocalStorage= JSON.parse(localStorage.getItem('institutions')) || [];
+        filteredInstitutions = institutionsFromlocalStorage.filter(institution => institution.id === id);
     }
     
     console.log("filteredInstitutions",filteredInstitutions)
@@ -99,7 +99,7 @@ export default function DonarDetails(){
           },
         ],
       };
-      const [institution, SetInstitution] = useState(institutionsFromsessionStorage.filter(institution => institution.id === id))
+      const [institution, SetInstitution] = useState(institutionsFromlocalStorage.filter(institution => institution.id === id))
       const [gallery, SetGallery] = useState(institution[0].galleryInstitution)
       const [amount, SetAmount] = useState(institution[0].institution_osp)
 
@@ -126,8 +126,8 @@ export default function DonarDetails(){
              console.log(response.data)
 
              
-              // Obtiene el objeto credential actual del sessionStorage
-                let updatedAmount = JSON.parse(sessionStorage.getItem('institutions'));
+              // Obtiene el objeto credential actual del localStorage
+                let updatedAmount = JSON.parse(localStorage.getItem('institutions'));
 
                 let filteredUpdatedAmount = updatedAmount.filter(institution => institution.id === id);
                 console.log("filteredUpdatedAmount",filteredUpdatedAmount)
@@ -135,10 +135,10 @@ export default function DonarDetails(){
                 // Actualiza los campos relevantes de credential
                 filteredUpdatedAmount[0].institution_osp = response.data.institution_osp;
 
-                // Guarda el objeto credential actualizado en el sessionStorage
-                sessionStorage.setItem('institutions', JSON.stringify(updatedAmount));
+                // Guarda el objeto credential actualizado en el localStorage
+                localStorage.setItem('institutions', JSON.stringify(updatedAmount));
 
-                let filteredUpdated = JSON.parse(sessionStorage.getItem('institutions')).filter(institution => institution.id === id);
+                let filteredUpdated = JSON.parse(localStorage.getItem('institutions')).filter(institution => institution.id === id);
 
                 console.log("consola",filteredUpdated)
 
