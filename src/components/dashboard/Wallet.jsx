@@ -18,6 +18,7 @@ import Dialog from "../Dialog";
 import TransactionSend from "./TransactionSend";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import TransactionDonations from "./TransactionDonation";
 
 
 export default function Wallet() {
@@ -28,11 +29,13 @@ export default function Wallet() {
     let pointsFromsessionStorage = 0;
     let codesEfectFromsessionStorage = [];
     let codesEnvioFromsessionStorage = [];
+    let codesDonacionesFromsessionStorage = [];
     if (typeof window !== 'undefined') {
       codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
       pointsFromsessionStorage = JSON.parse(sessionStorage.getItem('points')) || 0;
       codesEfectFromsessionStorage = JSON.parse(sessionStorage.getItem('payCodeEfect')) || [];
-      codesEnvioFromsessionStorage= JSON.parse(sessionStorage.getItem('send')) || [];
+      codesEnvioFromsessionStorage = JSON.parse(sessionStorage.getItem('send')) || [];
+      codesDonacionesFromsessionStorage = JSON.parse(sessionStorage.getItem('donaciones')) || [];
     }
 
     // states
@@ -55,6 +58,7 @@ export default function Wallet() {
     const [points, SetPoints] = useState(0);
     const [codeEfect, SetCodeEfect] = useState(codesEfectFromsessionStorage);
     const [codeEnvios, SetCodeEnvios] = useState(codesEnvioFromsessionStorage);
+    const [donaciones, SetDonaciones] = useState(codesDonacionesFromsessionStorage);
     const [receiveIdToDelete, setReceiveIdToDelete] = useState(null);
 
     useEffect(() => { 
@@ -63,6 +67,7 @@ export default function Wallet() {
       recibosEfectuados() 
       envios()
       getPoints()
+      donados()
 
       AOS.init({
         duration:2000
@@ -147,7 +152,7 @@ export default function Wallet() {
          }    
        }
 
-         /*------------RECIBOS EFECTUADOS------------- */
+    /*------------RECIBOS EFECTUADOS------------- */
         const recibosEfectuados = async () =>{
          const token = sessionStorage.getItem('access')
          console.log(token)
@@ -202,7 +207,7 @@ export default function Wallet() {
             }    
           }
 
-           /*------------ENVIOS------------- */
+    /*------------ENVIOS------------- */
          const envios = async () =>{
           const token = sessionStorage.getItem('access')
           console.log(token)
@@ -260,8 +265,66 @@ export default function Wallet() {
              }    
            }
 
+    /*------------DONACIONES------------- */
+         const donados = async () =>{
+          const token = sessionStorage.getItem('access')
+          console.log(token)
+          console.log("Peticion")
+          
+          try {
+              const response = await axios.get('https://zona0.onrender.com/institutions/donations/', { 
+                 headers: {
+                     'Authorization': 'Bearer ' + token
+                 }
+               });
+               
+               
+               SetDonaciones(JSON.parse(sessionStorage.getItem('donaciones')))
+               console.log("CODE1",codeEfect ) 
+                  // Obtén los datos del almacenamiento local
+              let codigossessionStorage = JSON.parse(sessionStorage.getItem('donaciones')) || [];
+                          
+              // Obtén los datos de la respuesta de la petición
+              let codigosResponse = response.data;
+                          
+              // Para cada elemento en los datos de la respuesta de la petición
+              codigosResponse.forEach(codigoResponse => {
+                 // Verifica si el elemento ya existe en el almacenamiento local
+                 let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
+              
+                 // Si el elemento no existe en el almacenamiento local, agrégalo
+                 if (!existeEnsessionStorage) {
+                     codigossessionStorage.push(codigoResponse);
+                 }
+              });
+              
+              // Para cada elemento en el almacenamiento local
+              codigossessionStorage.forEach((codigosessionStorage, index) => {
+                 // Verifica si el elemento existe en los datos de la respuesta de la petición
+                 let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
+              
+                 // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
+                 if (!existeEnResponse) {
+                     codigossessionStorage.splice(index, 1);
+                 }
+              });
+              
+              // Guarda los datos actualizados en el almacenamiento local
+              sessionStorage.setItem('donaciones', JSON.stringify(codigossessionStorage));
+              SetDonaciones(codigossessionStorage);
+              console.log("CODE ENVIOS",codigossessionStorage)
+              
+                 
+                  
+              
+             } catch(error) {
+              console.log(error.response);
+             }    
+           }
 
-            /*------------PUNTOS------------- */
+
+
+    /*------------PUNTOS------------- */
          const getPoints = async () =>{
           const token = sessionStorage.getItem('access')
           console.log(token)
@@ -296,7 +359,7 @@ export default function Wallet() {
            }
 
 
-            /*------------ELIMINAR EL CODIGO------------- */
+      /*------------ELIMINAR EL CODIGO------------- */
           const DeleteRecieves = async (id) =>{
           const token = sessionStorage.getItem('access')
           setLoading(true)
@@ -482,12 +545,36 @@ export default function Wallet() {
                     >Pendientes({code.length})</span>
                   </div> 
 
-                  {currentReceiveComponent === 2 && codeEfect.length > 0 ? 
-                  codeEfect.map((item, index) => (
-                    <Transaction 
+
+                  <div className={style.transactionBx}>
+                        {currentReceiveComponent === 2 && codeEfect.length > 0 ? 
+                        codeEfect.map((item, index) => (
+                          <Transaction 
+                                  key={item.id} 
+                                  res = {item}
+                                  SetVisible = { SetVisibleEffect}
+                                  setSelected = {setSelectedD}
+                                  setDialog = {() => {
+                                    setReceiveIdToDelete(item.id);
+                                    setDialog(true);
+                                  }}
+                                  visible={visible}
+                                  index = {index}
+                                
+                                  />
+                        )) : (
+                          currentReceiveComponent !== 2 ? (
+                            ""
+                          ) : (
+                            <div className={style.empty}>No hay solicitudes de recibos efectuados.</div>
+                          )
+                        )}
+                        {currentReceiveComponent === 3 && code.length > 0 ? 
+                        code.map((item, index) => (
+                              <Transaction
                             key={item.id} 
                             res = {item}
-                            SetVisible = { SetVisibleEffect}
+                            SetVisible = {SetVisible}
                             setSelected = {setSelectedD}
                             setDialog = {() => {
                               setReceiveIdToDelete(item.id);
@@ -495,36 +582,18 @@ export default function Wallet() {
                             }}
                             visible={visible}
                             index = {index}
-
                             />
-                  )) : (
-                    currentReceiveComponent !== 2 ? (
-                      ""
-                    ) : (
-                      <div className={style.empty}>No hay solicitudes de recibos efectuados.</div>
-                    )
-                  )}
-                  {currentReceiveComponent === 3 && code.length > 0 ? 
-                  code.map((item, index) => (
-                        <Transaction
-                      key={item.id} 
-                      res = {item}
-                      SetVisible = {SetVisible}
-                      setSelected = {setSelectedD}
-                      setDialog = {() => {
-                        setReceiveIdToDelete(item.id);
-                        setDialog(true);
-                      }}
-                      visible={visible}
-                      index = {index}
-                      />
-                  )) : (
-                    currentReceiveComponent !== 3 ? (
-                      ""
-                    ) : (
-                      <div className={style.empty}>No hay solicitudes de recibos pendientes.</div>
-                    )
-                  )}
+                        )) : (
+                          currentReceiveComponent !== 3 ? (
+                            ""
+                          ) : (
+                            <div className={style.empty}>No hay solicitudes de recibos pendientes.</div>
+                          )
+                        )}
+
+                  </div>
+
+                  
                 </div>
  
                 
@@ -537,53 +606,46 @@ export default function Wallet() {
                     >Transferencia({resSend.length})</span>
                     <span onClick={() => setCurrentSendComponent(5)}
                         className = {currentSendComponent === 5 ? `${style.active}`: `${style.inActive}`}
-                    >Donados</span> 
+                    >Donados({donaciones.length})</span> 
                   </div>
 
-                  {currentSendComponent === 4 && codeEnvios.length > 0  ? 
-                   resSend.map((item, index) => (
-                    <TransactionSend
-                              key={item.id} 
-                              res = {item}
-                              />
-                  )) : (
-                    currentSendComponent !== 4 ? (
-                      ""
-                    ) : (
-                      <div className={style.empty}>No existen solicitudes de envio.</div>
-                    )
-                  )}
-                  {currentSendComponent === 5 && code.length > 0 ? 
-                  code.map((item, index) => (
-                    <h1 key = {index}>Donaciones</h1>
-                  )) : (
-                    currentSendComponent !== 5 ? (
-                      ""
-                    ) : (
-                      <div className={style.empty}>No hay solicitudes de recibos pendientes.</div>
-                    )
-                  )}
-
-
+                  <div className={style.transactionBx}>
+                    {currentSendComponent === 4 && codeEnvios.length > 0  ? 
+                     resSend.map((item, index) => (
+                      <TransactionSend
+                                key={item.id} 
+                                res = {item}
+                                />
+                    )) : (
+                      currentSendComponent !== 4 ? (
+                        ""
+                      ) : (
+                        <div className={style.empty}>No existen solicitudes de envio.</div>
+                      )
+                    )}
+                    {currentSendComponent === 5 && donaciones.length > 0 ? 
+                    donaciones.map((item, index) => (
+                      <TransactionDonations
+                                key={item.id} 
+                                res = {item}
+                                />
+                    )) : (
+                      currentSendComponent !== 5 ? (
+                        ""
+                      ) : (
+                        <div className={style.empty}>No hay solicitudes de recibos pendientes.</div>
+                      )
+                    )}
+                    
+                  </div>
 
 
                 </div>
                   }
 
 
-                  <div>
-                 
-
-
-                  </div>
-
-
-
-
-
+               
               </div>
-
-              
             </div>
 
            {/* <div className={style.header} >
