@@ -1,0 +1,98 @@
+.cont{
+    position: fixed;
+    background-color: rgba(135, 134, 134, 0.5);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000000000000000000;
+}
+.bx{
+    position: relative;
+    width: 400px;
+    height: 300px;
+    background: var(--lightBg);
+    border-radius: 20px;
+    padding: 20px;
+    color: var(--darkLetter);
+}
+.header{
+    font-family: "PoppinsBolder";
+    font-size: 1.2em;
+    color: transparent;
+    text-align: center;
+    position: absolute;
+    animation: showText 2s ease-in-out 2s 1 forwards;
+}
+.content{
+    padding-bottom: 20px;
+    color: var(--darkLetter);
+}
+
+
+
+/*----------REGALO----------------*/
+.contBx{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+
+}
+.imageBx{
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    animation: showGift 2s ease-in-out 0.5s 1 forwards;
+    bottom: 15px;
+}
+
+
+@media(max-width: 408px){
+    .bx{
+        width: 300px;
+    }
+    .header{
+        font-size: 1em;
+    }
+    .content{
+       font-size: 0.8em;
+    }
+    
+}
+
+
+@keyframes showGift {
+    0%{
+        width: 0px;
+        height: 0px;
+        
+        transform: rotate(180deg);
+    }
+    50%{
+        width: 400px;
+        height: 300px;
+        transform: rotate(360deg);
+    }
+    100%{
+        width: 200px;
+        height: 200px;
+        
+    }
+}
+@keyframes showText {
+    0%{
+        position: relative;
+        color: transparent;
+    }
+    50%{
+        position: relative;
+        color: transparent;
+    }
+    100%{
+       position: relative;
+       color: var(--darkLetter);
+    }
+}
+
+
