@@ -25,6 +25,18 @@
     height: 90%;
     width: 100%;
 }
+.contBx{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 30px;
+    border-radius: 20px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    
+}
 .description{
     position: relative;
     width: 90%;
@@ -50,13 +62,18 @@
     margin-right: 10px;
 }
 .input{
-    position: relative;
-    width: 500px;
     margin-top: 50px;
+    position: relative;
+    width: 90%;
+    border: 1px solid var(--hlColor);
+    border-radius: 20px;
+    padding: 10px;
+    height: 50px;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    color: var(--darkLetter);
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    overflow: hidden;
 }
 .input input{
     position: relative;
@@ -65,8 +82,7 @@
     outline: none;
     background: transparent;
     color: var(--darkLetter);
-    border-bottom: 1px solid rgb(216, 215, 215);
-    width: 500px;
+    width: 100%;
 }
 .cont button,
 .cont1 button{
@@ -87,6 +103,9 @@
 .cont button:hover,
 .cont1 button:hover{
     background: var(--hlColorHover);
+}
+.deseableBtn{
+    background: rgb(173, 172, 172) !important;
 }
 .regalo{
     position: relative;
@@ -109,6 +128,13 @@
 .subHeader{
     color: var(--darkLetter);
     font-size: 1.2em;
+}
+.error{
+    color: var(--lightLetter);
+    position: absolute;
+
+    width: 100%;
+    text-align: center;
 }
 @media(max-width:1036px){
     .input{
@@ -134,12 +160,23 @@
         width: 90%;
         margin: 0 auto;
     }
+    .description{
+        width: 100%;
+    }
     .input{
-        width: 90%;
+        width: 100%;
     }
     .input .inputBx{
         width: 100%;
 
+    }
+    .inputBx input{
+    width: 80%;
+    }
+    .contBx{
+        
+        width: 95%;
+        padding: 20px;
     }
 }
 
