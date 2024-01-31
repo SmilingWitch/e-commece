@@ -171,6 +171,9 @@
 .btn:hover{
     background: var(--hlColorHover);
 }
+.imageIcon{
+    color: var(--lightLetter);
+}
 
 
 @media(max-width:734px){
