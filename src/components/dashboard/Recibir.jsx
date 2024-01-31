@@ -112,41 +112,45 @@ export default function Recibir(){
             </div>
 
             <div className={style.bx} data-aos="fade-up">
-
-                <div className={style.description}>
-                    <span>Entre el monto:</span>
-                    <p>Introduzca la cantidad de SOP que desea recibir para generar un codigo de pago.</p>
-                </div>
-
-                <div className={style.input}>
-                   {/* <label >Monto a recibir:</label>*/}
-                    <div className={style.inputBx}>
-                        <input  type="text" 
-                                name="amount" id=""
-                                value={formValue.amount}
-                                onChange={handleChange} 
-                                placeholder="Monto"
-                                onKeyDown={(event) => {
-                                    const keyCode = event.keyCode;
-                                    const isNumber = (keyCode >= 48 && keyCode <= 57);
-                                    const isBackspace = (keyCode === 8);
-                                    if (!isNumber && !isBackspace) {
-                                      event.preventDefault();
-                                    }
-                                  }}/>
-                        <span>OSP</span>
+              <div className={style.contBx}>
+                  <div className={style.description}>
+                        <span>Entre el monto:</span>
+                        <p>Introduzca la cantidad de SOP que desea recibir para generar un codigo de pago.</p>
                     </div>
-                </div>
-                {formValue.amount === "" ? <button className={style.deseableBtn}>Generar Link</button> :
-                loading  ? <div className={style.loader}>
-                   <BeatLoader
-                color="rgba(255, 68, 0,1)"
-                cssOverride={{}}
-                margin={10}
-                size={10}
-                speedMultiplier={1}
-              />
-                </div> : <button onClick = {createLink}>Generar Codigo</button>}
+
+                    <div className={style.input}>
+                       {/* <label >Monto a recibir:</label>*/}
+                        <div className={style.inputBx}>
+                            <input  type="text" 
+                                    name="amount" id=""
+                                    value={formValue.amount}
+                                    onChange={handleChange} 
+                                    placeholder="Monto"
+                                    onKeyDown={(event) => {
+                                        const keyCode = event.keyCode;
+                                        const isNumber = (keyCode >= 48 && keyCode <= 57);
+                                        const isBackspace = (keyCode === 8);
+                                        if (!isNumber && !isBackspace) {
+                                          event.preventDefault();
+                                        }
+                                      }}/>
+                            <span>OSP</span>
+                        </div>
+                    </div>
+                    {formValue.amount === "" ? <button className={style.deseableBtn}>Generar Link</button> :
+                    loading  ? <div className={style.loader}>
+                       <BeatLoader
+                    color="rgba(255, 68, 0,1)"
+                    cssOverride={{}}
+                    margin={10}
+                    size={10}
+                    speedMultiplier={1}
+                  />
+                    </div> : <button onClick = {createLink}>Generar Codigo</button>}
+
+              </div>
+
+                
             </div>
         </div>
     </div>

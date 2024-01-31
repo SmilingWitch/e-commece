@@ -164,33 +164,37 @@ export default function Enviar(){
                 </div>
 
                 <div className={style.bx} data-aos="fade-up">
+                  <div className={style.contBx}>
                     <div className={style.description} >
-                        <span>Entre el codigo:</span>
-                        <p>Introduzca el codigo para proceder a pagar el monto establecido.</p>
-                    </div>
-                    <div className={style.input}>
-                        <div className={style.inputBx}>
-                            <input type="text" 
-                                    name="code" 
-                                    id=""
-                                    placeholder="Codigo"
-                                    value={formValue.code} 
-                                    onChange={handleChange} />
-                            <span><BsQrCodeScan/></span>
-                        </div>
-                       
-                    </div>
-                    {/*<button>Verificar</button>*/}
-                    {formValue.code === "" ? <button className={style.deseableBtn}>Verificar</button> :
-                        loading  ? <div className={style.loader}>
-                           <BeatLoader
-                        color="rgba(255, 68, 0,1)"
-                        cssOverride={{}}
-                        margin={10}
-                        size={10}
-                        speedMultiplier={1}
-                    />
-                      </div> : <button onClick = {detailReceive}>Verificar</button>}
+                          <span>Entre el codigo:</span>
+                          <p>Introduzca el codigo para proceder a pagar el monto establecido.</p>
+                      </div>
+                      <div className={style.input}>
+                          <div className={style.inputBx}>
+                              <input type="text" 
+                                      name="code" 
+                                      id=""
+                                      placeholder="Codigo"
+                                      value={formValue.code} 
+                                      onChange={handleChange} />
+                              {/*<span><BsQrCodeScan/></span>*/}
+                          </div>
+
+                      </div>
+                      {/*<button>Verificar</button>*/}
+                      {formValue.code === "" ? <button className={style.deseableBtn}>Verificar</button> :
+                          loading  ? <div className={style.loader}>
+                             <BeatLoader
+                          color="rgba(255, 68, 0,1)"
+                          cssOverride={{}}
+                          margin={10}
+                          size={10}
+                          speedMultiplier={1}
+                      />
+                        </div> : <button onClick = {detailReceive}>Verificar</button>}
+
+                  </div>
+                    
                       </div>
                       {isObjectVisible && <div className={style.error} >
                          <ErrorDialog error = {error} />

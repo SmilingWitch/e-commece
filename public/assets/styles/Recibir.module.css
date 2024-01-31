@@ -26,6 +26,19 @@
     height: 90vh;
     width: 100%;
     padding-top: 50px;
+    
+}
+.contBx{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 30px;
+    border-radius: 20px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    
 }
 .header{
     position: relative;
@@ -44,18 +57,23 @@
 }
 
 .input{
-    position: relative;
-    width: 500px;
     margin-top: 50px;
+    position: relative;
+    width: 90%;
+    border: 1px solid var(--hlColor);
+    border-radius: 20px;
+    padding: 10px;
+    height: 50px;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    color: var(--darkLetter);
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    overflow: hidden;
 }
 .input .inputBx{
     position: relative;
     color: var(--darkLetter);
-    border-bottom: 1px solid rgb(216, 215, 215);
+    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
@@ -77,6 +95,7 @@
     outline: none;
     background: transparent;
 }
+
 .cont button, .cont1 button{
     position: relative;
     border: none;
@@ -244,12 +263,23 @@
         width: 90%;
         margin: 0 auto;
     }
+    .description{
+        width: 100%;
+    }
     .input{
-        width: 90%;
+        width: 100%;
     }
     .input .inputBx{
         width: 100%;
 
+    }
+    .inputBx input{
+    width: 80%;
+    }
+    .contBx{
+        
+        width: 95%;
+        padding: 20px;
     }
     
 }
