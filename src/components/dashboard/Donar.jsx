@@ -3,19 +3,33 @@ import style from "../../../public/assets/styles/Donar.module.css"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import InstitutionCard from "./InstitutionsCard"
+import BeatLoader from "react-spinners/BeatLoader"
+import Image from "next/image"
 
 export default function Donar(){
 
         
-    let institutionsFromsessionStorage = [];
+    let institutionsFromlocalStorage = [];
     if (typeof window !== 'undefined') {
-        institutionsFromsessionStorage= JSON.parse(sessionStorage.getItem('institutions')) || [];
+        institutionsFromlocalStorage= JSON.parse(localStorage.getItem('institutions')) || [];
     }
+    
 
 
 
-    const [institution, SetInstitution] = useState(institutionsFromsessionStorage)
+    const [institution, SetInstitution] = useState(institutionsFromlocalStorage)
     const [isMounted, setIsMounted] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if(institutionsFromlocalStorage.length === 0){
+            setLoading(true)
+        } else {
+            setLoading(false)
+        }
+    }, [institutionsFromlocalStorage]);
+
+    
 
     useEffect(() => { 
         institutions() 
@@ -36,11 +50,12 @@ export default function Donar(){
                    'Authorization': 'Bearer ' + token
                }
              });
+             setLoading(false)
              
-             SetInstitution(JSON.parse(sessionStorage.getItem('institutions')))
+             SetInstitution(JSON.parse(localStorage.getItem('institutions')))
              
                 // Obtén los datos del almacenamiento local
-            let codigossessionStorage = JSON.parse(sessionStorage.getItem('institutions')) || [];
+            let codigoslocalStorage = JSON.parse(localStorage.getItem('institutions')) || [];
                         
             // Obtén los datos de la respuesta de la petición
             let codigosResponse = response.data;
@@ -48,34 +63,35 @@ export default function Donar(){
             // Para cada elemento en los datos de la respuesta de la petición
             codigosResponse.forEach(codigoResponse => {
                // Verifica si el elemento ya existe en el almacenamiento local
-               let existeEnsessionStorage = codigossessionStorage.some(codigosessionStorage => codigosessionStorage.id === codigoResponse.id);
+               let existeEnlocalStorage = codigoslocalStorage.some(codigolocalStorage => codigolocalStorage.id === codigoResponse.id);
             
                // Si el elemento no existe en el almacenamiento local, agrégalo
-               if (!existeEnsessionStorage) {
-                   codigossessionStorage.push(codigoResponse);
+               if (!existeEnlocalStorage) {
+                   codigoslocalStorage.push(codigoResponse);
                }
             });
             
             // Para cada elemento en el almacenamiento local
-            codigossessionStorage.forEach((codigosessionStorage, index) => {
+            codigoslocalStorage.forEach((codigolocalStorage, index) => {
                // Verifica si el elemento existe en los datos de la respuesta de la petición
-               let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigosessionStorage.id);
+               let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigolocalStorage.id);
             
                // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
                if (!existeEnResponse) {
-                   codigossessionStorage.splice(index, 1);
+                   codigoslocalStorage.splice(index, 1);
                }
             });
             
             // Guarda los datos actualizados en el almacenamiento local
-            sessionStorage.setItem('institutions', JSON.stringify(codigossessionStorage));
-            SetInstitution(codigossessionStorage);
-            console.log("CODE ENVIOS",codigossessionStorage)
+            localStorage.setItem('institutions', JSON.stringify(codigoslocalStorage));
+            SetInstitution(codigoslocalStorage);
+            console.log("CODE ENVIOS",codigoslocalStorage)
 
             console.log("institution",institution)
   
            } catch(error) {
             console.log(error.response);
+            setLoading(false)
            }    
          }
 
@@ -92,12 +108,34 @@ export default function Donar(){
                   <div className={style.line}></div>
                   <h3>Donar</h3>
                 </div>
+                {loading ? 
+                <div className={style.loading}>
+
+                    <Image 
+                        width = {120}
+                        height = {120}
+                        src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+    
+                    <div className={style.spinner}>
+                        <div className="sweet-loading">
+                            <BeatLoader
+                              color="rgba(255, 68, 0,1)"
+                              cssOverride={{}}
+                              margin={15}
+                              size={10}
+                              speedMultiplier={1}
+                            />
+                        </div>
+                    </div>
+
+                </div> :
                 <div className={style.institutionBx}>
                     {institution && institution.map((item, index) => (
                     <InstitutionCard res = {item} key={item.id}  />
                     ))}
 
-                </div>
+                </div>}
+                
             </div>
         </div>
         
