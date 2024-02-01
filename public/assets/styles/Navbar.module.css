@@ -241,6 +241,9 @@
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media(max-width:700px){
