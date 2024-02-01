@@ -40,9 +40,7 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
                 </div>
             </Link>
                 <div className={style.iconBx}>
-                    <div className={style.contIcon}>
-                        <span><Link href = "/notificationes"><FaRegBell/></Link></span>
-                    </div>
+                    
                     {user === null ? <div className={style.contIcon1}>
                         <span className={style.icon2}><Link href = "/accounts/login"><FaRegUserCircle/></Link></span>
                         <div className={style.cont2}>Entrar o registrarse</div>
@@ -51,17 +49,21 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
                         <span className={style.iconLogg}>
                         <div className={style.linkLogg} onClick = {() => SetMyAccount(true)}>
                             <div className={style.circle}>
-                            {credential ? (<Image
-                                width={50}
-                                height={50} 
+                            {credential.image !== null ? (<Image
+                                width={40}
+                                height={40} 
                                 src={credential.image}  />):<Image
-                                width={50}
-                                height={50} 
-                                src="/assets/images/avatar.svg"  /> }
+                                width={40}
+                                height={40} 
+                                src="/assets/images/imagenPorDefecto.png"  /> }
+                                
                             </div>   
                         </div></span>
                     </div>
                      }
+                     <div className={style.contIcon}>
+                        <span><Link href = "/notificationes"><FaRegBell/></Link></span>
+                    </div>
                 </div>
 
             </section>
