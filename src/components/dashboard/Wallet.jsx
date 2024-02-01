@@ -19,10 +19,12 @@ import TransactionSend from "./TransactionSend";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import TransactionDonations from "./TransactionDonation";
+import { useRouter } from "next/navigation";
 
 
 export default function Wallet() {
     const { user } = useContext(AuthContext);
+    const { credential } = useContext(AuthContext);
 
     // variable
     let codesFromsessionStorage = [];
@@ -55,11 +57,12 @@ export default function Wallet() {
     const [resSend, SetResSend] = useState([])
     const [resEffect, SetEffect] = useState([])
     const [code, SetCode] = useState(codesFromsessionStorage || []);
-    const [points, SetPoints] = useState(0);
+    const [points, SetPoints] = useState( pointsFromsessionStorage);
     const [codeEfect, SetCodeEfect] = useState(codesEfectFromsessionStorage);
     const [codeEnvios, SetCodeEnvios] = useState(codesEnvioFromsessionStorage);
     const [donaciones, SetDonaciones] = useState(codesDonacionesFromsessionStorage);
     const [receiveIdToDelete, setReceiveIdToDelete] = useState(null);
+    const router = useRouter()
 
     useEffect(() => { 
       setIsMounted(true);
@@ -68,7 +71,10 @@ export default function Wallet() {
       envios()
       getPoints()
       donados()
-
+      
+      if (credential === null) {
+        router.push('/accounts/login');
+     }
       AOS.init({
         duration:2000
       });
@@ -409,10 +415,12 @@ export default function Wallet() {
              }    
            }
          
-         
+              
                if (!isMounted) {
                 return null; // Or some placeholder content
+
                }
+               
 
     return (
         <div className={style.cont} >
