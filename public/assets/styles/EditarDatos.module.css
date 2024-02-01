@@ -66,6 +66,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow:  4px 4px 8px #a2a2a2;
    }
    .iconBx{
     position: absolute;
@@ -81,6 +82,7 @@
     top: 100px;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow:  4px 4px 8px #a2a2a2;
    }
    .iconBx:hover{
     background: var(--hlColorHover);
@@ -109,7 +111,7 @@
 }
 .input{
     position: relative;
-    width: 100%;
+    width: 100% !important;
     border: 1px solid var(--hlColor);
     border-radius: 20px;
     padding: 10px;
@@ -119,6 +121,7 @@
     justify-content: flex-end;
     cursor: pointer;
     overflow: hidden;
+
 }
 .input input{
     position: relative;
@@ -139,6 +142,46 @@
 .input input:focus{
     outline: none;
     border: none;
+}
+.selectBx{
+    color: var(--darkLetter);
+    display: flex ;
+    align-items: center;
+    justify-content: space-between;
+}
+.selectIcon{
+    font-size: 1.5em !important;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.select1{
+    position: absolute;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--darkLetter);
+    /*top: 715px;*/
+    z-index: 10000000;
+    border-radius: 10px;
+    background: rgb(232, 231, 231);
+    
+}
+.selectedType{
+    font-size: 0.8em;
+}
+.option{
+    position: relative;
+    font-family: "PoppinsRegular" !important;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 10px;
+}
+.option:hover{
+    background: rgb(213, 212, 212);
+    
 }
 .label{
     font-family: "PoppinsBold" ;
@@ -173,8 +216,24 @@
 }
 .imageIcon{
     color: var(--lightLetter);
+    
 }
 
+.errorHeader{
+    color: red !important;
+    background: transparent;
+}
+.error{
+    position: relative;
+    font-size: 0.8em;
+    color: red;
+    background: rgba(255, 0, 0,0.2);
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 
 @media(max-width:734px){
     .bx {
