@@ -20,6 +20,7 @@ import EditarDatos from "./EditarDatos";
 import ChangePassword from "./ChangePassword";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import EditarDatosCompany from "./EditarDatosCompany";
 
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -68,6 +69,7 @@ const theme = createTheme({
     const [isChecked, setIsChecked] = useState(false);
     const [active, SetActive] = useState(false);
     const [activeEdit, SetActiveEdit] = useState(false);
+    const [activeEditComapany, SetActiveEditComapany] = useState(false);
     const [activechangePass, SetActivechangePass] = useState(false);
     const { credential } = useContext(AuthContext);
 
@@ -87,9 +89,14 @@ const theme = createTheme({
           console.log(error)
         }
        }
-
+       console.log(credential.type)
     const edit = () => {
-        SetActiveEdit(true)
+        if(credential.user_type === "company"){
+            SetActiveEditComapany(true)
+        }
+        if(credential.user_type === "client"){
+            SetActiveEdit(true)
+        }
     }
 
     const closeAll = () => {
@@ -104,7 +111,11 @@ const theme = createTheme({
             
             {activeEdit && (<EditarDatos 
                                 SetActiveEdit = {SetActiveEdit}
-                                closeAll = {closeAll}/>)}
+                                closeAll = {closeAll}
+                                />)}
+            {activeEditComapany &&  <EditarDatosCompany
+                                SetActiveEdit = {SetActiveEditComapany}
+                                closeAll = {closeAll}/>}
             {activechangePass &&<ChangePassword 
                                 SetActivechangePass = {SetActivechangePass}
                                 closeAll = {closeAll}/>}
@@ -131,10 +142,16 @@ const theme = createTheme({
                 <div className={style.optionsBx}>
                     <div className={style.insertPhoto}>
                         <div className={style.selectedImageBx}>
-                            {credential && (<Image
-                            width={110}
-                            height={110} 
-                            src={credential.image} alt="Imagen seleccionada" />)}
+                            {credential.image !== null ? (<Image
+                                width={110}
+                                height={110}  
+                                src={credential.image} 
+                                alt="Imagen seleccionada"  />):<Image
+                                width={110}
+                                height={110}  
+                                src="/assets/images/imagenPorDefecto.png"
+                                alt="Imagen seleccionada"  /> }
+                                
                         </div>
                         <div className={style.info}>
                             <div className={style.name}>
