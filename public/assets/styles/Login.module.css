@@ -88,7 +88,7 @@
     align-items: center;
     justify-content: flex-end;
     cursor: pointer;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .input input{
     position: relative;
@@ -116,7 +116,7 @@
     text-transform: uppercase;
 }
 .select{
-    position: relative;
+    position: absolute;
     width: 100%;
     border: 1px solid var(--hlColor);
     border-radius: 20px;
@@ -354,6 +354,50 @@
     position: absolute;
     height: 10px;
     display: none;
+}
+.selectBx{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+
+}
+.selectBx div{
+    font-size: 0.8em;
+}
+
+.select1{
+    position: absolute;
+    width: 90%;
+    background: transparent;
+    border: none;
+    color: var(--darkLetter);
+    top: 715px;
+    z-index: 10000000;
+    border-radius: 10px;
+    background: rgb(232, 231, 231);
+    
+}
+.selectIcon{
+    font-size: 1.5em !important;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.option{
+    position: relative;
+    font-family: "PoppinsRegular" !important;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 10px;
+}
+.option:hover{
+    background: rgb(213, 212, 212);
+    
 }
 
 
