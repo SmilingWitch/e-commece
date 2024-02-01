@@ -10,6 +10,8 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { HiPlusCircle } from "react-icons/hi2";
 import Image from "next/image"
 import BeatLoader from "react-spinners/BeatLoader"
+import { IoIosArrowDown } from "react-icons/io";
+import {IoMdArrowBack} from "react-icons/io"
 
 export default function RegistroCompany(){
 
@@ -22,12 +24,17 @@ export default function RegistroCompany(){
         username:'',
         password:'',
         email: '',
-        image: null
+        image: null, 
+        type: ''
       });
 
     const [correct,setCorrect] = useState(false)
     const [error,setError] = useState('')
     const [loading,setLoading] = useState(false)
+    const [visible,setVisible] = useState(false)
+    const options = ["Mipyme", "TCP", "Estatal"]
+    const defaultOption = "------"
+    const [selectedOption, setSelectedOption] = useState(defaultOption);
 
     const handleChange= (event) => {
       setFormValue({
@@ -35,36 +42,46 @@ export default function RegistroCompany(){
         [event.target.name]:event.target.value
       })
     }
+    const handleClick = (option) => {
+        setSelectedOption(option);
+        setFormValue(prevState => ({
+            ...prevState,
+            type: option
+        }));
+    };
+    
+    
 
     const handleSubmit = async (e) => {
         console.log("AUTENTICACION")
         e.preventDefault();
         setLoading(true)
+        console.log(formValue)
       try{
         console.log("AUTENTICACION1")
         console.log(formValue)
         const res = await axios.post('https://zona0.onrender.com/register/company/',formValue)
         console.log("response",res.data)
-        localStorage.setItem('access',res.data.data.access)
-        localStorage.setItem('refresh',res.data.data.refresh)
+       
         setError('')
         setCorrect(true)
         setLoading(false)
         console.log(correct)
       }catch(error){
         setLoading(false)
+        console.log(error)
         if (error.response) {
             // El servidor respondió con un estado fuera del rango de 2xx
             setError(error.response.data);
             console.log(error)
-          } else if (error.request) {
+          }/* else if (error.request) {
             alert("Something went wrong. Try in a few minutes!!")
           } else {
             alert("Something went wrong. Try in a few minutes!!")
           }
           if (error.response.status === 500) {
             alert("Something went wrong. Try in a few minutes!!")
-          }
+          }*/
       }
     }
 
@@ -88,9 +105,11 @@ export default function RegistroCompany(){
       else setPass('password')
     }
 
+    //Para desplegar el menu
+
 
     return(
-        <div className={style.bx}>
+        <div className={style.bx}  >
         <div className={style.formBx}>
             { correct === true ? 
             <form className={style.form1}>
@@ -110,7 +129,7 @@ export default function RegistroCompany(){
                 <div className={style.correct}>
                     <span>
                         <Link href = "/accounts/login" className={style.log}>
-                            <div><MdKeyboardArrowUp/> </div>
+                            <div><IoMdArrowBack/></div>
                             Volver al login      
                         </Link>   
                     </span>
@@ -189,16 +208,19 @@ export default function RegistroCompany(){
                 {error.ci === undefined ? "" : <div className={style.error}>{error.ci}</div>}
 
                 <div className= {error.type ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Tipo de compania</div>
-                <div className={style.input}>
-                    <input 
-                    type="text" 
-                    name="type" 
-                    id="" 
-                    required
-                    value={formValue.type}
-                    onChange={handleChange}
-                    placeholder="Tipo" />
-                </div>
+                <div className={`${style.input} ${style.selectBx} `} onClick = {()=> setVisible(!visible)}>
+                    <div>{selectedOption}</div>
+                    <div className={style.selectIcon} onClick = {()=> setVisible(!visible)}><IoIosArrowDown/></div>
+                    </div>
+                    {visible && <div className={style.select1}>
+                      {options.map((option, index) => (
+                        <div key={index} onClick={() =>{ handleClick(option); setVisible(false)}} className={style.option}>
+                          {option}
+                        </div>
+                      ))}
+                    
+                </div>}
+                
                 {error.type === undefined ? "" : <div className={style.error}>{error.type}</div>}
 
                 <div className= {error.company_code? `${style.errorHeader} ${style.label}` : `${style.label}`}>Codigo de la compania</div>
