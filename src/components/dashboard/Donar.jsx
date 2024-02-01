@@ -5,6 +5,9 @@ import { useState, useEffect } from "react"
 import InstitutionCard from "./InstitutionsCard"
 import BeatLoader from "react-spinners/BeatLoader"
 import Image from "next/image"
+import { useRouter } from 'next/navigation'
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Donar(){
 
@@ -20,6 +23,8 @@ export default function Donar(){
     const [institution, SetInstitution] = useState(institutionsFromlocalStorage)
     const [isMounted, setIsMounted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const router = useRouter()
+    const { credential } = useContext(AuthContext);
 
     useEffect(() => {
         if(institutionsFromlocalStorage.length === 0){
@@ -37,6 +42,9 @@ export default function Donar(){
         /*AOS.init({
           duration:2000
         });*/
+        if (credential === null) {
+            router.push('/accounts/login');
+         }
       }, []);
 
     const institutions = async () =>{
