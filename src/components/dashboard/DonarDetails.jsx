@@ -13,10 +13,11 @@ import "slick-carousel/slick/slick-theme.css";
 import DialogDonar from "../DialogDonar";
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import { useRouter } from 'next/navigation'
 
 
 export default function DonarDetails(){
-
+  
 
     const [visible, SetVisible] = useState(false)
     const [counter, SetCounter] = useState(0)
@@ -25,6 +26,7 @@ export default function DonarDetails(){
     const id = Number(param.id)
     const { user } = useContext(AuthContext);
     const { credential } = useContext(AuthContext);
+    const router = useRouter()
     let institutionsFromlocalStorage = [];
     let filteredInstitutions = []
     
@@ -35,6 +37,9 @@ export default function DonarDetails(){
     
     console.log("filteredInstitutions",filteredInstitutions)
     console.log("id",id)
+    if (credential === null) {
+      router.push('/accounts/login');
+   }
 
     const settings = {
         dots: true,
@@ -100,8 +105,8 @@ export default function DonarDetails(){
         ],
       };
       const [institution, SetInstitution] = useState(institutionsFromlocalStorage.filter(institution => institution.id === id))
-      const [gallery, SetGallery] = useState(institution[0].galleryInstitution)
-      const [amount, SetAmount] = useState(institution[0].institution_osp)
+      const [gallery, SetGallery] = useState(institution[0]?.galleryInstitution)
+      const [amount, SetAmount] = useState(institution[0]?.institution_osp)
 
    useEffect(() => { 
       institutions()
@@ -109,7 +114,9 @@ export default function DonarDetails(){
 
       useEffect(() => { 
         institutions()
+       
         }, []);  
+        
     
 
     const institutions = async () =>{
@@ -169,7 +176,7 @@ export default function DonarDetails(){
             
                 <div className={style.header}/* data-aos="fade-up"*/>
                   <div className={style.line}></div>
-                  <h3><Link href = "/dashboard/donar">Donar</Link> / {institution[0].institution_name}</h3>
+                  <h3><Link href = "/dashboard/donar">Donar</Link> / {institution[0]?.institution_name}</h3>
                 </div>
 
 
@@ -178,11 +185,11 @@ export default function DonarDetails(){
                     <Image 
                               layout="fill"
                                 objectFit="cover"
-                      src = {institution[0].image}/>
+                      src = {institution[0]?.image}/>
 
                   </div>
                   <div className={style.nameInst}>
-                    <h1>{institution[0].institution_name}</h1>
+                    <h1>{institution[0]?.institution_name}</h1>
                     <div className={style.button}>
                       <button className={style.btn} onClick={() => {SetVisible(true)}}>Donar</button>
                     </div>
@@ -238,14 +245,14 @@ export default function DonarDetails(){
                       <h3>Sobre nosotros</h3>
                     </div>
                     <div className={style.descBx}>
-                      {institution[0].description}
+                      {institution[0]?.description}
                     </div>
                         
                     </div>
                     <div className={style.bx}>
                         <div className={style.donado}>
                             <span>Cantidad donada hasta el momento:</span>
-                            <div className={style.amount}>{institution[0].institution_osp} OSP</div>
+                            <div className={style.amount}>{institution[0]?.institution_osp} OSP</div>
 
                         </div>
                         <div className={style.button}>
