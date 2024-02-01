@@ -8,8 +8,19 @@ import { useRouter } from 'next/navigation'
 
 
 export function AuthProvider({ children }) {
+  let userFromsessionStorage = null;
+  let credentialFromsessionStorage = null;
+  let institutionsFromlocalStorage = [];
+  if (typeof window !== 'undefined') {
+    userFromsessionStorage = sessionStorage.getItem('access') || null;
+    credentialFromsessionStorage = JSON.parse(sessionStorage.getItem('credential')) || null;
+    institutionsFromlocalStorage= JSON.parse(localStorage.getItem('institutions')) || [];
+  }
+
+  
   const [user, setUser] = useState(null);
-  const [credential, setCredential] = useState(null);
+  const [credential, setCredential] = useState(credentialFromsessionStorage);
+  
   /*const [credential, setCredential] = useState(null);*/
   const updateCredential = (newCredential) => {
     // Actualiza el estado de credential
@@ -23,6 +34,61 @@ export function AuthProvider({ children }) {
   
  
  const router = useRouter()
+
+
+
+/*--------------------INSTITUTIONS-------------------- */
+
+const institutions = async () =>{
+  const token = sessionStorage.getItem('access')
+  console.log(token)
+  console.log("Peticion")
+  
+  try {
+      const response = await axios.get('https://zona0.onrender.com/institutions/list-institution/', { 
+         headers: {
+             'Authorization': 'Bearer ' + token
+         }
+       });
+       
+          // Obtén los datos del almacenamiento local
+      let codigoslocalStorage = JSON.parse(localStorage.getItem('institutions')) || [];
+                  
+      // Obtén los datos de la respuesta de la petición
+      let codigosResponse = response.data;
+                  
+      // Para cada elemento en los datos de la respuesta de la petición
+      codigosResponse.forEach(codigoResponse => {
+         // Verifica si el elemento ya existe en el almacenamiento local
+         let existeEnlocalStorage = codigoslocalStorage.some(codigolocalStorage => codigolocalStorage.id === codigoResponse.id);
+      
+         // Si el elemento no existe en el almacenamiento local, agrégalo
+         if (!existeEnlocalStorage) {
+             codigoslocalStorage.push(codigoResponse);
+         }
+      });
+      
+      // Para cada elemento en el almacenamiento local
+      codigoslocalStorage.forEach((codigolocalStorage, index) => {
+         // Verifica si el elemento existe en los datos de la respuesta de la petición
+         let existeEnResponse = codigosResponse.some(codigoResponse => codigoResponse.id === codigolocalStorage.id);
+      
+         // Si el elemento no existe en los datos de la respuesta de la petición, elimínalo del almacenamiento local
+         if (!existeEnResponse) {
+             codigoslocalStorage.splice(index, 1);
+         }
+      });
+      
+      // Guarda los datos actualizados en el almacenamiento local
+      localStorage.setItem('institutions', JSON.stringify(codigoslocalStorage));
+      console.log("CODE ENVIOS",codigoslocalStorage)
+
+
+     } catch(error) {
+      console.log(error.response);
+
+     }    
+   }
 
  /*--------------------SING IN-------------------- */
  const signIn = async (formValue) => {
@@ -116,6 +182,9 @@ const recibos = async () =>{
 }, []);*/
 
 useEffect(() => {
+  if (credential === null) {
+    router.push('/accounts/login');
+ }
   if (typeof window !== 'undefined') {
     let storedCredential = null;
       try {
@@ -129,7 +198,16 @@ useEffect(() => {
     setCredential(storedCredential);
   }
   /*recibos()*/
+  institutions() 
 }, []);
+
+
+
+useEffect(() => {
+  if (credential === null) {
+     router.push('/accounts/login');
+  }
+ }, [user]);
 
  return (
  <AuthContext.Provider value={{ user, signIn, signOut, credential, updateCredential }}>
