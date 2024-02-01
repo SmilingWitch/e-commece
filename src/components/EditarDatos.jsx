@@ -27,6 +27,8 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
     const fileInput = useRef(null);
     const defaultImageUrl = "/assets/images/avatar.svg";
     const [loading, setLoading] = useState(false)
+    const [error,SetError] = useState('')
+    const [errorImg,SetErrorImg] = useState('')
     const [loadingImage, setLoadingImage] = useState(false)
 
     
@@ -92,10 +94,6 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
         }
        }*/
 
-       
-
-       
-
 
        /*-----------------UPDATE PERSONAL INFORMATION------------------- */
 
@@ -144,8 +142,8 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
              } catch(error) {
               console.log(error.response);
               if(error.response.status === 400){
-                /*SetError(error.response.data.error)*/
-                console.log("ERROR", error)
+                SetError(error.response.data.errors)
+                console.log("ERROR", error.response.data.errors)
                 /*errorVisible()*/
               }
               /*if(error.response.status === 500){
@@ -187,25 +185,14 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
              
              console.log(response.data.image)
              setImageUrl(response.data.image)
-             /*console.log("IMAGEN", imageUrl)*/
-             
-             
-              /*// Obtiene el objeto credential actual del sessionStorage
-              let credential = JSON.parse(sessionStorage.getItem('credential'));
-
-              // Actualiza el valor de la imagen
-              credential.image = response.data.image;
-
-              // Guarda el objeto credential actualizado en el sessionStorage
-              sessionStorage.setItem('credential', JSON.stringify(credential));
-              let credentialUpload = JSON.parse(sessionStorage.getItem('credential'));*/
-
-             
+             SetErrorImg('')
+             SetError('')
 
           } catch (error) {
              console.log(error.response);
              if (error.response.status === 400) {
                console.log("ERROR", error);
+               SetErrorImg(error.response.data.image)
              }
             setLoadingImage(false);
           }
@@ -261,10 +248,17 @@ async function handleImageUpload(event) {
                 </div>
              <div className={style.imageBx}>
                 <div className={style.image}>
-                    <Image
-                    width={150}
-                    height={150} 
-                    src={imageUrl || defaultImageUrl}  alt="Imagen seleccionada" />
+
+
+                  {credential.image !== null ? (<Image
+                                width={150}
+                                height={150}  
+                                src={imageUrl || defaultImageUrl} 
+                                alt="Imagen seleccionada"  />):<Image
+                                width={150}
+                                height={150}  
+                                src="/assets/images/imagenPorDefecto.png"
+                                alt="Imagen seleccionada"  /> }
                 </div>
                 <div className={style.iconBx}>
                 <input
@@ -277,8 +271,10 @@ async function handleImageUpload(event) {
                     <BiImageAdd className={style.imageIcon} onClick={() => fileInput.current.click()}/>
                 </div>
                 
+                
                     
                 </div>
+                {errorImg === '' ? "" : <div className={style.error}>{errorImg[0]}</div>}
                 {loadingImage ? 
                     <div className="sweet-loading">
                         <BeatLoader
@@ -297,7 +293,7 @@ async function handleImageUpload(event) {
                 <form className={style.form}>
                     <div className={style.datos}>Datos personales</div>
                     <div className={style.inputBx}>
-                        <div className={style.label}>Usuario</div>
+                        <div className= {error.username ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Usuario</div>
                         <div className={style.input}>
                             <input 
                             type="text" 
@@ -307,9 +303,11 @@ async function handleImageUpload(event) {
                             onChange={handleChange} />
 
                         </div>
+                        {error.username === undefined ? "" : <div className={style.error}>{error.username[0]}</div>}
+                        </div>
 
                         <div className={style.inputBx}>
-                        <div className={style.label}>Nombre</div>
+                        <div className= {error.name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Nombre</div>
                         <div className={style.input}>
                             <input 
                             type="text" 
@@ -319,10 +317,11 @@ async function handleImageUpload(event) {
                             onChange={handleChange} />
 
                         </div>
+                        {error.name === undefined ? "" : <div className={style.error}>{error.name[0]}</div>}
                         </div>
 
                         <div className={style.inputBx}>
-                        <div className={style.label}>Apellidos</div>
+                        <div className= {error.last_name ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Apellidos</div>
                         <div className={style.input}>
                             <input 
                             type="text" 
@@ -332,10 +331,11 @@ async function handleImageUpload(event) {
                             onChange={handleChange} />
 
                         </div>
+                        {error.last_name === undefined ? "" : <div className={style.error}>{error.last_name[0]}</div>}
                         </div>
 
                         <div className={style.inputBx}>
-                        <div className={style.label}>Telefono</div>
+                        <div className= {error.movil ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Telefono</div>
                         <div className={style.input}>
                             <input 
                             type="tel" 
@@ -345,10 +345,11 @@ async function handleImageUpload(event) {
                             onChange={handleChange} />
 
                         </div>
+                        {error.movil === undefined ? "" : <div className={style.error}>{error.movil[0]}</div>}
                         </div>
 
                         <div className={style.inputBx}>
-                        <div className={style.label}>Carnet de identidad</div>
+                        <div className= {error.ci ? `${style.errorHeader} ${style.label}` : `${style.label}`}>Carnet de identidad</div>
                         <div className={style.input}>
                             <input 
                             type="text" 
@@ -358,9 +359,10 @@ async function handleImageUpload(event) {
                             onChange={handleChange} />
 
                         </div>
+                        {error.ci === undefined ? "" : <div className={style.error}>{error.ci[0]}</div>}
                         </div>
 
-                </div>
+                
                 {loading ? 
                     <div className="sweet-loading">
                         <BeatLoader
