@@ -9,19 +9,22 @@ import axios from "axios"
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import BeatLoader from "react-spinners/BeatLoader"
+import ErrorDialog from "../ErrorDialog"
 
 export default function Guardar(){
 
-    let sessionDeposFromsessionStorage = [];
+    let depositsFromsessionStorage = [];
     if (typeof window !== 'undefined') {
-        sessionDeposFromsessionStorage = JSON.parse(sessionStorage.getItem('sessionDepo')) || [];
+        depositsFromsessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
 
         
     }
 
-    const [depo, SetDepo] = useState( sessionDeposFromsessionStorage);
+    const [depo, SetDepo] = useState( depositsFromsessionStorage);
     const [update, SetUpdate] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [resp, setResp] = useState(false);
     const { credential } = useContext(AuthContext);
     const [formValue,setFormValue]=useState({
         amount:'',
@@ -29,11 +32,12 @@ export default function Guardar(){
         state: ''
       });
       const [loading,setLoading] = useState(false)
+      const [loadingDeposit,setLoadingDeposit] = useState(true)
 
 
     useEffect(() => { 
         setIsMounted(true);
-        donaciones()
+        depositos()
         
         
         if (credential === null) {
@@ -45,19 +49,19 @@ export default function Guardar(){
       }, []);
 
       useEffect(() => {
-        SetDepo(JSON.parse(sessionStorage.getItem('sessionDepo')))
+        SetDepo(JSON.parse(sessionStorage.getItem('deposit')))
         console.log("depo",depo)
        }, []); // Este efecto se ejecutará cada vez que 'depo' cambie
 
-  useEffect(() => {
-    // Este efecto se ejecutará cada vez que 'depo' cambie
-    sessionStorage.setItem('sessionDepo', JSON.stringify(depo));
-    console.log("codigossessionStorage", depo);
-    console.log("depo", depo);
-  }, [depo]);
+      useEffect(() => {
+        // Este efecto se ejecutará cada vez que 'depo' cambie
+        sessionStorage.setItem('deposit', JSON.stringify(depo));
+        console.log("codigossessionStorage", depo);
+        console.log("depo", depo);
+      }, [depo]);
     
 
-      /*------------CREAR UN sessionDepo------------- */
+      /*------------CREAR UN DEPOSITO------------- */
       const createDeposit = async () =>{
         const token = sessionStorage.getItem('access')
         console.log(token)
@@ -74,7 +78,7 @@ export default function Guardar(){
               console.log("CODIGO")
 
               // Obtén los datos del almacenamiento local
-              let codigossessionStorage = JSON.parse(sessionStorage.getItem('sessionDepo')) || [];
+              let codigossessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
 
               
               let codigosResponse = response.data;
@@ -84,7 +88,7 @@ export default function Guardar(){
               
               
               // Guarda los datos actualizados en el almacenamiento local
-              sessionStorage.setItem('sessionDepo', JSON.stringify(codigossessionStorage));
+              sessionStorage.setItem('deposit', JSON.stringify(codigossessionStorage));
               SetDepo(codigossessionStorage);
               
               console.log("codigossessionStorage",codigossessionStorage)
@@ -98,13 +102,25 @@ export default function Guardar(){
             setLoading(false)
            }
            
-  }
+    }
+
+     /*-----PARA VISIBILIZAR EL ERROR DIALOG------*/
+     const [isObjectVisible, setIsObjectVisible] = useState(false);
+     const errorVisible = () => {
+       setIsObjectVisible(true);
+       setTimeout(() => {
+           setIsObjectVisible(false);
+       }, 3000);
+    }
+
+          
 
 
-        /*------------OBTENER sessionDepoS------------- */
-        const donaciones = async () =>{
+        /*------------OBTENER DEPOSITOS------------- */
+        const depositos = async () =>{
             const token = sessionStorage.getItem('access')
             console.log(token)
+            setLoadingDeposit(true)
             
             try {
                 const response = await axios.get('https://zona0.onrender.com/banking/account/', { 
@@ -116,7 +132,7 @@ export default function Guardar(){
                  console.log(response.data)
                 
                  // Obtén los datos del almacenamiento local
-                let codigossessionStorage = JSON.parse(sessionStorage.getItem('sessionDepo')) || [];
+                let codigossessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
                             
                 // Obtén los datos de la respuesta de la petición
                 let codigosResponse = response.data;
@@ -144,36 +160,44 @@ export default function Guardar(){
                 });
                 
                 // Guarda los datos actualizados en el almacenamiento local
-                sessionStorage.setItem('sessionDepo', JSON.stringify(codigosResponse));
+                sessionStorage.setItem('deposit', JSON.stringify(codigosResponse));
 
                 SetDepo(codigosResponse);
-                   
+                setLoadingDeposit(false)
                     
                 
                } catch(error) {
                 console.log(error.response);
-                /*if(error.response.status === 404){
-                    sessionStorage.setItem('sessionDepo','');
-                    SetDepo([]);
-                }*/
+                setLoadingDeposit(false)
+                if(error.response.status === 404){
+                  localStorage.removeItem('deposit');
+                  SetDepo([]);
+              }
+              
                }    
              }
-             const handleChange= (event) => {
-                setFormValue({
-                  ...formValue,
-                  [event.target.name]:event.target.value
-                })
-              }
+
+             
 
 
-             if (!isMounted) {
-                return null; // Or some placeholder content
+        const handleChange= (event) => {
+           setFormValue({
+             ...formValue,
+             [event.target.name]:event.target.value
+           })
+         }
 
-               }
+
+        if (!isMounted) {
+           return null; // Or some placeholder content
+          }
 
     return(
         <div className={style.cont}>
+                         
             <div className={style.content}>
+            {isObjectVisible && <div className={style.error} >
+                         <ErrorDialog error = {resp} /> </div>}
                 <div className={style.header} /*data-aos="fade-up"*/>
                   <div className={style.line}></div>
                   <h3>Bancarizar</h3> 
@@ -221,27 +245,44 @@ export default function Guardar(){
 
                     </div>
 
-                <div className={style.sessionDeposBx}>
+                <div className={style.depositsBx}>
                     <div className={style1.header} /*data-aos="fade-up"*/>
                       <div className={style1.line}></div>
                       <h3>Depositos</h3> 
                     </div>
+                    
                     <div className={style.depo}>
-                       {depo !== null ?  depo.map((index) =>{
-                        
-                        return index.state === "Banked" ? <DepositosCard res = {index} key = {index}/> : ""
-                        }): <div className={style.empty}>No has realizado ningun deposito todavia</div>}
+                    {loadingDeposit  ? <div className={style.loaderDepo}>
+                           <BeatLoader
+                        color="rgba(255, 68, 0,1)"
+                        cssOverride={{}}
+                        margin={10}
+                        size={10}
+                        speedMultiplier={1}
+                        />
+                    </div> : 
+                        depo.length !== 0 
+                           ? depo
+                             .filter(index => index.state === "Banked") // Filtramos aquí
+                             .map((index) => (
+                               <DepositosCard 
+                                 res={index} 
+                                 key={index} 
+                                 setResp={setResp}
+                                 errorVisible={errorVisible}
+                                 SetDepo = {SetDepo}
+                                 depo = {depo}
+                                 setVisible = {setVisible}
+                               />
+                             ))
+                           : <div className={style.empty}>No has realizado ningún depósito todavía</div>
+                      }
                         
                     </div>
-                </div>
-
-
-                </div>
-                
-                
                     
-            
-                
+                </div>
+                </div>
+
             </div>
         </div> 
     )
