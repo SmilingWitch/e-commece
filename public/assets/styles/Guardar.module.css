@@ -1,0 +1,276 @@
+.depositosBx{
+    position: relative;
+    width: 100%;
+
+}
+
+.cont{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    
+}
+.content{
+    position: relative;
+    width: calc(100vw - 320px);
+    min-height: 90vh;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 90px;
+    padding-bottom: 10vh;
+}
+.bx{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+.contBx{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 30px;
+    border-radius: 20px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    
+}
+.description{
+    position: relative;
+    width: 90%;
+    text-align: center;
+    
+}
+.description span{
+    font-family: "PoppinsBolder";
+}
+.header{
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.line{
+    position: relative;
+    height: 100%;
+    width: 5px;
+    background: var(--hlColor);
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.depo{
+    position: relative;
+    margin: 0 auto;
+    width: 600px;
+    padding: 20px;
+    background: whitesmoke;
+    border-radius: 10px;
+    height: 500px;
+    overflow: scroll;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+
+/*-----------------CARD----------------*/
+.card{
+    color: var(--darkLetter);
+    width: 100%;
+    height: 150px;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card div span{
+    font-family: "PoppinsBold";
+}
+.info{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    width: 70%;
+    justify-content: space-between;
+    background: var(--lightColor);
+}
+.date{
+    font-size: 0.8em;
+}
+.btnBx{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 100%;
+    width: 25%; 
+}
+.btnBx button{
+    position: relative;
+    top: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    padding: 8px !important;
+    text-transform: none !important;
+    border-radius: 30px !important;
+    width: 100px;
+}
+.cont button,
+.cont1 button{
+    position: relative;
+    border: none;
+    background: var(--hlColor);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--lightLetter);
+    margin-top: 30px;
+}
+.cont button:hover,
+.cont1 button:hover{
+    background: var(--hlColorHover);
+}
+.popUp{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progreso{
+    position: relative;
+    display: flex;
+}
+.hover{
+    position: absolute;
+    width: 100px;
+    font-size: 0.8em;
+    z-index: 100;
+    background: whitesmoke;
+    box-shadow:  4px 4px 8px #a2a2a2;
+    padding: 5px;
+    border-radius: 10px;
+    top: 40px;
+    /*display: none;*/
+    display: none;
+    transition: 0.3s;
+}
+.deseableBtn{
+    background: rgb(173, 172, 172) !important;
+}
+.empty{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--darkLetter);
+}
+.sessionDeposBx{
+    position: relative;
+    width: 100%;
+}
+.icon{
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.popUp:hover .hover{
+    display: block;
+}
+@media(max-width:768px){
+    .content{
+        position: relative;
+        width: 100%;
+        margin: 0;
+    }
+    .header{
+        margin-top: 0px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .description{
+        width: 100%;
+        
+    }
+    .input{
+        width: 100%;
+    }
+    .input .inputBx{
+        width: 100%;
+
+    }
+    .inputBx input{
+    width: 80%;
+    }
+    .contBx{
+        margin-top: 30px;
+        margin-bottom: 50px;
+        width: 90%;
+        padding: 20px;
+    }
+    .depo{
+        width: 90%;
+        margin-top: 30px;
+        padding: 10px;
+        
+    }
+    .info{
+        font-size: 0.8em;
+    }
+    .card{
+        padding: 15px;
+
+    }
+    .sessionDeposBx{
+        width: 100%;
+    }
+}
+@media(max-width: 646px){
+    
+    .card{
+        flex-direction: column;
+        height: 180px;
+    }
+    .info{
+        width: 100%;
+    }
+    .btnBx{ 
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+        justify-content: space-around;
+        height: 80px;
+    }
+    
+}
