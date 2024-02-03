@@ -218,7 +218,7 @@ export default function Guardar(){
          }
          
   }     
-
+    
 
         const handleChange= (event) => {
            setFormValue({
@@ -235,7 +235,7 @@ export default function Guardar(){
 
     return(
         <div className={style.cont}>
-          {dialog === true ?  <div className={style.prov}>
+          {dialog &&  <div className={style.prov}>
             <Dialog 
                     header = "Retirar OSP"
                     content = "Si retiras ahora obtendras 0.00 OSP de ganancia." 
@@ -244,7 +244,7 @@ export default function Guardar(){
                     Setloading = {SetLoadingDialog}
                    
                     fnc = {retirar}/>  
-          </div>: ""}
+          </div>}
      
         
            
@@ -326,7 +326,7 @@ export default function Guardar(){
                                  errorVisible={errorVisible}
                                  SetDepo = {SetDepo}
                                  depo = {depo}
-                                 setVisible = {setVisible}
+                                 setVisible = {Setdialog}
                                  setSelected = {setSelectedD}
                                />
                              ))
