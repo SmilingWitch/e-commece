@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import BeatLoader from "react-spinners/BeatLoader"
 import ErrorDialog from "../ErrorDialog"
+import Dialog from "../Dialog"
 
 export default function Guardar(){
 
@@ -19,11 +20,13 @@ export default function Guardar(){
 
         
     }
-
+    
     const [depo, SetDepo] = useState( depositsFromsessionStorage);
-    const [update, SetUpdate] = useState(0);
+    const [selectedD, setSelectedD] = useState(null)
     const [isMounted, setIsMounted] = useState(false);
+    const [loadingDialog, SetLoadingDialog] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [dialog, Setdialog] = useState(false);
     const [resp, setResp] = useState(false);
     const { credential } = useContext(AuthContext);
     const [formValue,setFormValue]=useState({
@@ -93,9 +96,10 @@ export default function Guardar(){
               
               console.log("codigossessionStorage",codigossessionStorage)
               console.log("depo",depo)
-
+              
 
             setLoading(false)
+
             console.log(response.data)
            } catch(error) {
             console.log(error.response);
@@ -177,7 +181,43 @@ export default function Guardar(){
                }    
              }
 
-             
+        /*------------RETIRAR------------- */
+    const retirar = async () =>{
+      const token = sessionStorage.getItem('access')
+      console.log(token)
+      console.log("Peticion")
+      setLoading(true)
+      console.log(token)
+      SetLoadingDialog(true)
+      try {
+          const response = await axios.post(`https://zona0.onrender.com/banking/account/withdraw/?id=${selectedD}`,{},{ 
+              headers: {
+                  'Authorization': 'Bearer ' + token
+              }
+            });
+            console.log(response.data)
+
+          let codigossessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
+
+          let idToRemove = selectedD; // Reemplaza esto con el ID que quieres eliminar
+          let newArray = codigossessionStorage.filter(obj => obj.id !== idToRemove);
+          console.log("newArray",newArray)
+          sessionStorage.setItem('deposit', JSON.stringify(newArray));
+          let updatedArray = JSON.parse(sessionStorage.getItem('deposit'));
+          console.log("updatedArray", updatedArray);
+
+          SetLoadingDialog(false)
+          errorVisible(JSON.parse(sessionStorage.getItem('deposit')))
+          setResp(response.data.message)
+          SetDepo(updatedArray)
+          Setdialog(false)
+         } catch(error) {
+          console.log(error.response)
+          SetLoadingDialog(false)
+          Setdialog(false)
+         }
+         
+  }     
 
 
         const handleChange= (event) => {
@@ -187,6 +227,7 @@ export default function Guardar(){
            })
          }
 
+        
 
         if (!isMounted) {
            return null; // Or some placeholder content
@@ -194,7 +235,20 @@ export default function Guardar(){
 
     return(
         <div className={style.cont}>
-                         
+          {dialog === true ?  <div className={style.prov}>
+            <Dialog 
+                    header = "Retirar OSP"
+                    content = "Si retiras ahora obtendras 0.00 OSP de ganancia." 
+                    SetActive = {Setdialog} 
+                    loading = {loadingDialog} 
+                    Setloading = {SetLoadingDialog}
+                   
+                    fnc = {retirar}/>  
+          </div>: ""}
+     
+        
+           
+                       
             <div className={style.content}>
             {isObjectVisible && <div className={style.error} >
                          <ErrorDialog error = {resp} /> </div>}
@@ -273,10 +327,12 @@ export default function Guardar(){
                                  SetDepo = {SetDepo}
                                  depo = {depo}
                                  setVisible = {setVisible}
+                                 setSelected = {setSelectedD}
                                />
                              ))
                            : <div className={style.empty}>No has realizado ningún depósito todavía</div>
-                      }
+                             }
+                             
                         
                     </div>
                     
