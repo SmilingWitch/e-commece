@@ -83,6 +83,7 @@
     overflow: scroll;
     margin-top: 30px;
     margin-bottom: 50px;
+    
 }
 
 
@@ -206,6 +207,29 @@
 .popUp:hover .hover{
     display: block;
 }
+.loaderDepo{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.depositsBx{
+    position: relative;
+    width: 100%;
+}
+.error{
+    color: var(--lightLetter);
+    position: fixed;
+    width: 100%;
+    height: 90vh;
+    text-align: center;
+    z-index: 100000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
 @media(max-width:768px){
     .content{
         position: relative;
@@ -241,6 +265,7 @@
         width: 90%;
         margin-top: 30px;
         padding: 10px;
+       
         
     }
     .info{
