@@ -40,8 +40,8 @@
 .description{
     position: relative;
     width: 90%;
-    margin-top: 30px;
     text-align: center;
+    
 }
 .description span{
     font-family: "PoppinsBolder";
