@@ -238,7 +238,7 @@ export default function Guardar(){
           {dialog &&  <div className={style.prov}>
             <Dialog 
                     header = "Retirar OSP"
-                    content = "Si retiras ahora obtendras 0.00 OSP de ganancia." 
+                    content = "Estas seguro de que quieres retirar el deposito?" 
                     SetActive = {Setdialog} 
                     loading = {loadingDialog} 
                     Setloading = {SetLoadingDialog}
