@@ -14,11 +14,15 @@ export default function InstitutionCard({res}){
     return (
         <div className={style.card}>
             <div className={style.imageBx}>
-                <Image 
+               {res.image !== null ? <Image 
                     layout="fill"
                     objectFit="cover"
                     src={res.image} /*"/assets/images/gilles-lambert-mSK5nNsAsLY-unsplash.jpg"*/
-                    alt="Descripción de la imagen"/>
+                    alt="Descripción de la imagen"/>: <Image 
+                    layout="fill"
+                    objectFit="cover"
+                    src="/assets/images/defaultDonation.jpg"
+                    alt="Descripción de la imagen"/>}
             </div>
             <div className={style.info}>
                 <div className={style.bxCard}>
