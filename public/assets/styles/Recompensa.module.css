@@ -9,7 +9,7 @@
 }
 .content{
     position: relative;
-    width: calc(100vw - 320px);
+    width: calc(100% - 320px);
     height: 90vh;
     margin-right: 10px;
     display: flex;
@@ -48,12 +48,19 @@
 .description span{
     font-family: "PoppinsBolder";
 }
+
 .header{
     position: relative;
     height: 40px;
     display: flex;
     align-items: center;
     width: 100%;
+}
+
+.iconCalc{
+    position: relative;
+    color: var(--hlColor);
+    background: red;
 }
 .line{
     position: relative;
