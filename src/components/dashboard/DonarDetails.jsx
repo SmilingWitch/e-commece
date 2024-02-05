@@ -16,6 +16,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useRouter } from 'next/navigation'
 
 
+
 export default function DonarDetails(){
   
 
@@ -41,69 +42,7 @@ export default function DonarDetails(){
       router.push('/accounts/login');
    }
 
-    const settings = {
-        dots: true,
-        arrows: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 500,
-        fade : false ,
-   
-        responsive: [
-          {
-            breakpoint: 1600,
-            settings: {
-              slidesToShow: 1,
-            },
-          },
-          {
-            breakpoint: 1400,
-            settings: {
-              slidesToShow: 1,
-            },
-          },
-          {
-            breakpoint: 992,
-            settings: {
-              slidesToShow: 1,
-            },
-          },
-          {
-            breakpoint: 864,
-            settings: {
-              slidesToShow: 1,
-              initialSlide: 1,
-              arrows: false,
-    
-            },
-          },
-    
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 1,
-              initialSlide: 1
-            },
-          },
-          {
-            breakpoint: 564,
-            settings: {
-              slidesToShow: 1,
-              
-    
-            },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-               
-             
-            },
-          },
-        ],
-      };
+
       const [institution, SetInstitution] = useState(institutionsFromlocalStorage.filter(institution => institution.id === id))
       const [gallery, SetGallery] = useState(institution[0]?.galleryInstitution)
       const [amount, SetAmount] = useState(institution[0]?.institution_osp)
@@ -168,6 +107,77 @@ export default function DonarDetails(){
            }    
          }
 
+         const settings = {
+          dots: true,
+          arrows: true,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          autoplay: false,
+          speed: 200,
+          fade : false ,
+          centerMode: true, // Habilita el modo de centrado
+          centerPadding: '60px', // Define el espacio adicional alrededor del elemento central
+     
+          responsive: [
+            {
+              breakpoint: 1600,
+              settings: {
+                slidesToShow: 3,
+                arrows: true,
+                
+              },
+            },
+            {
+              breakpoint: 1400,
+              settings: {
+                slidesToShow: 3,
+              },
+            },
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 3,
+                centerMode: false, // Habilita el modo de centrado
+              },
+            },
+            {
+              breakpoint: 864,
+              settings: {
+                slidesToShow: 3,
+                initialSlide: 1,
+                arrows: false,
+                centerMode: false, // Habilita el modo de centrado
+      
+              },
+            },
+      
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                centerMode: false, // Habilita el modo de centrado
+              },
+            },
+            {
+              breakpoint: 564,
+              settings: {
+                slidesToShow: 2,
+                centerMode: false, // Habilita el modo de centrado
+                
+      
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 2,
+                centerMode: false, // Habilita el modo de centrado
+               
+              },
+            },
+          ],
+        };
+
 
     return(
         <div className={style.cont}  >
@@ -182,10 +192,14 @@ export default function DonarDetails(){
 
                 <div className={style.frontImage}>
                   <div className={style.frontImageBx}>
-                    <Image 
+                 { institution[0].image !==null ? <Image 
                               layout="fill"
                                 objectFit="cover"
-                      src = {institution[0]?.image}/>
+                      src = {institution[0]?.image}/>: <Image 
+                      layout="fill"
+                      objectFit="cover"
+                      src="/assets/images/defaultDonation.jpg"
+                      alt="Descripción de la imagen"/>}
 
                   </div>
                   <div className={style.nameInst}>
@@ -196,49 +210,40 @@ export default function DonarDetails(){
 
                   </div>
                 </div>
-                {gallery  ? <div className={style.imgBxGallery}>
+                {gallery ? <div className={style.imgBxGallery}>
+                
+                               {/*gallery.map((item, index) => 
+                                <div  key = {index}>
+                                  {item.image !== null ? 
+                                  <div className={style.ImageBxGallery1} key = {index}>
+                                  <Image
+                                   layout="fill"
+                                   objectFit="cover"
+                                   src={item.image}
+                                   key = {index}
+                                   alt="properties identity"
+                                   /> </div>: ""}
+                                </div>              
+                                  )*/}
+                               
+                               <Slider {...settings}>
+                                  {gallery.map((item, index) => (
+                                    item.image && <div key={index} className={item.image !== null ? `${style.visible}` : `${style.invisible}`}>
 
-                         {gallery.map((item, index) => 
-                            <div className={style.ImageBxGallery} key = {index}>
-                                <Image
-                                layout="fill"
-                                objectFit="cover"
-                                src={item.image}
-                                key = {index}
-                                alt="properties identity"
-                                />
-                            </div>              
-                            )}
+                                        <div className={style.ImageBxGallery1} key={index}>
+                                          <Image
+                                            layout="fill"
+                                            objectFit="cover"
+                                            src={item.image}
+                                            key={index}
+                                            alt="properties identity"
+                                          />
+                                        </div>
+
+                                    </div>
+                                  ))}
+                              </Slider>
                 </div>: undefined}
-
-               {/*<div className={style.infoDetails}>
-                    <div className={style.imageBxDetail}>
-                        
-                     {gallery  ?
-                     <div className={style.gallery}>
-                        <Slider {...settings} >
-                         {gallery.map((item, index) => 
-                            <div className={style.images}>
-                                <Image
-                                layout="fill"
-                                objectFit="cover"
-                                src={item.image}
-                                alt="properties identity"
-                                />
-                            </div>              
-                            )}
-                            </Slider>
-                     </div>
-                        : undefined}
-                    </div>
-                    
-
-                </div>*/}
-
-                {/*<div className={`${style.header} ${style.header1}`}>
-                  <div className={style.line}></div>
-                  <h3>About me</h3>
-              </div>*/}
               <div className={style.about}>
                   <div className={style.descriptionDetail}>
                     <div className={`${style.header} ${style.header1}`}>
