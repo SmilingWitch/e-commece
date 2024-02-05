@@ -1,0 +1,92 @@
+.cont{
+    position: fixed;
+    background-color: rgba(135, 134, 134, 0.5);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000000000000000000;
+}
+.bx{
+    position: relative;
+    width: 400px;
+    min-height: 200px;
+    background: var(--lightBg);
+    border-radius: 20px;
+    padding: 20px;
+    color: var(--darkLetter);
+}
+.answer{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background: var(--lightColor);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    
+}
+.calc{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--darkLetter);
+}
+
+.calc:nth-child(1){
+    font-size: 1.5em;
+}
+
+.inputsBx{
+    position: relative;
+    
+   height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.input{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+}
+.input span{
+    position: relative;
+    margin-left: 10px;
+}
+
+.input input{
+    position: relative;
+
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--darkLetter);
+    width: 100%;
+    border: 1px solid var(--hlColor);
+    padding: 10px;
+    height: 40px;
+    border-radius: 50px;
+}
+.iconBx{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 30px;
+    
+}
+.iconClose{
+    font-size: 1.2em;
+    cursor: pointer;
+}
