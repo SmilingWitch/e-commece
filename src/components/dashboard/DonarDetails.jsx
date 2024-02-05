@@ -156,6 +156,7 @@ export default function DonarDetails(){
               settings: {
                 slidesToShow: 3,
                 centerMode: false, // Habilita el modo de centrado
+                arrows:false,
               },
             },
             {
@@ -163,7 +164,7 @@ export default function DonarDetails(){
               settings: {
                 slidesToShow: 2,
                 centerMode: false, // Habilita el modo de centrado
-                
+                arrows:false,
       
               },
             },
@@ -172,7 +173,15 @@ export default function DonarDetails(){
               settings: {
                 slidesToShow: 2,
                 centerMode: false, // Habilita el modo de centrado
-               
+                arrows:false,
+              },
+            },
+            {
+              breakpoint: 380,
+              settings: {
+                slidesToShow: 1,
+                centerMode: true, // Habilita el modo de centrado
+                arrows:false,
               },
             },
           ],

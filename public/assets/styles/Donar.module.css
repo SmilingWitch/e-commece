@@ -175,6 +175,8 @@
     /*display: flex;*/
     height: 250px;
     width: 800px;
+    padding-left: 30px;
+    padding-right: 25px;
     
 }
 .ImageBxGallery{
@@ -294,6 +296,10 @@
 
         width: 100% !important;
     }
+    .imgBxGallery{
+        width: 100%;
+        padding-left: 35px;
+    }
 }
 
 @media(max-width:700px){
@@ -316,5 +322,14 @@
     .ImageBxGallery{
         width: 100px;
         height: 150px;
+    }
+}
+@media(max-width:380px){
+    .imgBxGallery{
+        
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        background: red;
     }
 }
