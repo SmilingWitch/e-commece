@@ -291,6 +291,10 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
+.deseableBtn{
+    background: rgb(173, 172, 172) !important;
+}
+
 
 @media(max-width: 1324px){
     .depo{

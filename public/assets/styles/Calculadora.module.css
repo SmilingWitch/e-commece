@@ -122,7 +122,6 @@
 
 @media(max-width: 398px){
     .input{
-        background: red;
         width: 90%;
     }
     .input input{

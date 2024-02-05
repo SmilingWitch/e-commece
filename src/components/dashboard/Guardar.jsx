@@ -269,7 +269,7 @@ export default function Guardar(){
 
                         <div className={style.description}>
                               <span>Entre el monto:</span>
-                              <p>Deposita tus fondos y obtén un interés fijo del 3% mensual para hacer crecer tus ahorros.</p>
+                              <p>Deposita tus fondos y obtén un interés fijo del 3% cada 30 dias para hacer crecer tus ahorros.</p>
                               <p className={style.infoWarning}>Las OSP depositadas quedaran congeladas un total de 60 dias. Luego de eso podra retirarlas.</p>
                           </div>
 
