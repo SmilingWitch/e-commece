@@ -11,6 +11,8 @@ import { AuthContext } from '../../contexts/AuthContext';
 import BeatLoader from "react-spinners/BeatLoader"
 import ErrorDialog from "../ErrorDialog"
 import Dialog from "../Dialog"
+import { IoIosCalculator } from "react-icons/io";
+import Calculadora from "./Calculadora"
 
 export default function Guardar(){
 
@@ -25,7 +27,7 @@ export default function Guardar(){
     const [selectedD, setSelectedD] = useState(null)
     const [isMounted, setIsMounted] = useState(false);
     const [loadingDialog, SetLoadingDialog] = useState(false);
-    const [visible, setVisible] = useState(false);
+    const [visible, SetVisible] = useState(false);
     const [dialog, Setdialog] = useState(false);
     const [resp, setResp] = useState(false);
     const { credential } = useContext(AuthContext);
@@ -245,16 +247,21 @@ export default function Guardar(){
                    
                     fnc = {retirar}/>  
           </div>}
+          {visible && <div className={style.prov}>
+          <Calculadora SetVisible = {SetVisible}/>
+        </div>}
+          
      
         
            
                        
             <div className={style.content}>
+            
             {isObjectVisible && <div className={style.error} >
                          <ErrorDialog error = {resp} /> </div>}
                 <div className={style.header} /*data-aos="fade-up"*/>
                   <div className={style.line}></div>
-                  <h3>Bancarizar</h3> 
+                  <h3>Bancarizar <button className={style.btn} onClick={() => SetVisible(true)}><span><IoIosCalculator/></span> <span>Calculadora</span></button></h3> 
                 </div>
                 
                 <div className={style.bx}>
@@ -263,6 +270,7 @@ export default function Guardar(){
                         <div className={style.description}>
                               <span>Entre el monto:</span>
                               <p>Deposita tus fondos y obtén un interés fijo del 3% mensual para hacer crecer tus ahorros.</p>
+                              <p className={style.infoWarning}>Las OSP depositadas quedaran congeladas un total de 60 dias. Luego de eso podra retirarlas.</p>
                           </div>
 
                           <div className={style2.input}>
