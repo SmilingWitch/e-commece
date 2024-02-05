@@ -11,7 +11,20 @@ import BeatLoader from "react-spinners/BeatLoader"
 export default function DepositosCard({res,setVisible, setSelected}){
 
     const { credential } = useContext(AuthContext);
+
     
+
+    const [calc, SetCalc] = useState()
+
+    
+    useEffect(() => { 
+        if (res.date_banked >= 30){
+            SetCalc(((res.amount * (res.date_banked/30) * (3/100)) + res.amount))
+        } else{
+            SetCalc(res.amount)
+        }
+        
+      }, []);
 
     return(
         <div className={style.card} >
@@ -19,7 +32,8 @@ export default function DepositosCard({res,setVisible, setSelected}){
                 <div className={style.date}> <span>{res.date}</span></div>
                 <div className={style.gain}><span>Ganancia mensual</span> <span>3%</span></div>
                 <div className={style.amount}><span>Monto inicial</span> <span>{res.amount} OSP</span></div>
-                <div className={style.block}><span>Ganancia</span> <span>0.00 OSP</span></div>
+                <div className={style.block}><span>Monto actual</span> <span>{calc} OSP</span></div>
+                <div className={style.block}><span>Proxima ganancia</span> <span>{res.post_interest} OSP</span></div>
                 <div className={style.block}><span>Tiempo de bloqueo</span> <span>{res.date_banked} dia(s)</span></div>
                 
             </div>
