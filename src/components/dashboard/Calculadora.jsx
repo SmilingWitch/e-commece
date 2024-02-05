@@ -6,6 +6,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect, useState } from "react";
 import {VscClose} from "react-icons/vsc"
+import { FaPlus } from "react-icons/fa6";
+import { FaMinus } from "react-icons/fa6";
 
 
 export default function Calculadora({SetVisible}){
@@ -27,11 +29,14 @@ export default function Calculadora({SetVisible}){
 
       const [formValue, setFormValue] = useState({
         amount: 0,
-        days: 0
+        days: 30
       });
     
       const [result, setResult] = useState(0);
       const [gain, setGain] = useState(0);
+      const [suma, setSuma] = useState(30);
+      const [resta, setResta] = useState(30);
+
     
       const handleChange = (event) => {
         const { name, value } = event.target;
@@ -56,12 +61,36 @@ export default function Calculadora({SetVisible}){
             }
 
           
-          
         } else {
           setResult(0);
         }
       }, [formValue]);
 console.log(result)
+
+
+    const incrementSuma = () => {
+      setFormValue(prevFormValue => ({
+        ...prevFormValue,
+        days: prevFormValue.days +  30
+      }));
+    };
+
+    const decrementResta = () => {
+      setFormValue(prevFormValue => {
+        let newDays = prevFormValue.days;
+        if (newDays >  30) {
+          newDays -=  30;
+        }
+        return {
+          ...prevFormValue,
+          days: newDays
+        };
+      });
+    };
+    function redondearDecimales(num, decimales) {
+      var multiplicador = Math.pow(10, decimales);
+      return Math.round(num * multiplicador) / multiplicador;
+    }
 
 
 
@@ -73,12 +102,17 @@ console.log(result)
                 <VscClose className={style.iconClose} onClick = {() =>  SetVisible(false)}/> 
             </div>
                 <div className={style.answer}>
-                    <div className={style.calc}><span>Monto total</span><span>{result}</span></div>
-                    <div className={style.calc}><span>Ganancia</span><span>{gain}</span></div>
+                    <div className={style.calc}><span>Monto total</span><span>{redondearDecimales(result,  2)}</span></div>
+                    <div className={style.calc}><span>Ganancia</span><span>{redondearDecimales(gain,  2)}</span></div>
                 </div>
                 <div className={style.inputsBx}>
                     <div className={style.input}>
                         <span>Dias</span>
+                        <div className={style.days}>
+                          <div className={style.inputIcon} onClick={decrementResta}>
+                            <FaMinus/>
+                          </div>
+                          
                         <input 
                             type="text" 
                             name="days" 
@@ -86,13 +120,20 @@ console.log(result)
                             value={formValue.days}
                             onChange={handleChange}
                             onKeyDown={(event) => {
-                            const keyCode = event.keyCode;
-                            const isNumber = (keyCode >= 48 && keyCode <= 57);
-                            const isBackspace = (keyCode === 8);
-                            if (!isNumber && !isBackspace) {
-                              event.preventDefault();
-                            }
-                          }}/>
+                              const keyCode = event.keyCode;
+                              const isNumber = (keyCode >= 48 && keyCode <= 57);
+                              const isBackspace = (keyCode === 8);
+                              if (!isNumber && !isBackspace) {
+                                event.preventDefault();
+                              }
+                            }}
+                            />
+                            <div className={style.inputIcon} onClick = {incrementSuma}>
+                              <FaPlus />
+                            </div>
+                          
+                        </div>
+                        
                     </div>
                     <div className={style.input}>
                         <span>Monto</span>

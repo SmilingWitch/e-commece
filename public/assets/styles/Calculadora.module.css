@@ -61,7 +61,8 @@
 }
 .input span{
     position: relative;
-    margin-left: 10px;
+    margin-left: 30px;
+    font-size: 0.8em;
 }
 
 .input input{
@@ -71,11 +72,12 @@
     outline: none;
     background: transparent;
     color: var(--darkLetter);
-    width: 100%;
+    width: 180px;
     border: 1px solid var(--hlColor);
     padding: 10px;
     height: 40px;
     border-radius: 50px;
+    margin: 0 auto;
 }
 .iconBx{
     position: relative;
@@ -89,4 +91,41 @@
 .iconClose{
     font-size: 1.2em;
     cursor: pointer;
+}
+.days{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inputIcon{
+    position: relative;
+    background: var(--hlColor);
+    color: var(--lightLetter);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px ;
+    cursor: pointer;
+}
+.input{
+    width: 70%;
+}
+.days{
+    width: 100%;
+}
+.days input{
+    width: 180px;
+}
+
+@media(max-width: 398px){
+    .input{
+        background: red;
+        width: 90%;
+    }
+    .input input{
+        width: 70%;
+    }
 }
