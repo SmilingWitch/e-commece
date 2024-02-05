@@ -18,7 +18,7 @@ export default function DepositosCard({res,setVisible, setSelected}){
 
     
     useEffect(() => { 
-        if (res.date_banked >= 30){
+        if (res.date_banked >= 30 && res.date_banked %  30 ===  0){
             SetCalc(((res.amount * (res.date_banked/30) * (3/100)) + res.amount))
         } else{
             SetCalc(res.amount)
@@ -49,8 +49,10 @@ export default function DepositosCard({res,setVisible, setSelected}){
                         
     </div>
                 </div>*/}
-                
-            <button onClick={() => {setVisible(true); setSelected(res.id);console.log(res.id)}}>Retirar</button>
+             {res.date_banked > 60 ?  
+            <button onClick={() => {setVisible(true); setSelected(res.id);console.log(res.id)}}>Retirar</button> :
+            <button className={style.deseableBtn}>Retirar</button>
+            }
             </div>
             
             
