@@ -1,6 +1,7 @@
 import style from "../../public/assets/styles/SideBar.module.css"
 import { IoGameControllerOutline } from "react-icons/io5";
 import { LuArrowDownToLine, LuArrowUpFromLine } from "react-icons/lu";
+import { FaRegCreditCard } from "react-icons/fa";
 import { BiDonateHeart } from "react-icons/bi";
 import { GrSave } from "react-icons/gr";
 import { IoGiftOutline } from "react-icons/io5";
@@ -71,12 +72,12 @@ export default function SideBar(){
 
             </div>
             <div className={style.juego}>
-                <h3>Juegos</h3>
+                <h3>Personal</h3>
                 <ul>
                     <li>
                         <Link  href="/dashboard/wallet"  className={style.link}>
-                            <span className={style.icon}><IoGameControllerOutline/></span>
-                            <span>Cerito</span>    
+                            <span className={style.icon}><FaRegCreditCard/></span>
+                            <span>Tarjetas</span>    
                         </Link> 
                         </li>
                 </ul>
