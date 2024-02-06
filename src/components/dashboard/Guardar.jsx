@@ -248,8 +248,8 @@ export default function Guardar(){
                     fnc = {retirar}/>  
           </div>}
           {visible && <div className={style.prov}>
-          <Calculadora SetVisible = {SetVisible}/>
-        </div>}
+            <Calculadora SetVisible = {SetVisible}/>
+          </div>}
           
      
         
