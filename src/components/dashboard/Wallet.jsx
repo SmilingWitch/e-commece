@@ -13,6 +13,7 @@ import { FaBalanceScale } from "react-icons/fa";
 import { IoGiftOutline } from "react-icons/io5";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { BiDonateHeart } from "react-icons/bi";
+import { FaRegCreditCard } from "react-icons/fa";
 import Details from "./Details";
 import Dialog from "../Dialog";
 import TransactionSend from "./TransactionSend";
@@ -503,9 +504,9 @@ export default function Wallet() {
                 
                 <div className={style.opp}>
                   <div>
-                    <IoGameControllerOutline/>
+                    <FaRegCreditCard />
                   </div>
-                  <span>Jugar</span>
+                  <span>Tarjetas</span>
                 </div>
 
                 <Link href = "/dashboard/donar">
