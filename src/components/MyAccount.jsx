@@ -6,7 +6,6 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { IoIosArrowForward } from "react-icons/io";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 import { IoIosLogOut } from "react-icons/io";
-import { FaRegTrashAlt } from "react-icons/fa";
 import {VscClose} from "react-icons/vsc"
 import Switch from '@mui/material/Switch';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -15,15 +14,20 @@ import { IoMoonOutline } from "react-icons/io5";
 import Dialog from "./Dialog";
 import{ useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
-import Link from "next/link"
 import EditarDatos from "./EditarDatos";
 import ChangePassword from "./ChangePassword";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { FaRegCreditCard } from "react-icons/fa";
 import EditarDatosCompany from "./EditarDatosCompany";
+import CardConfig from "./CardConfig";
 
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+
+    export default function MyAccount({SetMyAccount}) {
+
+        const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const theme = createTheme({
     components: {
@@ -54,8 +58,6 @@ const theme = createTheme({
     },
    });
 
-    export default function MyAccount({SetMyAccount}) {
-
         const [link, SetLink] = useState(false)
         
         useEffect(() => {
@@ -68,6 +70,7 @@ const theme = createTheme({
     const { signOut } = useContext(AuthContext);
     const [isChecked, setIsChecked] = useState(false);
     const [active, SetActive] = useState(false);
+    const [activeCard, SetActiveCard] = useState(false);
     const [activeEdit, SetActiveEdit] = useState(false);
     const [activeEditComapany, SetActiveEditComapany] = useState(false);
     const [activechangePass, SetActivechangePass] = useState(false);
@@ -126,6 +129,9 @@ const theme = createTheme({
                         fnc = {handleSubmit}
                         loading = {loading}
                         setLoading = {setLoading}/>: ""}
+                        
+            {activeCard  === true ? <CardConfig 
+                                        SetActive = {SetActiveCard}/> : ""}
                 
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}} data-aos="fade-left">
                 
@@ -180,9 +186,14 @@ const theme = createTheme({
                         <div className={style.name} >Cerrar sesion</div>
                         <div className={style.icon1}><IoIosArrowForward/></div>
                     </div>
-                    <div className={style.option}>
+                    {/*<div className={style.option}>
                         <div className={style.icon}><FaRegTrashAlt /></div>
                         <div className={style.name}>Eliminar cuenta</div>
+                        <div className={style.icon1}><IoIosArrowForward/></div>
+                        </div>*/}
+                    <div className={style.option} onClick = {() => SetActiveCard(true)}>
+                        <div className={style.icon}><FaRegCreditCard /></div>
+                        <div className={style.name}>Gestion de tarjetas</div>
                         <div className={style.icon1}><IoIosArrowForward/></div>
                     </div>
                 </div>
@@ -215,7 +226,7 @@ const theme = createTheme({
                             </div>
                         }
                         
-                    <ThemeProvider theme={theme}>
+                    <ThemeProvider theme = {theme}>
                          <div>
                          <Switch 
                              checked={isChecked} 
