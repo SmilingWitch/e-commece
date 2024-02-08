@@ -398,6 +398,11 @@
         width: 90%;
         margin: 0 auto;
     }
+    .switch{
+
+        width: 100%;
+    
+    }
 
     .options{
 
@@ -439,5 +444,12 @@
     .amount{
         font-size: 0.6em;
         min-width: 80px;
+    }
+}
+@media(max-width: 466px){
+    .switch{
+
+        width: 100%;
+    
     }
 }
