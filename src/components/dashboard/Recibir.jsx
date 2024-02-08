@@ -100,20 +100,20 @@ export default function Recibir(){
                 
 
     return(
- <div className={style.cont}>
+ <div className="cont">
           {visible && (<Details 
                           SetVisible = {SetVisible}
                           recibir = {res}
                           />) }
-        <div className={style.content}>
-            <div className={style.header} data-aos="fade-up">
-              <div className={style.line}></div>
+        <div className="content">
+            <div className="header" data-aos="fade-up">
+              <div className="line"></div>
               <h3>Recibir OSP</h3> 
             </div>
 
-            <div className={style.bx} data-aos="fade-up">
-              <div className={style.contBx}>
-                  <div className={style.description}>
+            <div className="bx" data-aos="fade-up">
+              <div className="contBx">
+                  <div className="description">
                         <span>Entre el monto:</span>
                         <p>Introduzca la cantidad de SOP que desea recibir para generar un codigo de pago.</p>
                     </div>

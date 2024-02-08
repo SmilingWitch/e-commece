@@ -236,7 +236,7 @@ export default function Guardar(){
           }
 
     return(
-        <div className={style.cont}>
+        <div className="cont">
           {dialog &&  <div className={style.prov}>
             <Dialog 
                     header = "Retirar OSP"
@@ -255,7 +255,7 @@ export default function Guardar(){
         
            
                        
-            <div className={style.content}>
+            <div className="content">
             
             {isObjectVisible && <div className={style.error} >
                          <ErrorDialog error = {resp} /> </div>}
@@ -264,10 +264,9 @@ export default function Guardar(){
                   <h3>Bancarizar <button className={style.btn} onClick={() => SetVisible(true)}><span><IoIosCalculator/></span> <span>Calculadora</span></button></h3> 
                 </div>
                 
-                <div className={style.bx}>
-                    <div  className={style.contBx}>
-
-                        <div className={style.description}>
+                <div className="bx">
+                    <div  className="contBx">
+                        <div className="description">
                               <span>Entre el monto:</span>
                               <p>Deposita tus fondos y obtén un interés fijo del 3% cada 30 dias para hacer crecer tus ahorros.</p>
                               <p className={style.infoWarning}>Las OSP depositadas quedaran congeladas un total de 60 dias. Luego de eso podra retirarlas.</p>
@@ -308,8 +307,8 @@ export default function Guardar(){
                     </div>
 
                 <div className={style.depositsBx}>
-                    <div className={style1.header} /*data-aos="fade-up"*/>
-                      <div className={style1.line}></div>
+                    <div className="header" /*data-aos="fade-up"*/>
+                      <div className="line"></div>
                       <h3>Depositos</h3> 
                     </div>
                     

@@ -110,10 +110,10 @@ export default function Donar(){
 
 
     return(
-        <div className={style.cont}  data-aos="fade-up">
-            <div className={style.content} >
-                <div className={style.header}/* data-aos="fade-up"*/>
-                  <div className={style.line}></div>
+        <div className="cont"  data-aos="fade-up">
+            <div className="content" >
+                <div className="header"/* data-aos="fade-up"*/>
+                  <div className="line"></div>
                   <h3>Donar</h3>
                 </div>
                 {loading ? 

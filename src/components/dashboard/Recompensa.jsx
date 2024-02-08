@@ -85,17 +85,17 @@ export default function Recompensa(){
       }, []);
 
     return(
-        <div className={style.cont}>
+        <div className="cont">
           {active && <Regalo header = {res}  SetActive = {SetActive}/>}
           
-            <div className={style.content}>
-                <div className={style.header} data-aos="fade-up">
-                  <div className={style.line}></div>
+            <div className="content">
+                <div className="header" data-aos="fade-up">
+                  <div className="line"></div>
                   <h3>Canjear Codigo</h3> 
                 </div>
-                <div className={style.bx} data-aos="fade-up">
-                  <div  className={style.contBx}>
-                    <div className={style.description}>
+                <div className="bx" data-aos="fade-up">
+                  <div  className="contBx">
+                    <div className="description">
                           <span>Entre el codigo:</span>
                           <p>Aqui podras canjear codigos que esten disponibles para obtener OSP de manera gratuita.</p>
                       </div>
@@ -122,14 +122,14 @@ export default function Recompensa(){
 
                   </div>
                   
-                    <div className={style.regalo}>
+                    {/*<div className={style.regalo}>
                         <Image src = "/assets/images/undraw_happy_birthday_re_c16u.svg"
                         width = {300}
                         height={300}></Image>
                         {isObjectVisible && <div className={style.error} >
                          <ErrorDialog error = {error} />
                       </div>}
-                    </div>
+                    </div>*/}
                     
                 </div>
                 

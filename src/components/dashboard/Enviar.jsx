@@ -149,7 +149,7 @@ export default function Enviar(){
           }
          
     return(
-         <div className={style.cont}>
+         <div className="cont">
               {visible && <Dialog header = "Enviar"
                                   content = {"Estas seguro de que quieres mandar " + resDetails.amount + " SOP al usuario " + "@"+ resDetails.user + " ?"}
                                   SetActive = {SetVisible}
@@ -157,15 +157,15 @@ export default function Enviar(){
                                   loading = {loading} 
                                   setLoading={setLoading}/>}
           
-            <div className={style.content}>
-                <div className={style.header} data-aos="fade-up">
-                  <div className={style.line}></div>
+            <div className="content">
+                <div className="header" data-aos="fade-up">
+                  <div className="line"></div>
                   <h3>Enviar OSP</h3> 
                 </div>
 
-                <div className={style.bx} data-aos="fade-up">
-                  <div className={style.contBx}>
-                    <div className={style.description} >
+                <div className="bx" data-aos="fade-up">
+                  <div className="contBx">
+                    <div className="description" >
                           <span>Entre el codigo:</span>
                           <p>Introduzca el codigo para proceder a pagar el monto establecido.</p>
                       </div>

@@ -424,7 +424,7 @@ export default function Wallet() {
                
 
     return (
-        <div className={style.cont} >
+        <div className="cont" >
           
           {visible && <Details
                         SetVisible = {SetVisible}
@@ -444,7 +444,7 @@ export default function Wallet() {
                                 setLoading = {setLoading}
                                 loading = {loading}
             />}
-          <div className={style.content}>
+          <div className="content">
             <div className={style.operations} data-aos="fade-up">
             
               <div className={style.total}>
@@ -521,8 +521,8 @@ export default function Wallet() {
               </div>
             </div>
 
-            <div className={style.header}/* data-aos="fade-up"*/>
-              <div className={style.line}></div>
+            <div className="header"/* data-aos="fade-up"*/>
+              <div className="line"></div>
               <h3>Ultimas Operaciones</h3> 
             </div>
 
@@ -657,8 +657,8 @@ export default function Wallet() {
               </div>
             </div>
 
-           {/* <div className={style.header} >
-              <div className={style.line}></div>
+           {/* <div className="header" >
+              <div className="line"></div>
               <h3>Envios</h3> 
             </div>
             <div className={style.options} >
