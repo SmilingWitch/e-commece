@@ -272,6 +272,18 @@
     font-size: 1.2em;
     font-family: "PoppinsBold";
 }
+.error{
+    color: var(--lightLetter);
+    position: fixed;
+    width: calc(100% - 310px);
+    height: 100vh;
+    text-align: center;
+    z-index: 10000000000000000000000000000000000000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    bottom: 0;
+}
 
 @media(max-width: 1126px){
     .imgBxGallery{
@@ -301,6 +313,11 @@
     .imgBxGallery{
         width: 100%;
         padding-left: 35px;
+    }
+    .error{
+
+        width: 100%;
+
     }
 }
 
