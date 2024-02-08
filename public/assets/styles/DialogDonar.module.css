@@ -83,13 +83,7 @@
     align-items: center;
     justify-content: center;
 }
-.error{
-    color: var(--lightLetter);
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    top: 280px;
-}
+
 @media(max-width: 408px){
     .bx{
         width: 300px;
