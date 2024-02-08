@@ -14,6 +14,7 @@ import DialogDonar from "../DialogDonar";
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useRouter } from 'next/navigation'
+import ErrorDialog from "../ErrorDialog";
 
 
 
@@ -46,6 +47,13 @@ export default function DonarDetails(){
       const [institution, SetInstitution] = useState(institutionsFromlocalStorage.filter(institution => institution.id === id))
       const [gallery, SetGallery] = useState(institution[0]?.galleryInstitution)
       const [amount, SetAmount] = useState(institution[0]?.institution_osp)
+      const [loading, setLoading] = useState(false)
+      const [error, SetError] = useState(null)
+      const [formValue,setFormValue]=useState({
+          amount:'',
+          user: credential.pk,
+          institution: id
+        });
 
    useEffect(() => { 
       institutions()
@@ -57,7 +65,7 @@ export default function DonarDetails(){
         }, []);  
         
     
-
+        /*-----------------------OBTENER LAS INSTITUCIONES------------------ */
     const institutions = async () =>{
         const token = sessionStorage.getItem('access')
         console.log(token)
@@ -106,6 +114,53 @@ export default function DonarDetails(){
             console.log(error.response);
            }    
          }
+         /*----------------------DONAR------------------------------------- */
+         const donate = async () =>{
+          const token = sessionStorage.getItem('access')
+          console.log(token)
+          console.log(formValue)
+          setLoading(true)
+          try {
+              const response = await axios.post('https://zona0.onrender.com/institutions/donations/', formValue, { 
+                  headers: {
+                      'Authorization': 'Bearer ' + token
+                  }
+                });
+                console.log(response.data)
+                SetAmount(formValue.amount)
+              setLoading(false)
+              SetVisible(false)
+              SetError(`Ha donado ${formValue.amount} OSP a ${institution[0]?.institution_name} `)
+              errorVisible()
+             } catch(error) {
+              console.log(error);
+              setLoading(false)
+              if(error.response.status === 400){
+                SetError(error.response.data.amount)
+                console.log("ERROR", error)
+                errorVisible()
+              }
+              if(error.response.status === 500){
+                SetError("Algo salio mal. Compruebe que escribio el codigo correctamente.")
+                errorVisible()
+              }
+              if(error.response.status === 404){
+                SetError(error.response.data.message)
+                errorVisible()
+              }
+             }
+             
+    }
+
+
+    /*-----PARA VISIBILIZAR EL ERROR DIALOG------*/
+      const [isObjectVisible, setIsObjectVisible] = useState(false);
+      const errorVisible = () => {
+        setIsObjectVisible(true);
+        setTimeout(() => {
+            setIsObjectVisible(false);
+        }, 3000);
+     }
 
          const settings = {
           dots: true,
@@ -190,13 +245,26 @@ export default function DonarDetails(){
 
     return(
         <div className={style.cont}  >
-            {visible && <DialogDonar SetActive = {SetVisible} institution= {id} user = {credential.pk} SetAmount = {SetAmount}/>}
+            {visible && <DialogDonar 
+                          SetActive = {SetVisible} 
+                          fnc = {donate}
+                          setFormValue = {setFormValue}
+                          formValue = {formValue}
+                          loading = {loading}
+                          header = "Monto a donar"
+                          name = "amount"
+                          value = {formValue.amount}/>}
+              {isObjectVisible && <div className={style.error} >
+                         <ErrorDialog error = {error} />
+                </div>}
+               
             <div className={style.content} >
             
                 <div className={style.header}/* data-aos="fade-up"*/>
                   <div className={style.line}></div>
                   <h3><Link href = "/dashboard/donar">Donar</Link> / {institution[0]?.institution_name}</h3>
                 </div>
+                
 
 
                 <div className={style.frontImage}>
