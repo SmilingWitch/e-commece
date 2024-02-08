@@ -31,16 +31,18 @@
     margin-top: 90px;
     margin-bottom: 10vh;
 }
-.bx{
+/*.bx{
+
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    height: 100%;
+    justify-content: flex-start;
+    height: 90vh;
     width: 100%;
-}
-.contBx{
+    padding-top: 50px;
+}*/
+/*.contBx{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -62,7 +64,7 @@
 }
 .description span{
     font-family: "PoppinsBolder";
-}
+}*/
 .header{
     position: relative;
     height: 40px;
@@ -199,7 +201,7 @@
     border-radius: 30px !important;
     text-transform: none !important;*/
 }
-.cont button,
+/*.cont button,
 .cont1 button{
     position: relative;
     border: none;
@@ -218,7 +220,7 @@
 .cont button:hover,
 .cont1 button:hover{
     background: var(--hlColorHover);
-}
+}*/
 .popUp{
 
     display: flex;
@@ -325,12 +327,12 @@
     .inputBx input{
     width: 80%;
     }
-    .contBx{
+    /*.contBx{
         margin-top: 30px;
         margin-bottom: 50px;
         width: 90%;
         padding: 20px;
-    }
+    }*/
     .depo{
         width: 90%;
         margin-top: 30px;

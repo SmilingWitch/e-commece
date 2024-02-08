@@ -1,4 +1,4 @@
-.cont{
+/*.cont{
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -26,8 +26,8 @@
     justify-content: center;
     height: 90%;
     width: 100%;
-}
-.contBx{
+}*/
+/*.contBx{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -47,29 +47,29 @@
 }
 .description span{
     font-family: "PoppinsBolder";
-}
+}*/
 
-.header{
+/*.header{
     position: relative;
     height: 40px;
     display: flex;
     align-items: center;
     width: 100%;
-}
+}*/
 
 .iconCalc{
     position: relative;
     color: var(--hlColor);
     background: red;
 }
-.line{
+/*.line{
     position: relative;
     height: 100%;
     width: 5px;
     background: var(--hlColor);
     border-radius: 50px;
     margin-right: 10px;
-}
+}*/
 .input{
     margin-top: 50px;
     position: relative;
@@ -164,14 +164,14 @@
         width: 100%;
         margin: 0;
     }
-    .header{
+    /*.header{
         margin-top: 0px;
         width: 90%;
         margin: 0 auto;
     }
     .description{
         width: 100%;
-    }
+    }*/
     .input{
         width: 100%;
     }
@@ -182,11 +182,10 @@
     .inputBx input{
     width: 80%;
     }
-    .contBx{
-        
+    /*.contBx{
         width: 95%;
         padding: 20px;
-    }
+    }*/
 }
 
 @media(max-width: 389px){

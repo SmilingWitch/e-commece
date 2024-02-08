@@ -1,13 +1,11 @@
 
-.cont{
+/*.cont{
     position: relative;
     width: 100%;
     min-height: 100vh;
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
-   /* padding-top: 80px;*/
-    
+    justify-content: flex-end;   
 }
 .content{
     position: relative;
@@ -19,7 +17,7 @@
     align-items: center;
     margin-top: 90px;
     margin-bottom: 10vh;
-}
+}*/
 .bx{
     position: relative;
     display: flex;
@@ -41,7 +39,7 @@
     box-shadow:  4px 4px 8px #a2a2a2;
     
 }
-.header{
+/*.header{
     position: relative;
     height: 40px;
     display: flex;
@@ -55,7 +53,7 @@
     background: var(--hlColor);
     border-radius: 50px;
     margin-right: 10px;
-}
+}*/
 
 .input{
     margin-top: 50px;
@@ -96,7 +94,7 @@
     outline: none;
     background: transparent;
 }
-.cont button,
+/*.cont button,
 .cont1 button{
     position: relative;
     border: none;
@@ -115,7 +113,7 @@
 .cont button:hover,
 .cont1 button:hover{
     background: var(--hlColorHover);
-}
+}*/
 .imageBx{
     position: relative;
     width: 400px;
