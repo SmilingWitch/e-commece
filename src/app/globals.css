@@ -82,6 +82,7 @@ a {
   position: relative;
   width: calc(100% - 320px);
   padding-top: 100px;
+
 }
 .header{
   position: relative;
@@ -119,6 +120,15 @@ button{
 button:hover{
   background: var(--hlColorHover);
 }
+button span{
+  color: var(--lightLetter);
+}
+button span:nth-child(1){
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .deseableBtn{
   background: rgb(173, 172, 172) !important;
 }
@@ -143,7 +153,7 @@ button:hover{
   box-shadow:  4px 4px 8px #a2a2a2;
   margin-top: 30px;
   margin-bottom: 50px;
-  
+  width: 800px;
 }
 .description{
   position: relative;
@@ -153,6 +163,32 @@ button:hover{
 }
 .description span{
   font-family: "PoppinsBolder";
+}
+
+.errorRequest{
+  color: var(--lightLetter);
+  position: fixed;
+  width: calc(100% - 320px);
+  top: 90vh;
+  text-align: center;
+  z-index: 10000000000000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0px;
+}
+.deseableBtn{
+  background: rgb(173, 172, 172) !important;
+}
+.loader{
+  position: relative;
+  border: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  height: 45px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -169,7 +205,12 @@ button:hover{
   }
 }
 
+@media(max-width: 1176px){
+  .contBx{
 
+    width: 90%;
+  }
+}
 @media(max-width:768px){
   .content{
       position: relative;
@@ -193,6 +234,11 @@ button:hover{
   .description{
     width: 100%;
 }
+.errorRequest{
+
+  width: 100% 
+}
+
 
 }
 @media(max-width: 389px){
