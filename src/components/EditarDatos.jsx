@@ -15,6 +15,7 @@ import { BiImageAdd } from "react-icons/bi";
 import axios from "axios"
 import BeatLoader from "react-spinners/BeatLoader"
 import compress from 'browser-image-compression';
+import ErrorDialog from "./ErrorDialog"
 
 
 
@@ -30,6 +31,7 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
     const [error,SetError] = useState('')
     const [errorImg,SetErrorImg] = useState('')
     const [loadingImage, setLoadingImage] = useState(false)
+    const [errorRes,SetErrorRes] = useState('')
 
     
 
@@ -137,7 +139,8 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
 
                 // Llama a updateCredential para actualizar el estado local
                 updateCredential(updatedCredential);
-
+                SetErrorRes("Se ha actualizado la informacion.")
+                errorVisible()
 
              } catch(error) {
               console.log(error.response);
@@ -187,6 +190,8 @@ export default function EditarDatos({SetActiveEdit, closeAll}){
              setImageUrl(response.data.image)
              SetErrorImg('')
              SetError('')
+             SetErrorRes("Se ha actualizado la foto de perfil.")
+            errorVisible()
 
           } catch (error) {
              console.log(error.response);
@@ -234,10 +239,23 @@ async function handleImageUpload(event) {
  }
 }
 
+
+  /*-----PARA VISIBILIZAR EL ERROR DIALOG------*/
+  const [isObjectVisible, setIsObjectVisible] = useState(false);
+  const errorVisible = () => {
+    setIsObjectVisible(true);
+    setTimeout(() => {
+        setIsObjectVisible(false);
+    }, 3000);
+  }
+
+
    
 
     return(
         <div className={style.cont} onClick = {closeAll} data-aos="fade-left">
+            {isObjectVisible && <div className="errorRequest" >
+                         <ErrorDialog error = {errorRes} /> </div>}
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
                 <div className={style2.header}>
                 

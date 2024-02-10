@@ -1,7 +1,6 @@
 "use client"
 
 import style from "../../../public/assets/styles/Calculadora.module.css"
-import BeatLoader from "react-spinners/BeatLoader"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect, useState } from "react";
@@ -19,25 +18,17 @@ export default function Calculadora({SetVisible}){
       }, []);
 
 
-      /*const handleChange= (event) => {
-        setFormValue({
-          [event.target.name]:event.target.value
-        })
-      }*/
-
-
-
+      //stats
       const [formValue, setFormValue] = useState({
         amount: 0,
         days: 30
       });
-    
       const [result, setResult] = useState(0);
       const [gain, setGain] = useState(0);
       const [suma, setSuma] = useState(30);
       const [resta, setResta] = useState(30);
 
-    
+      //functions
       const handleChange = (event) => {
         const { name, value } = event.target;
     
@@ -65,7 +56,6 @@ export default function Calculadora({SetVisible}){
           setResult(0);
         }
       }, [formValue]);
-console.log(result)
 
 
     const incrementSuma = () => {
@@ -87,6 +77,7 @@ console.log(result)
         };
       });
     };
+
     function redondearDecimales(num, decimales) {
       var multiplicador = Math.pow(10, decimales);
       return Math.round(num * multiplicador) / multiplicador;
@@ -152,12 +143,8 @@ console.log(result)
                                 }
                               }} />
                     </div>
-
                 </div>
-                
-
             </div>
-            
         </div>
     )
 }

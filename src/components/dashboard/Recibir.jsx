@@ -1,19 +1,12 @@
 "use client"
 import {useRouter} from "next/navigation"
 import style from "../../../public/assets/styles/Recibir.module.css"
-import { BsQrCodeScan } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import Image from "next/image"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import QRCode from "react-qr-code";
-import { IoMdCopy } from "react-icons/io";
-import copyToClipboard from "../functions/copyToClipboard"
 import axios from "axios"
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
-import Link from "next/link"
-import { grey } from "@mui/material/colors";
 import Details from "./Details";
 import BeatLoader from "react-spinners/BeatLoader"
 
@@ -37,53 +30,47 @@ export default function Recibir(){
 
 
         //functions
-
         const [formValue,setFormValue]=useState({
             amount:''
           });
 
-        const handleChange= (event) => {
+        /*-----------------------RECIBIR UNA CANTIDAD---------------------- */
+        const recibir= (event) => {
             setFormValue({
               ...formValue,
               [event.target.name]:event.target.value
             })
           }
-        const createLink = async () =>{
-                const token = sessionStorage.getItem('access')
-                console.log(token)
-                console.log("Peticion")
-                setLoading(true)
-                try {
-                    const response = await axios.post('https://zona0.onrender.com/transfer/create-receive/', {amount: formValue.amount}, { 
-                        headers: {
-                            'Authorization': 'Bearer ' + token
-                        }
-                      });
-
-                      // Guardar la nueva información del código en el estado
-                        setCodigo(response.data);
-
-                        // Recuperar los datos existentes del sessionStorage
-                        let codigos = JSON.parse(sessionStorage.getItem('pay')) || [];
-
-                        // Agregar el nuevo código al arreglo
-                        codigos.push(response.data);
-
-                        // Almacenar el arreglo actualizado en el sessionStorage
-                        sessionStorage.setItem('pay', JSON.stringify(codigos));
-
-                      console.log("CODIGO",sessionStorage.getItem('pay'))
-
-                    SetRes(response.data)
-                    console.log(response);
-                    SetLink(true);
-                    setCopyLink(res.code)
-                    SetVisible(true)
-                    setLoading(false)
-                   } catch(error) {
-                    console.log(error.response);
-                    setLoading(false)
-                   }
+          const createLink = async () =>{
+          const token = sessionStorage.getItem('access')
+          console.log(token)
+          console.log("Peticion")
+          setLoading(true)
+          try {
+              const response = await axios.post('https://zona0.onrender.com/transfer/create-receive/', {amount: formValue.amount}, { 
+                  headers: {
+                      'Authorization': 'Bearer ' + token
+                  }
+                });
+              // Guardar la nueva información del código en el estado
+              setCodigo(response.data);
+              // Recuperar los datos existentes del sessionStorage
+              let codigos = JSON.parse(sessionStorage.getItem('pay')) || [];
+              // Agregar el nuevo código al arreglo
+              codigos.push(response.data);
+              // Almacenar el arreglo actualizado en el sessionStorage
+              sessionStorage.setItem('pay', JSON.stringify(codigos));
+              console.log("CODIGO",sessionStorage.getItem('pay'))
+              SetRes(response.data)
+              console.log(response);
+              SetLink(true);
+              setCopyLink(res.code)
+              SetVisible(true)
+              setLoading(false)
+            } catch(error) {
+              console.log(error.response);
+              setLoading(false)
+             }
                    
           }
 
@@ -92,16 +79,11 @@ export default function Recibir(){
               duration:2000
           });
           }, []);
-
-          /*if(link){
-            router.push(`/dashboard/recibir/${res.code}`)
-          }*/
-
-                
+   
 
     return(
  <div className="cont">
-          {visible && (<Details 
+        {visible && (<Details 
                           SetVisible = {SetVisible}
                           recibir = {res}
                           />) }
@@ -119,12 +101,11 @@ export default function Recibir(){
                     </div>
 
                     <div className={style.input}>
-                       {/* <label >Monto a recibir:</label>*/}
                         <div className={style.inputBx}>
                             <input  type="text" 
                                     name="amount" id=""
                                     value={formValue.amount}
-                                    onChange={handleChange} 
+                                    onChange={recibir} 
                                     placeholder="Monto"
                                     onKeyDown={(event) => {
                                         const keyCode = event.keyCode;
@@ -137,8 +118,8 @@ export default function Recibir(){
                             <span>OSP</span>
                         </div>
                     </div>
-                    {formValue.amount === "" ? <button className={style.deseableBtn}>Generar Link</button> :
-                    loading  ? <div className={style.loader}>
+                    {formValue.amount === "" ? <button className="deseableBtn">Generar Link</button> :
+                    loading  ? <div className="loader">
                        <BeatLoader
                     color="rgba(255, 68, 0,1)"
                     cssOverride={{}}
@@ -147,10 +128,8 @@ export default function Recibir(){
                     speedMultiplier={1}
                   />
                     </div> : <button onClick = {createLink}>Generar Codigo</button>}
+              </div> 
 
-              </div>
-
-                
             </div>
         </div>
     </div>

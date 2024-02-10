@@ -223,7 +223,7 @@ const errorVisible = () => {
         console.log(error.response);
         setDialog(false)
         if(error.response.status === 400){
-            SetErrorRes(error.response.data.amount)
+          SetErrorRes(error.response.data.amount)
           console.log("ERROR", error)
           errorVisible()
         }
@@ -313,7 +313,7 @@ const desactiveCard = async () =>{
         setDialog(false)
        } catch(error) {
         console.log(error.response);
-        /*setLoading(false)
+        setLoading(false)
         setDialog(false)
         if(error.response.status === 400){
             SetErrorRes(error.response.data.amount)
@@ -327,13 +327,13 @@ const desactiveCard = async () =>{
         if(error.response.status === 404){
             SetErrorRes(error.response.data.message)
           errorVisible()
-        }*/
+        }
        }
        
-}
-            if (!isMounted) {
-                return null; // Or some placeholder content
-               }
+      }
+        if (!isMounted) {
+            return null; // Or some placeholder content
+           }
 
    return(
        <div className={style.cont} data-aos="fade-left" onClick = {() =>{
@@ -350,7 +350,7 @@ const desactiveCard = async () =>{
                     name = "min_withdraw"
                     value = {formValue.min_withdraw}/>
           }  
-          {isObjectVisible && <div className={style.errorRequest} >
+          {isObjectVisible && <div className="errorRequest" >
                          <ErrorDialog error = {errorRes} /> </div>}
                          
                          

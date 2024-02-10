@@ -29,9 +29,6 @@ export default function InstitutionCard({res}){
                     <div className={style.name}>
                         {res.institution_name}
                     </div>
-                    {/*<div className={style.osp}>
-                       Cantidad minima: {res.institution_osp}
-                    </div>*/}
                     <div className={style.description}>
                        {limitedDescription}
 

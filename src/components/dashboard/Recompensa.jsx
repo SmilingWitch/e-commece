@@ -1,8 +1,5 @@
 "use client"
-
 import style from "../../../public/assets/styles/Recompensa.module.css"
-import Image from "next/image"
-import Link from "next/link"
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import AOS from 'aos';
@@ -11,10 +8,9 @@ import { useState, useEffect } from "react";
 import axios from "axios"
 import Regalo from "./Regalo";
 import BeatLoader from "react-spinners/BeatLoader"
-import ErrorDialog from "../ErrorDialog";
 
 export default function Recompensa(){
-
+    //states
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false)
     const [active, SetActive] = useState(false)
@@ -23,6 +19,9 @@ export default function Recompensa(){
     const [formValue,setFormValue]=useState({
         code:''
       });
+
+    
+      //functions
       const handleChange= (event) => {
         setFormValue({
           ...formValue,
@@ -30,16 +29,7 @@ export default function Recompensa(){
         })
       }
 
-      /*-----PARA VISIBILIZAR EL ERROR DIALOG------*/
-      const [isObjectVisible, setIsObjectVisible] = useState(false);
-      const errorVisible = () => {
-        setIsObjectVisible(true);
-        setTimeout(() => {
-            setIsObjectVisible(false);
-        }, 3000);
-     }
-
-
+      /*---------------------RECIBIR LA RECOMPENSA------------------- */
       const canjear = async () =>{
         const token = sessionStorage.getItem('access')
         console.log(token)
@@ -73,10 +63,8 @@ export default function Recompensa(){
               SetError(error.response.data.message)
               errorVisible()
             }
-
-           }
-           
-  }
+           }    
+      }
 
     useEffect(() => {
         AOS.init({
@@ -87,7 +75,6 @@ export default function Recompensa(){
     return(
         <div className="cont">
           {active && <Regalo header = {res}  SetActive = {SetActive}/>}
-          
             <div className="content">
                 <div className="header" data-aos="fade-up">
                   <div className="line"></div>
@@ -107,10 +94,8 @@ export default function Recompensa(){
                           onChange={handleChange} />
                       </div>
 
-
-
-                      {formValue.code === "" ? <button className={style.deseableBtn}>Recibir Premio</button> :
-                    loading  ? <div className={style.loader}>
+                      {formValue.code === "" ? <button className="deseableBtn">Recibir Premio</button> :
+                    loading  ? <div className="loader">
                        <BeatLoader
                     color="rgba(255, 68, 0,1)"
                     cssOverride={{}}
@@ -119,7 +104,6 @@ export default function Recompensa(){
                     speedMultiplier={1}
                   />
                     </div> : <button onClick = {canjear}>Recibir Premio</button>}
-
                   </div>
                   
                     {/*<div className={style.regalo}>

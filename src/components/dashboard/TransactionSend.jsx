@@ -4,8 +4,7 @@ export default function TransactionSend({res}){
     
 
 
-    return (<div className={style.tranBx} /*onClick={() => {SetVisible(true);
-                                                        setSelected(index)}}*/>
+    return (<div className={style.tranBx}>
             <div className={style.tranCont}>
                 <div className={style.detailBx}>
                     <div className={style.detail}>

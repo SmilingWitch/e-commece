@@ -3,7 +3,6 @@
 import style from "../../../public/assets/styles/Donar.module.css"
 import axios from "axios"
 import { useState, useEffect } from "react";
-import { useSearchParams } from 'next/navigation';
 import { useParams } from 'next/navigation'
 import Image from "next/image"
 import Link from "next/link"
@@ -20,10 +19,10 @@ import ErrorDialog from "../ErrorDialog";
 
 export default function DonarDetails(){
   
+   
 
-    const [visible, SetVisible] = useState(false)
-    const [counter, SetCounter] = useState(0)
-    const searchParams = useSearchParams();
+
+    //variables
     const param = useParams()
     const id = Number(param.id)
     const { user } = useContext(AuthContext);
@@ -37,23 +36,24 @@ export default function DonarDetails(){
         filteredInstitutions = institutionsFromlocalStorage.filter(institution => institution.id === id);
     }
     
-    console.log("filteredInstitutions",filteredInstitutions)
-    console.log("id",id)
     if (credential === null) {
       router.push('/accounts/login');
    }
 
 
-      const [institution, SetInstitution] = useState(institutionsFromlocalStorage.filter(institution => institution.id === id))
-      const [gallery, SetGallery] = useState(institution[0]?.galleryInstitution)
-      const [amount, SetAmount] = useState(institution[0]?.institution_osp)
-      const [loading, setLoading] = useState(false)
-      const [error, SetError] = useState(null)
-      const [formValue,setFormValue]=useState({
-          amount:'',
-          user: credential.pk,
-          institution: id
-        });
+    //stats
+    const [visible, SetVisible] = useState(false)
+    const [counter, SetCounter] = useState(0)
+    const [institution, SetInstitution] = useState(institutionsFromlocalStorage.filter(institution => institution.id === id))
+    const [gallery, SetGallery] = useState(institution[0]?.galleryInstitution)
+    const [amount, SetAmount] = useState(institution[0]?.institution_osp)
+    const [loading, setLoading] = useState(false)
+    const [error, SetError] = useState(null)
+    const [formValue,setFormValue]=useState({
+        amount:'',
+        user: credential.pk,
+        institution: id
+      });
 
    useEffect(() => { 
       institutions()
@@ -61,16 +61,14 @@ export default function DonarDetails(){
 
       useEffect(() => { 
         institutions()
-       
         }, []);  
         
-    
+    //functions
         /*-----------------------OBTENER LAS INSTITUCIONES------------------ */
-    const institutions = async () =>{
+      const institutions = async () =>{
         const token = sessionStorage.getItem('access')
         console.log(token)
         console.log("Peticion")
-        
         try {
             const response = await axios.get(`https://zona0.onrender.com/institutions/list-institution/${id}/`, { 
                headers: {
@@ -78,42 +76,23 @@ export default function DonarDetails(){
                }
              });
              console.log(response.data)
-
-             
               // Obtiene el objeto credential actual del localStorage
                 let updatedAmount = JSON.parse(localStorage.getItem('institutions'));
-
                 let filteredUpdatedAmount = updatedAmount.filter(institution => institution.id === id);
                 console.log("filteredUpdatedAmount",filteredUpdatedAmount)
-
                 // Actualiza los campos relevantes de credential
                 filteredUpdatedAmount[0].institution_osp = response.data.institution_osp;
-
                 // Guarda el objeto credential actualizado en el localStorage
                 localStorage.setItem('institutions', JSON.stringify(updatedAmount));
-
                 let filteredUpdated = JSON.parse(localStorage.getItem('institutions')).filter(institution => institution.id === id);
-
-                console.log("consola",filteredUpdated)
-
                 // Llama a updateCredential para actualizar el estado local
                 SetInstitution(filteredUpdated)
-
-
-                console.log("INSTITUTION",institution)
-
-
-             /*SetInstitution(response.data)
-             console.log("institutions",response.data)
-             SetGallery(response.data.galleryInstitution)
-
-             console.log(response.data.galleryInstitution)
-             console.log(response.data.galleryInstitution.image) */
             
            } catch(error) {
             console.log(error.response);
            }    
          }
+
          /*----------------------DONAR------------------------------------- */
          const donate = async () =>{
           const token = sessionStorage.getItem('access')
@@ -244,7 +223,7 @@ export default function DonarDetails(){
 
 
     return(
-        <div className={style.cont}  >
+        <div className="cont"  >
             {visible && <DialogDonar 
                           SetActive = {SetVisible} 
                           fnc = {donate}
@@ -257,16 +236,11 @@ export default function DonarDetails(){
               {isObjectVisible && <div className={style.error} >
                          <ErrorDialog error = {error} />
                 </div>}
-               
-            <div className={style.content} >
-            
-                <div className={style.header}/* data-aos="fade-up"*/>
-                  <div className={style.line}></div>
+            <div className="content" >
+                <div className="header"/* data-aos="fade-up"*/>
+                  <div className="line"></div>
                   <h3><Link href = "/dashboard/donar">Donar</Link> / {institution[0]?.institution_name}</h3>
                 </div>
-                
-
-
                 <div className={style.frontImage}>
                   <div className={style.frontImageBx}>
                  { institution[0].image !==null ? <Image 
@@ -277,32 +251,15 @@ export default function DonarDetails(){
                       objectFit="cover"
                       src="/assets/images/defaultDonation.jpg"
                       alt="Descripción de la imagen"/>}
-
                   </div>
                   <div className={style.nameInst}>
                     <h1>{institution[0]?.institution_name}</h1>
                     <div className={style.button}>
                       <button className={style.btn} onClick={() => {SetVisible(true)}}>Donar</button>
                     </div>
-
                   </div>
                 </div>
                 {gallery ? <div className={style.imgBxGallery}>
-                
-                               {/*gallery.map((item, index) => 
-                                <div  key = {index}>
-                                  {item.image !== null ? 
-                                  <div className={style.ImageBxGallery1} key = {index}>
-                                  <Image
-                                   layout="fill"
-                                   objectFit="cover"
-                                   src={item.image}
-                                   key = {index}
-                                   alt="properties identity"
-                                   /> </div>: ""}
-                                </div>              
-                                  )*/}
-                               
                                <Slider {...settings}>
                                   {gallery.map((item, index) => (
                                     item.image && <div key={index} className={item.image !== null ? `${style.visible}` : `${style.invisible}`}>
@@ -335,7 +292,6 @@ export default function DonarDetails(){
                         <div className={style.donado}>
                             <span>Cantidad donada hasta el momento:</span>
                             <div className={style.amount}>{institution[0]?.institution_osp} OSP</div>
-
                         </div>
                         <div className={style.button}>
                             <button className={style.btn} onClick={() => {SetVisible(true)}}>Donar</button>
@@ -343,9 +299,6 @@ export default function DonarDetails(){
 
                     </div>
               </div>
-                
-                
-                
             </div>
         </div>
     )

@@ -9,14 +9,16 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import BeatLoader from "react-spinners/BeatLoader"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ErrorDialog from "./ErrorDialog";
 
 
 export default function ChangePassword({SetActivechangePass, closeAll}){
 
-
+    const [errorRes,SetErrorRes] = useState('')
     //Para poner visible/invisible la contrasena
     const [pass,setPass] = useState('password')
     const [pass2,setPass2] = useState('password')
+    
 
     const viewPass = () => {
       if (pass === 'password'){
@@ -32,7 +34,14 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
       else setPass2('password')
     }
 
-
+    /*-----PARA VISIBILIZAR EL ERROR DIALOG------*/
+    const [isObjectVisible, setIsObjectVisible] = useState(false);
+    const errorVisible = () => {
+      setIsObjectVisible(true);
+      setTimeout(() => {
+          setIsObjectVisible(false);
+      }, 3000);
+    }
 
     const [formValue,setFormValue]=useState({
         new_password1:'',
@@ -67,6 +76,8 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
         setError('')
         setResponse(res.data.detail)
         setLoading(false)
+        SetErrorRes(`Se ha cambiado la contrasena`)
+        errorVisible()
       }catch(error){
         console.log(error.response.data)
         if (error.response) {
@@ -75,13 +86,15 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
             setError(error.response.data);
             console.log(error)
           } else if (error.request) {
-            alert("Something went wrong. Try in a few minutes!!")
+            SetErrorRes(`Algo salio mal. Prueba otra vez en unos minutos`)
+            errorVisible()
           } else {
-            alert("Something went wrong. Try in a few minutes!!")
-            console.log(error)
+            SetErrorRes(`Algo salio mal. Prueba otra vez en unos minutos`)
+            errorVisible()
           }
           if (error.response.status === 500) {
-            alert("Something went wrong. Try in a few minutes!!")
+            SetErrorRes(`Algo salio mal. Prueba otra vez en unos minutos`)
+            errorVisible()
           }
           console.log(error)
       }
@@ -97,6 +110,9 @@ export default function ChangePassword({SetActivechangePass, closeAll}){
         <div className={style.cont} data-aos="fade-left" onClick = {() =>{
                                                     setResponse("");
                                                     closeAll}}>
+            {isObjectVisible && <div className="errorRequest" >
+                         <ErrorDialog error = {errorRes} /> </div>}
+                         
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}}>
                 <div className={style1.header}>
                 

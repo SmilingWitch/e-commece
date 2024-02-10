@@ -15,21 +15,13 @@ import 'aos/dist/aos.css';
 
 
 export default function Details({SetVisible, recibir,SetCode}){
-    // variables
-    /*let codesFromsessionStorage = [];
-    if (typeof window !== 'undefined') {
-     codesFromsessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
-     
-    }*/
 
     //states
     const [resDelete, SetResDelete] = useState([])
     const [loading, setLoading] = useState(false)
     const [loadingDialod, setLoadingDialog] = useState(false)
     const [dialog, setDialog] = useState(false)
-    /*const [code, SetCode] = useState(codesFromsessionStorage || []);*/
 
-    console.log("RECIBIR",recibir )
     
     //function
     const DeleteRecieves = async (id) =>{
@@ -44,13 +36,12 @@ export default function Details({SetVisible, recibir,SetCode}){
                }
              });
 
-             SetResDelete(response.data)
+            SetResDelete(response.data)
             console.log(response);
             setDialog(false)
             setLoading(false)
             SetVisible(false)
 
-            // Eliminar el código del arreglo en el sessionStorage
             // Obtén los datos del almacenamiento local
             let codigossessionStorage = JSON.parse(sessionStorage.getItem('pay')) || [];
 
@@ -72,11 +63,11 @@ export default function Details({SetVisible, recibir,SetCode}){
          }
 
 
-         useEffect(() => {
-            AOS.init({
-              duration:250
-          });
-          }, []);
+    useEffect(() => {
+       AOS.init({
+         duration:250
+     });
+     }, []);
 
 
  return(
@@ -127,11 +118,12 @@ export default function Details({SetVisible, recibir,SetCode}){
                                         
                             </div>  
 
-                            {recibir.state === "Unpaid" ? <div className={style.btn}>
+                            {recibir.state === "Unpaid" ? 
                                 <button onClick={() =>setDialog(true)}>
                                     <span><FaRegTrashAlt/></span>
-                                    <span>Cancelar el recibo de pago</span></button>    
-                            </div> : ""}        
+                                    <span>Cancelar el recibo de pago</span>
+                                </button>    
+                            : ""}        
                         </div>                  
                 </div>
     </div>

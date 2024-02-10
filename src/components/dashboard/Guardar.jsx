@@ -1,6 +1,4 @@
 "use client"
-
-import style1 from "../../../public/assets/styles/Recompensa.module.css"
 import style from "../../../public/assets/styles/Guardar.module.css"
 import style2 from "../../../public/assets/styles/Recibir.module.css"
 import DepositosCard from "./DepositosCard"
@@ -13,16 +11,17 @@ import ErrorDialog from "../ErrorDialog"
 import Dialog from "../Dialog"
 import { IoIosCalculator } from "react-icons/io";
 import Calculadora from "./Calculadora"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Guardar(){
-
+  //variables
     let depositsFromsessionStorage = [];
     if (typeof window !== 'undefined') {
-        depositsFromsessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
-
-        
+        depositsFromsessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];  
     }
     
+    //stats
     const [depo, SetDepo] = useState( depositsFromsessionStorage);
     const [selectedD, setSelectedD] = useState(null)
     const [isMounted, setIsMounted] = useState(false);
@@ -38,34 +37,34 @@ export default function Guardar(){
       });
       const [loading,setLoading] = useState(false)
       const [loadingDeposit,setLoadingDeposit] = useState(true)
+      const [errorRes,SetErrorRes] = useState('')
 
 
     useEffect(() => { 
         setIsMounted(true);
         depositos()
-        
+        AOS.init({
+          duration:2000
+        });
         
         if (credential === null) {
           router.push('/accounts/login');
        }
-       /* AOS.init({
-          duration:2000
-        });*/
+
       }, []);
 
       useEffect(() => {
         SetDepo(JSON.parse(sessionStorage.getItem('deposit')))
         console.log("depo",depo)
-       }, []); // Este efecto se ejecutará cada vez que 'depo' cambie
+       }, []); 
 
       useEffect(() => {
-        // Este efecto se ejecutará cada vez que 'depo' cambie
         sessionStorage.setItem('deposit', JSON.stringify(depo));
         console.log("codigossessionStorage", depo);
         console.log("depo", depo);
       }, [depo]);
     
-
+      //function
       /*------------CREAR UN DEPOSITO------------- */
       const createDeposit = async () =>{
         const token = sessionStorage.getItem('access')
@@ -84,23 +83,17 @@ export default function Guardar(){
 
               // Obtén los datos del almacenamiento local
               let codigossessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
-
-              
               let codigosResponse = response.data;
-              codigossessionStorage.push(codigosResponse)
-                          
+              codigossessionStorage.push(codigosResponse)         
               console.log("codigossessionStorage1",codigossessionStorage)
-              
-              
               // Guarda los datos actualizados en el almacenamiento local
               sessionStorage.setItem('deposit', JSON.stringify(codigossessionStorage));
               SetDepo(codigossessionStorage);
-              
               console.log("codigossessionStorage",codigossessionStorage)
               console.log("depo",depo)
-              
-
-            setLoading(false)
+              setLoading(false)
+              SetErrorRes(`Se ha creado un deposito`)
+              errorVisible()
 
             console.log(response.data)
            } catch(error) {
@@ -119,10 +112,7 @@ export default function Guardar(){
        }, 3000);
     }
 
-          
-
-
-        /*------------OBTENER DEPOSITOS------------- */
+    /*------------OBTENER DEPOSITOS------------- */
         const depositos = async () =>{
             const token = sessionStorage.getItem('access')
             console.log(token)
@@ -183,45 +173,44 @@ export default function Guardar(){
                }    
              }
 
-        /*------------RETIRAR------------- */
-    const retirar = async () =>{
-      const token = sessionStorage.getItem('access')
-      console.log(token)
-      console.log("Peticion")
-      setLoading(true)
-      console.log(token)
-      SetLoadingDialog(true)
-      try {
-          const response = await axios.post(`https://zona0.onrender.com/banking/account/withdraw/?id=${selectedD}`,{},{ 
-              headers: {
-                  'Authorization': 'Bearer ' + token
+    /*------------RETIRAR------------- */
+         const retirar = async () =>{
+           const token = sessionStorage.getItem('access')
+           console.log(token)
+           console.log("Peticion")
+           setLoading(true)
+           console.log(token)
+           SetLoadingDialog(true)
+           try {
+               const response = await axios.post(`https://zona0.onrender.com/banking/account/withdraw/?id=${selectedD}`,{},{ 
+                   headers: {
+                       'Authorization': 'Bearer ' + token
+                   }
+                 });
+                 console.log(response.data)
+               
+               let codigossessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
+               let idToRemove = selectedD; // Reemplaza esto con el ID que quieres eliminar
+               let newArray = codigossessionStorage.filter(obj => obj.id !== idToRemove);
+               console.log("newArray",newArray)
+               sessionStorage.setItem('deposit', JSON.stringify(newArray));
+               let updatedArray = JSON.parse(sessionStorage.getItem('deposit'));
+               console.log("updatedArray", updatedArray);
+               
+               SetLoadingDialog(false)
+               errorVisible(JSON.parse(sessionStorage.getItem('deposit')))
+               setResp(response.data.message)
+               SetDepo(updatedArray)
+               Setdialog(false)
+
+              } catch(error) {
+               console.log(error.response)
+               SetLoadingDialog(false)
+               Setdialog(false)
               }
-            });
-            console.log(response.data)
-
-          let codigossessionStorage = JSON.parse(sessionStorage.getItem('deposit')) || [];
-
-          let idToRemove = selectedD; // Reemplaza esto con el ID que quieres eliminar
-          let newArray = codigossessionStorage.filter(obj => obj.id !== idToRemove);
-          console.log("newArray",newArray)
-          sessionStorage.setItem('deposit', JSON.stringify(newArray));
-          let updatedArray = JSON.parse(sessionStorage.getItem('deposit'));
-          console.log("updatedArray", updatedArray);
-
-          SetLoadingDialog(false)
-          errorVisible(JSON.parse(sessionStorage.getItem('deposit')))
-          setResp(response.data.message)
-          SetDepo(updatedArray)
-          Setdialog(false)
-         } catch(error) {
-          console.log(error.response)
-          SetLoadingDialog(false)
-          Setdialog(false)
-         }
          
-  }     
+            }     
     
-
         const handleChange= (event) => {
            setFormValue({
              ...formValue,
@@ -229,7 +218,6 @@ export default function Guardar(){
            })
          }
 
-        
 
         if (!isMounted) {
            return null; // Or some placeholder content
@@ -249,31 +237,23 @@ export default function Guardar(){
           </div>}
           {visible && <div className={style.prov}>
             <Calculadora SetVisible = {SetVisible}/>
-          </div>}
-          
-     
-        
-           
-                       
+          </div>}        
             <div className="content">
-            
-            {isObjectVisible && <div className={style.error} >
-                         <ErrorDialog error = {resp} /> </div>}
-                <div className={style.header} /*data-aos="fade-up"*/>
+            {isObjectVisible && <div className="errorRequest" >
+                         <ErrorDialog error = {errorRes} /> </div>}
+                <div className={style.header} data-aos="fade-up">
                   <div className={style.line}></div>
                   <h3>Bancarizar <button className={style.btn} onClick={() => SetVisible(true)}><span><IoIosCalculator/></span> <span>Calculadora</span></button></h3> 
                 </div>
                 
                 <div className="bx">
-                    <div  className="contBx">
+                    <div  className="contBx" data-aos="fade-up">
                         <div className="description">
                               <span>Entre el monto:</span>
                               <p>Deposita tus fondos y obtén un interés fijo del 3% cada 30 dias para hacer crecer tus ahorros.</p>
                               <p className={style.infoWarning}>Las OSP depositadas quedaran congeladas un total de 60 dias. Luego de eso podra retirarlas.</p>
                           </div>
-
                           <div className={style2.input}>
-                           {/* <label >Monto a recibir:</label>*/}
                             <div className={style2.inputBx}>
                                 <input  type="text" 
                                         name="amount" id=""
@@ -292,8 +272,8 @@ export default function Guardar(){
                             </div>
                         </div>
 
-                        {formValue.amount === "" ? <button className={style.deseableBtn}>Bancarizar</button> :
-                        loading  ? <div className={style.loader}>
+                        {formValue.amount === "" ? <button className="deseableBtn">Bancarizar</button> :
+                        loading  ? <div className="loader">
                            <BeatLoader
                         color="rgba(255, 68, 0,1)"
                         cssOverride={{}}
@@ -302,17 +282,14 @@ export default function Guardar(){
                         speedMultiplier={1}
                         />
                     </div> : <button onClick = {createDeposit}>Bancarizar</button>}
-                                      
-
                     </div>
-
                 <div className={style.depositsBx}>
-                    <div className="header" /*data-aos="fade-up"*/>
+                    <div className="header" data-aos="fade-up">
                       <div className="line"></div>
                       <h3>Depositos</h3> 
                     </div>
                     
-                    <div className={style.depo}>
+                    <div className={style.depo} data-aos="fade-up">
                     {loadingDeposit  ? <div className={style.loaderDepo}>
                            <BeatLoader
                         color="rgba(255, 68, 0,1)"
@@ -339,10 +316,7 @@ export default function Guardar(){
                              ))
                            : <div className={style.empty}>No has realizado ningún depósito todavía</div>
                              }
-                             
-                        
                     </div>
-                    
                 </div>
                 </div>
 
