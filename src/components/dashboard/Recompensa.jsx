@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios"
 import Regalo from "./Regalo";
 import BeatLoader from "react-spinners/BeatLoader"
+import ErrorDialog from "../ErrorDialog";
 
 export default function Recompensa(){
     //states
@@ -28,6 +29,15 @@ export default function Recompensa(){
           [event.target.name]:event.target.value
         })
       }
+
+      /*-----PARA VISIBILIZAR EL ERROR DIALOG------*/
+     const [isObjectVisible, setIsObjectVisible] = useState(false);
+     const errorVisible = () => {
+       setIsObjectVisible(true);
+       setTimeout(() => {
+           setIsObjectVisible(false);
+       }, 3000);
+    }
 
       /*---------------------RECIBIR LA RECOMPENSA------------------- */
       const canjear = async () =>{
@@ -75,6 +85,8 @@ export default function Recompensa(){
     return(
         <div className="cont">
           {active && <Regalo header = {res}  SetActive = {SetActive}/>}
+          {isObjectVisible && <div className="errorRequest" >
+                         <ErrorDialog error = {error} /></div>}
             <div className="content">
                 <div className="header" data-aos="fade-up">
                   <div className="line"></div>
