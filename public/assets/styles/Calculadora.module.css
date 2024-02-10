@@ -119,6 +119,13 @@
 .days input{
     width: 180px;
 }
+@media(max-width: 436px){
+    .bx{
+
+        width: 90%;
+
+    }
+}
 
 @media(max-width: 398px){
     .input{
