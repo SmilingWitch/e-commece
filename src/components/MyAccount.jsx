@@ -21,7 +21,7 @@ import 'aos/dist/aos.css';
 import { FaRegCreditCard } from "react-icons/fa";
 import EditarDatosCompany from "./EditarDatosCompany";
 import CardConfig from "./CardConfig";
-
+import axios from "axios"
 
 
 
@@ -64,6 +64,7 @@ const theme = createTheme({
             AOS.init({
               duration:200
           });
+          cardData()
           }, []);
 
     const [loading,setLoading] = useState(false)    
@@ -72,6 +73,7 @@ const theme = createTheme({
     const [active, SetActive] = useState(false);
     const [activeCard, SetActiveCard] = useState(false);
     const [activeEdit, SetActiveEdit] = useState(false);
+    const [visibleBtn, SetVisibleBtn] = useState(false);
     const [activeEditComapany, SetActiveEditComapany] = useState(false);
     const [activechangePass, SetActivechangePass] = useState(false);
     const { credential } = useContext(AuthContext);
@@ -107,8 +109,50 @@ const theme = createTheme({
         SetActivechangePass(false)
     }
 
-    
+    const [res, setRes] = useState(() => {
+        if (typeof window !== 'undefined') {
+          return JSON.parse(sessionStorage.getItem('config')) || {};
+          
+        }
+        return {};
+      });
 
+/*------------------------INFORMACION DE LA TARJETA--------------------------- */
+const cardData = async () =>{
+    const token = sessionStorage.getItem('access')
+    console.log(token)
+    
+    try {
+        const response = await axios.get('https://zona0.onrender.com/card/card-details/', { 
+           headers: {
+               'Authorization': 'Bearer ' + token
+           }
+         });
+         console.log(response.data)
+         console.log(response.data.active)
+
+         if(response.data.active === true){
+            setIsChecked(true)
+         } else{
+            setIsChecked(false)
+         }
+         // Guarda los datos actualizados en el almacenamiento local
+         sessionStorage.setItem('config', JSON.stringify(response.data));
+            
+         // Actualiza el estado res con los datos de la respuesta
+         setRes(response.data);
+         SetVisibleBtn(true)
+        console.log("resPetition",res )
+ 
+       } catch(error) {
+        console.log(error.response);
+        console.log(error.response.status)
+        if(error.response.status === 404){
+            SetVisibleBtn(false)
+        }
+       }    
+     }
+    
     return(
         <div className={style.cont} onClick = {() => SetMyAccount(false)} >
             
@@ -131,7 +175,7 @@ const theme = createTheme({
                         setLoading = {setLoading}/>: ""}
                         
             {activeCard  === true ? <CardConfig 
-                                        SetActive = {SetActiveCard}/> : ""}
+                                        SetActive = {SetActiveCard} setRes = {setRes} res = {res}/> : ""}
                 
             <div className={style.bx} onClick = {(event) => {event.stopPropagation()}} data-aos="fade-left">
                 
@@ -191,11 +235,11 @@ const theme = createTheme({
                         <div className={style.name}>Eliminar cuenta</div>
                         <div className={style.icon1}><IoIosArrowForward/></div>
                         </div>*/}
-                    <div className={style.option} onClick = {() => SetActiveCard(true)}>
+                        {visibleBtn && <div className={style.option} onClick = {() => SetActiveCard(true)}>
                         <div className={style.icon}><FaRegCreditCard /></div>
                         <div className={style.name}>Gestion de tarjetas</div>
                         <div className={style.icon1}><IoIosArrowForward/></div>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className={style1.header}>
