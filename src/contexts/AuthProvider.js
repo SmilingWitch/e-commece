@@ -20,7 +20,8 @@ export function AuthProvider({ children }) {
   
   const [user, setUser] = useState(null);
   const [credential, setCredential] = useState(credentialFromsessionStorage);
-  
+  const [hasCompanyRequestRun, setHasCompanyRequestRun] = useState(false);
+
   /*const [credential, setCredential] = useState(null);*/
   const updateCredential = (newCredential) => {
     // Actualiza el estado de credential
@@ -108,12 +109,15 @@ const institutions = async () =>{
    console.log(response)
    console.log("FormValue",formValue)
   router.push('/dashboard/wallet')
+  setHasCompanyRequestRun(true)
  } catch (error) {
    console.log(error.response)
    console.log("No se hizo la peticion")
    
  }
  };
+
+
 
 
  /*--------------------SING OUT--------------------*/
@@ -173,7 +177,6 @@ const recibos = async () =>{
       console.log(error.response);
      }    
    }
-   
 
 
 /*useEffect(() => {
@@ -181,7 +184,52 @@ const recibos = async () =>{
   return () => clearInterval(intervalId);
 }, []);*/
 
+
 useEffect(() => {
+  if (hasCompanyRequestRun === true) {
+    company(); // Llama a la función company solo si no se ha ejecutado previamente
+    setHasCompanyRequestRun(false)
+  }
+  // ... resto del código del useEffect ...
+}, [credential]); // Dependencia en el estado de credential
+
+
+ /*----------------COMPANY------------------- */
+ const company = async () =>{
+  const token = sessionStorage.getItem('access')
+  console.log(token)
+  console.log("Peticion company")
+  
+  try {
+      const response = await axios.get(`https://zona0.onrender.com/users/company-update?id=${credential.pk}/`, { 
+         headers: {
+             'Authorization': 'Bearer ' + token
+         }
+       });
+       
+     console.log("COMPANIA",response.data)
+
+
+     const currentCredential = {...credential};
+
+     // Fusiona los nuevos datos de la respuesta con el estado actual
+     const updatedCredential = {
+       ...currentCredential,
+       ...response.data
+     };
+
+     // Actualiza el estado y sessionStorage con la nueva información
+     updateCredential(updatedCredential);
+
+     } catch(error) {
+      console.log(error.response);
+
+     }    
+   }
+
+
+useEffect(() => {
+  company()
   if (credential === null) {
     router.push('/accounts/login');
  }
@@ -199,6 +247,8 @@ useEffect(() => {
   }
   /*recibos()*/
   institutions() 
+
+
 }, []);
 
 
