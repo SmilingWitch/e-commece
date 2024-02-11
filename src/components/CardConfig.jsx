@@ -22,7 +22,7 @@ import ErrorDialog from "./ErrorDialog";
 
 
 
-export default function CardConfig({SetActive, closeAll}){
+export default function CardConfig({SetActive, closeAll, setRes, res}){
 
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
@@ -55,13 +55,13 @@ export default function CardConfig({SetActive, closeAll}){
         },
        });
 
-       const [res, setRes] = useState(() => {
+       /*const [res, setRes] = useState(() => {
         if (typeof window !== 'undefined') {
           return JSON.parse(sessionStorage.getItem('config')) || {};
           
         }
         return {};
-      });
+      });*/
     
 
 
@@ -74,7 +74,6 @@ export default function CardConfig({SetActive, closeAll}){
    const [dialog,setDialog] = useState('')
    const [loading,setLoading] = useState(false)
    const [loadingDescount,setLoadingDescount] = useState(false)
-
    const [isChecked, setIsChecked] = useState(res.active);
    const [isMounted, setIsMounted] = useState(false);
    const [formValue,setFormValue]=useState({
@@ -127,18 +126,13 @@ const errorVisible = () => {
          } else{
             setIsChecked(false)
          }
-
-         
-         
          // Guarda los datos actualizados en el almacenamiento local
          sessionStorage.setItem('config', JSON.stringify(response.data));
             
          // Actualiza el estado res con los datos de la respuesta
          setRes(response.data);
         console.log("resPetition",res )
-           
-            
-        
+ 
        } catch(error) {
         console.log(error.response);
        }    
@@ -181,7 +175,7 @@ const errorVisible = () => {
               errorVisible()
             }
             if(error.response.status === 500){
-              SetError("Algo salio mal. Compruebe que escribio el codigo correctamente.")
+              SetErrorRes("Algo salio mal. Compruebe que escribio el codigo correctamente.")
               errorVisible()
             }
             if(error.response.status === 404){
@@ -228,7 +222,7 @@ const errorVisible = () => {
           errorVisible()
         }
         if(error.response.status === 500){
-          SetError("Algo salio mal. Compruebe que escribio el codigo correctamente.")
+          SetErrorRes("Algo salio mal. Compruebe que escribio el codigo correctamente.")
           errorVisible()
         }
         if(error.response.status === 404){
@@ -272,7 +266,7 @@ const activeCard = async () =>{
           errorVisible()
         }
         if(error.response.status === 500){
-          SetError("Algo salio mal. Compruebe que escribio el codigo correctamente.")
+          SetErrorRes("Algo salio mal. Compruebe que escribio el codigo correctamente.")
           errorVisible()
         }
         if(error.response.status === 404){
@@ -321,7 +315,7 @@ const desactiveCard = async () =>{
           errorVisible()
         }
         if(error.response.status === 500){
-          SetError("Algo salio mal. Compruebe que escribio el codigo correctamente.")
+          SetErrorRes("Algo salio mal. Compruebe que escribio el codigo correctamente.")
           errorVisible()
         }
         if(error.response.status === 404){
@@ -360,7 +354,7 @@ const desactiveCard = async () =>{
                    <div className={style.header1}>
                        <h2 className = {style1.iconH2} onClick = {() =>{
                            SetActive(false)} } ><IoIosArrowBack/></h2>
-                       <h2>Mi tarjeta</h2>
+                       <h2>Gestionar Tarjeta</h2>
                    </div>
                </div>
                <div className={style.info}> 
@@ -400,6 +394,7 @@ const desactiveCard = async () =>{
 
                </div>
                 <div className={style.btnBx}>
+                <div className={style.infoHeader}><span>Opciones</span></div>
                 {loadingDescount  ? <div className={style.loader}>
                            <BeatLoader
                         color="rgba(255, 68, 0,1)"
