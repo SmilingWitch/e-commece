@@ -286,6 +286,14 @@
     bottom: 0;
 }
 
+.noInstitution{
+    position: relative;
+    width: 100%;
+    color: var(--darkLetter);
+    margin-top: 50px;
+    text-align: center;
+}
+
 @media(max-width: 1126px){
     .imgBxGallery{
         width: 100%;
