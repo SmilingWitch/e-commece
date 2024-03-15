@@ -20,20 +20,20 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
     const { user } = useContext(AuthContext);
     const { credential } = useContext(AuthContext);
 
-    function handleKeyDown(event) {
+    /*function handleKeyDown(event) {
         if (event.key === 'Enter') {
           if (router.pathname !== '/catalogo') {
             router.push('/catalogo');
           }
         }
-       }
+       }*/
 
        const isMobile = useMediaQuery('(max-width: 768px)');
 
     return(
         <div className={style.contMobile}>
             <section className={style.superiorMobile}>
-            <Link href = "/home">
+            <Link href = "/dashboard/wallet">
                 <div className={style.logo}>
                     <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
                     <span>rca Store</span>
@@ -62,7 +62,7 @@ export default function NavBarMobile({SetCart, cart,SetMyAccount,myAccount}){
                     </div>
                      }
                      <div className={style.contIcon}>
-                        <span><Link href = "/notificationes"><FaRegBell/></Link></span>
+                        <span><Link href = "/dashboard/wallet"><FaRegBell/></Link></span>
                     </div>
                 </div>
 

@@ -75,10 +75,12 @@ export default function SideBar(){
                 <h3>Personal</h3>
                 <ul>
                     <li>
-                        <Link  href="/dashboard/wallet"  className={style.link}>
+                        {/*<Link  href="/dashboard/wallet"  className={style.link}>
                             <span className={style.icon}><FaRegCreditCard/></span>
                             <span>Tarjetas</span>    
-                        </Link> 
+    </Link> */}
+                            <span className={style.icon}><FaRegCreditCard/></span>
+                            <span>Tarjetas</span>
                         </li>
                 </ul>
 

@@ -48,9 +48,9 @@ export default function Navbar({SetCart, cart,SetMyAccount, myAccount}){
     return(
         <div className={style.cont}>
             <section className={style.superior}>
-            <Link href = "/home">
+            <Link href = "/dashboard/wallet">
                 <div className={style.logo}>
-                    <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
+                <img src="/assets/images/[removal.ai]_597ed435-d169-410c-962e-7dbf022aae9f-photo1702144866.png" alt="" />
                     <span>rca Store</span>
                 </div>
             </Link>

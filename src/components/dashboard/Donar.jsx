@@ -21,6 +21,7 @@ export default function Donar(){
 
 
     const [institution, SetInstitution] = useState(institutionsFromlocalStorage)
+    const [noInstitution, SetNoInstitution] = useState('')
     const [isMounted, setIsMounted] = useState(false);
     const [loading, setLoading] = useState(false);
     const router = useRouter()
@@ -100,6 +101,10 @@ export default function Donar(){
            } catch(error) {
             console.log(error.response);
             setLoading(false)
+
+            if(error.response.status === 404){
+                SetNoInstitution(404)   
+            }
            }    
          }
 
@@ -137,7 +142,7 @@ export default function Donar(){
                     </div>
 
                 </div> :
-                <div className={style.institutionBx}>
+                noInstitution === 404 ? <div className={style.noInstitution}>No hay instituciones</div>:<div className={style.institutionBx}>
                     {institution && institution.map((item, index) => (
                     <InstitutionCard res = {item} key={item.id}  />
                     ))}
